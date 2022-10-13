@@ -1,4 +1,4 @@
-package Controller;
+package com.example.javaeindopdracht;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ public class Start extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("Login-View.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 700, 400);
-        stage.setTitle("Login!");
+        stage.setTitle("Login");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

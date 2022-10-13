@@ -3,6 +3,6 @@ module com.example.javaeindopdracht {
     requires javafx.fxml;
 
 
-    opens Controller to javafx.fxml;
-    exports Controller;
+    opens com.example.javaeindopdracht to javafx.fxml;
+    exports com.example.javaeindopdracht;
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaeindopdracht.LoginController">
+   <children>
+      <Button fx:id="loginBtn" layoutX="41.0" layoutY="247.0" mnemonicParsing="false" onAction="#loginBtnClick" prefHeight="31.0" prefWidth="110.0" style="-fx-background-color: #0078D7;" text="Login" textFill="WHITE" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="50.0">
+         <font>
+            <Font name="Book Antiqua" size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="userNametxt" layoutX="41.0" layoutY="157.0" prefHeight="30.0" prefWidth="196.0" promptText="Username" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="160.0">
+         <font>
+            <Font name="Book Antiqua" size="15.0" />
+         </font>
+      </TextField>
+      <Label layoutX="41.0" layoutY="98.0" maxHeight="-Infinity" prefHeight="10.0" text="Login" textFill="#cccccc" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="464.0" AnchorPane.topAnchor="100.0">
+         <font>
+            <Font name="Book Antiqua Bold" size="32.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="passWordtxt" layoutX="41.0" layoutY="200.0" prefHeight="30.0" prefWidth="196.0" promptText="Password" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="200.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </PasswordField>
+      <Label fx:id="LblErrorMessage" layoutX="167.0" layoutY="254.0" prefHeight="17.0" prefWidth="825.0" textFill="RED" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="260.0">
+         <font>
+            <Font name="Book Antiqua" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
