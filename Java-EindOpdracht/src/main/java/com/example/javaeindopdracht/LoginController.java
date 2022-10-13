@@ -47,11 +47,15 @@ public class LoginController {
                       stage.setTitle("DashBoard");
                       stage.setScene(new Scene(root));
                       stage.show();
+                      Start.loginStage.close();
                       break;
+
+
                   }
                }
+               throw new Exception("Invalid Username combination");
            }
-           throw new Exception("Invalid Username combination");
+
 
        }
        catch(Exception ex){
