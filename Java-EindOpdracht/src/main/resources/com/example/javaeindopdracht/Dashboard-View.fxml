@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="DashBoardAnchorPane" prefHeight="400.0" prefWidth="700.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -27,12 +28,16 @@
                            <children>
                               <AnchorPane prefHeight="87.0" prefWidth="707.0">
                                  <children>
-                                    <Label alignment="CENTER_RIGHT" layoutX="533.0" layoutY="12.0" prefHeight="35.0" prefWidth="139.0" text="Members" />
+                                    <Label id="LblWelcomeUser" fx:id="LblWelcome11" alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="Calibri" size="29.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="248.0" prefWidth="707.0">
                                  <children>
-                                    <TableView fx:id="tableViewMembers" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0">
+                                    <TableView fx:id="tableViewMembers" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                        <columns>
                                           <TableColumn prefWidth="75.0" text="Identifier">
                                              <cellValueFactory>
@@ -60,9 +65,9 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="92.0" prefWidth="707.0">
                                  <children>
-                                    <Button layoutX="608.0" layoutY="20.0" mnemonicParsing="false" text="Button" />
-                                    <Button layoutX="487.0" layoutY="20.0" mnemonicParsing="false" text="Button" />
-                                    <Button layoutX="373.0" layoutY="20.0" mnemonicParsing="false" text="Button" />
+                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
+                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -79,12 +84,16 @@
                            <children>
                               <AnchorPane prefHeight="87.0" prefWidth="707.0">
                                  <children>
-                                    <Label alignment="CENTER_RIGHT" layoutX="533.0" layoutY="12.0" prefHeight="35.0" prefWidth="139.0" text="Members" />
+                                    <Label id="LblWelcomeUser" fx:id="LblWelcome1" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="Calibri" size="29.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="248.0" prefWidth="707.0">
                                  <children>
-                                    <TableView fx:id="tableViewCollection" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0">
+                                    <TableView fx:id="tableViewCollection" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                        <columns>
                                           <TableColumn prefWidth="75.0" text="Item code">
                                              <cellValueFactory>
@@ -112,9 +121,9 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="92.0" prefWidth="707.0">
                                  <children>
-                                    <Button layoutX="608.0" layoutY="20.0" mnemonicParsing="false" text="Button" />
-                                    <Button layoutX="487.0" layoutY="20.0" mnemonicParsing="false" text="Button" />
-                                    <Button layoutX="373.0" layoutY="20.0" mnemonicParsing="false" text="Button" />
+                                    <Button layoutX="526.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                    <Button layoutX="436.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button layoutX="418.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -129,25 +138,34 @@
                      <children>
                         <HBox layoutX="-1.0" layoutY="53.0" prefHeight="287.0" prefWidth="707.0">
                            <children>
-                              <AnchorPane prefHeight="287.0" prefWidth="377.0">
+                              <AnchorPane id="AnchorPaneLendingRight" prefHeight="287.0" prefWidth="377.0">
                                  <children>
-                                    <Button layoutX="184.0" layoutY="105.0" mnemonicParsing="false" text="Button" />
-                                    <TextField layoutX="102.0" layoutY="37.0" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="287.0" prefWidth="378.0">
-                                 <children>
-                                    <TextField layoutX="142.0" layoutY="51.0" />
-                                    <TextField layoutX="138.0" layoutY="108.0" />
-                                    <Button layoutX="213.0" layoutY="179.0" mnemonicParsing="false" text="Button" />
+                                    <Button id="BtnReceiveItem" layoutX="184.0" layoutY="105.0" mnemonicParsing="false" prefWidth="100.0" text="Receive Item" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="80.0" />
+                                    <TextField alignment="CENTER_RIGHT" layoutX="102.0" layoutY="37.0" prefWidth="250.0" promptText="Item Code" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
                                  </children>
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </AnchorPane>
+                              <AnchorPane id="AnchorPaneLendingLeft" prefHeight="287.0" prefWidth="378.0">
+                                 <children>
+                                    <TextField alignment="CENTER_RIGHT" layoutX="150.0" layoutY="32.0" prefHeight="25.0" prefWidth="250.0" promptText="Item Code" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                                    <Button id="BtnLendItem" layoutX="241.0" layoutY="129.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Lend Item" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="130.0">
+                                       <font>
+                                          <Font name="Calibri" size="12.0" />
+                                       </font></Button>
+                                    <TextField alignment="CENTER_RIGHT" layoutX="75.0" layoutY="82.0" prefHeight="25.0" prefWidth="250.0" promptText="Member Identifier" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="80.0" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="20.0" left="10.0" right="20.0" top="10.0" />
                                  </HBox.margin>
                               </AnchorPane>
                            </children>
                         </HBox>
-                        <Label fx:id="LblWelcome" alignment="CENTER_RIGHT" layoutX="511.0" layoutY="9.0" prefHeight="44.0" prefWidth="145.0" text="Welcome [name of user]" />
+                        <Label id="LblWelcomeUser" fx:id="LblWelcome" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="9.0" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font name="Calibri" size="29.0" />
+                           </font></Label>
                      </children>
                   </AnchorPane>
                </content>

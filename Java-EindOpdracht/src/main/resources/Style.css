@@ -17,3 +17,25 @@
 #TabLending{
     -fx-background-color: #E5E5E5;
 }
+
+#AnchorPaneLendingLeft{
+    -fx-background-color: #FFFFFF;
+}
+
+#AnchorPaneLendingRight{
+    -fx-background-color: #FFFFFF;
+}
+
+#LblWelcomeUser{
+    -fx-text-fill: #6F6F6F;
+}
+
+#BtnLendItem{
+    -fx-background-color: #0078D7;
+    -fx-text-fill: #E7F2FB;
+}
+
+#BtnReceiveItem{
+    -fx-background-color: #0078D7;
+    -fx-text-fill: #E7F2FB;
+}
