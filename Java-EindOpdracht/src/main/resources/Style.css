@@ -1,0 +1,19 @@
+#DashBoardAnchorPane{
+    -fx-background-color: #000000;
+}
+
+#DashboardTabPane.tab-pane .tab-header-area .tab-header-background{
+    -fx-background-color: #000000;
+}
+
+#TabMembers{
+    -fx-background-color: #E5E5E5;
+}
+
+#TabCollection{
+    -fx-background-color: #E5E5E5;
+}
+
+#TabLending{
+    -fx-background-color: #E5E5E5;
+}

@@ -41,22 +41,20 @@ public class LoginController {
                           throw new Exception("Invalid Password combination");
                       }
                       FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Dashboard-View.fxml"));
-                      Parent root = (Parent)fxmlLoader.load();
+                      DashboardController dashboardController = new DashboardController(member);
+                      fxmlLoader.setController(dashboardController);
                       Stage stage = new Stage();
+                      stage.setScene(new Scene(fxmlLoader.load()));
                       stage.setResizable(false);
                       stage.setTitle("DashBoard");
-                      stage.setScene(new Scene(root));
+
                       stage.show();
                       Start.loginStage.close();
                       break;
-
-
                   }
                }
-               throw new Exception("Invalid Username combination");
+               throw new Exception("Username does not exist!");
            }
-
-
        }
        catch(Exception ex){
            this.LblErrorMessage.setText("");
