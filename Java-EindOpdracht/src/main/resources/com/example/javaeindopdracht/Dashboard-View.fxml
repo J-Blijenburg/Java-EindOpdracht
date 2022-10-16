@@ -37,7 +37,6 @@
                                                   <PropertyValueFactory property="id"/>
                                               </cellValueFactory>
                                           </TableColumn>
-
                                           <TableColumn prefWidth="75.0" text="First name" >
                                               <cellValueFactory>
                                                   <PropertyValueFactory property="firstName"/>
@@ -85,8 +84,26 @@
                                  <children>
                                     <TableView fx:id="tableViewCollection" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0">
                                        <columns>
-                                          <TableColumn prefWidth="75.0" text="C1" />
-                                          <TableColumn prefWidth="75.0" text="C2" />
+                                          <TableColumn prefWidth="75.0" text="Item code" >
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="itemCode"/>
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="Available" >
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="available"/>
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="title" >
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="title"/>
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="author" >
+                                          <cellValueFactory>
+                                             <PropertyValueFactory property="author"/>
+                                          </cellValueFactory>
+                                          </TableColumn>
                                        </columns>
                                     </TableView>
                                  </children>

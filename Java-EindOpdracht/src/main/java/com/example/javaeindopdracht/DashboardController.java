@@ -15,11 +15,14 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
     @FXML
-    public Label LblWelcome;
+    private Label LblWelcome;
 
-    public Members currentMember;
+    private Members currentMember;
     @FXML
-    public TableView tableViewMembers;
+    private TableView tableViewMembers;
+
+    @FXML
+    private TableView tableViewCollection;
 
     private ObservableList<Members> listOfMembers;
     private ObservableList<Items> listOfItems;
@@ -33,6 +36,8 @@ public class DashboardController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        LblWelcome.setText("Welcome " + currentMember.getFirstName());
         tableViewMembers.setItems(listOfMembers);
+        tableViewCollection.setItems(listOfItems);
     }
 }
