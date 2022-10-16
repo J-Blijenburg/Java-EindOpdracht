@@ -1,7 +1,17 @@
 package Model;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Members {
+    private int id;
+    private String firstName;
+    private String lastName;
+    private LocalDate birthDate;
+    private String userName;
+    private String passWord;
+    private List<Items> itemsLend;
+
     public Members(int id, String firstName, String lastName, LocalDate birthDate, String userName, String passWord) {
         this.id = id;
         this.firstName = firstName;
@@ -9,6 +19,23 @@ public class Members {
         this.birthDate = birthDate;
         this.userName = userName;
         this.passWord = passWord;
+        this.itemsLend = new ArrayList<>();
+    }
+
+    public List<Items> getItemsLend() {
+        return itemsLend;
+    }
+
+    public void setItemsLend(List<Items> itemsLend) {
+        this.itemsLend = itemsLend;
+    }
+
+    public void AddItem(Items item){
+        itemsLend.add(item);
+    }
+
+    public void RemoveItem(Items item){
+        itemsLend.remove(item);
     }
 
     public int getId() {
@@ -59,12 +86,7 @@ public class Members {
         this.passWord = passWord;
     }
 
-    private int id;
-    private String firstName;
-    private String lastName;
-    private LocalDate birthDate;
-    private String userName;
-    private String passWord;
+
 
 
 }
