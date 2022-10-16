@@ -9,11 +9,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
+    @FXML
+    private ImageView DashBoardImage;
     @FXML
     private Label LblWelcome;
 
@@ -39,5 +44,8 @@ public class DashboardController implements Initializable {
         LblWelcome.setText("Welcome " + currentMember.getFirstName());
         tableViewMembers.setItems(listOfMembers);
         tableViewCollection.setItems(listOfItems);
+        File file = new File("/Images/LibrarySystem.jpg");
+        Image image = new Image(file.toURI().toString());
+        DashBoardImage.setImage(image);
     }
 }
