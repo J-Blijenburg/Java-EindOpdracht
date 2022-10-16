@@ -39,22 +39,22 @@
                                  <children>
                                     <TableView fx:id="tableViewMembers" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                        <columns>
-                                          <TableColumn prefWidth="75.0" text="Identifier">
+                                          <TableColumn prefWidth="85.0" text="Identifier">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="id" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="75.0" text="First name">
+                                          <TableColumn prefWidth="87.0" text="First name">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="firstName" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="75.0" text="Last name">
+                                          <TableColumn prefWidth="98.0" text="Last name">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="lastName" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="75.0" text="Birth date">
+                                          <TableColumn prefWidth="154.0" text="Birth date">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="birthDate" />
                                              </cellValueFactory>
@@ -100,17 +100,17 @@
                                                 <PropertyValueFactory property="itemCode" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="75.0" text="Available">
+                                          <TableColumn prefWidth="100.0" text="Available">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="available" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="75.0" text="title">
+                                          <TableColumn prefWidth="193.0" text="title">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="title" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="75.0" text="author">
+                                          <TableColumn minWidth="0.0" prefWidth="204.0" text="author">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="author" />
                                              </cellValueFactory>
