@@ -28,7 +28,7 @@
                            <children>
                               <AnchorPane prefHeight="87.0" prefWidth="707.0">
                                  <children>
-                                    <Label id="LblWelcomeUser" fx:id="LblWelcome11" alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                    <Label id="LblWelcomeUser" fx:id="LblWelcome11" alignment="CENTER_RIGHT" prefHeight="44.0" prefWidth="656.0" text="Members" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                        <font>
                                           <Font name="Calibri" size="29.0" />
                                        </font>
@@ -65,9 +65,9 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="92.0" prefWidth="707.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
-                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                                    <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnDelete" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Delete Member" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnEdit" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Edit Member" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -84,7 +84,7 @@
                            <children>
                               <AnchorPane prefHeight="87.0" prefWidth="707.0">
                                  <children>
-                                    <Label id="LblWelcomeUser" fx:id="LblWelcome1" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                    <Label id="LblWelcomeUser" fx:id="LblWelcome1" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Items" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                        <font>
                                           <Font name="Calibri" size="29.0" />
                                        </font>
@@ -121,9 +121,9 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="92.0" prefWidth="707.0">
                                  <children>
-                                    <Button layoutX="526.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                                    <Button layoutX="436.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                                    <Button layoutX="418.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Button" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnDelete" layoutX="418.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Delete Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>

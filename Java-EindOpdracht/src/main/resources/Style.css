@@ -39,3 +39,18 @@
     -fx-background-color: #0078D7;
     -fx-text-fill: #E7F2FB;
 }
+
+#BtnAdd{
+    -fx-background-color: #0078D7;
+    -fx-text-fill: #E7F2FB;
+}
+
+#BtnDelete{
+    -fx-background-color:  #C60108;
+    -fx-text-fill: #E7F2FB;
+}
+
+#BtnEdit{
+    -fx-background-color: #797979;
+    -fx-text-fill: #E7F2FB;
+}
