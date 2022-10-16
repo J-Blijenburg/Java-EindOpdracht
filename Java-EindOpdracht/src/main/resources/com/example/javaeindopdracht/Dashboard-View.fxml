@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,7 +17,6 @@
 
 <AnchorPane id="DashBoardAnchorPane" prefHeight="400.0" prefWidth="700.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="DashBoardImage" fitHeight="43.0" fitWidth="264.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
       <TabPane id="DashboardTabPane" layoutY="31.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="369.0" prefWidth="707.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Members">
@@ -33,10 +34,26 @@
                                  <children>
                                     <TableView fx:id="tableViewMembers" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0">
                                        <columns>
-                                          <TableColumn prefWidth="73.0" text="Identifier" />
-                                          <TableColumn minWidth="7.0" prefWidth="173.0" text="First name" />
-                                          <TableColumn prefWidth="229.0" text="Last name" />
-                                           <TableColumn prefWidth="185.0" text="Birth date" />
+                                          <TableColumn prefWidth="75.0" text="Identifier">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="id" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="First name">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="firstName" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="Last name">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="lastName" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="Birth date">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="birthDate" />
+                                             </cellValueFactory>
+                                          </TableColumn>
                                        </columns>
                                     </TableView>
                                  </children>
@@ -69,8 +86,26 @@
                                  <children>
                                     <TableView fx:id="tableViewCollection" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0">
                                        <columns>
-                                          <TableColumn prefWidth="75.0" text="C1" />
-                                          <TableColumn prefWidth="75.0" text="C2" />
+                                          <TableColumn prefWidth="75.0" text="Item code">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="itemCode" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="Available">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="available" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="title">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="title" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="author">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="author" />
+                                             </cellValueFactory>
+                                          </TableColumn>
                                        </columns>
                                     </TableView>
                                  </children>
@@ -119,5 +154,9 @@
             </Tab>
          </tabs>
       </TabPane>
+      <ImageView fx:id="DashBoardImage" fitHeight="43.0" fitWidth="264.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/LibrarySystem.jpg" />
+         </image></ImageView>
    </children>
 </AnchorPane>

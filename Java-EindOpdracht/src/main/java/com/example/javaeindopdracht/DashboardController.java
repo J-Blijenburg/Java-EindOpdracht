@@ -44,8 +44,6 @@ public class DashboardController implements Initializable {
         LblWelcome.setText("Welcome " + currentMember.getFirstName());
         tableViewMembers.setItems(listOfMembers);
         tableViewCollection.setItems(listOfItems);
-        File file = new File("/Images/LibrarySystem.jpg");
-        Image image = new Image(file.toURI().toString());
-        DashBoardImage.setImage(image);
+
     }
 }
