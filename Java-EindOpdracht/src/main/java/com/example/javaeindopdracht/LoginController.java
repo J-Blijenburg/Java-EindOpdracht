@@ -16,12 +16,9 @@ import javafx.stage.Stage;
 import java.util.Iterator;
 
 public class LoginController {
-    @FXML
-    public TextField userNametxt;
-    @FXML
-    public PasswordField passWordtxt;
-    @FXML
-    public Label LblErrorMessage;
+    @FXML public TextField userNametxt;
+    @FXML public PasswordField passWordtxt;
+    @FXML public Label LblErrorMessage;
     private Database db = new Database();
     private ObservableList<Members> listOfMembers;
     public LoginController() {

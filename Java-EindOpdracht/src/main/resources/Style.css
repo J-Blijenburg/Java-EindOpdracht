@@ -54,3 +54,19 @@
     -fx-background-color: #797979;
     -fx-text-fill: #E7F2FB;
 }
+
+#LblLendItemSuccses{
+    -fx-text-fill: #258200;
+}
+
+#LblLendItemError{
+    -fx-text-fill: #C60108;
+}
+
+#LblReceiveItemSuccses{
+    -fx-text-fill: #258200;
+}
+
+#LblReceiveItemError{
+    -fx-text-fill: #C60108;
+}
