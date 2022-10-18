@@ -2,8 +2,6 @@ package Database;
 
 import Model.Members;
 import Model.Items;
-import javafx.collections.FXCollections;
-import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -17,7 +15,8 @@ private List<Items> allItems = new ArrayList<>();
 
 
     public Database() {
-
+        DatabaseInput();
+        Write();
         Read();
     }
 
