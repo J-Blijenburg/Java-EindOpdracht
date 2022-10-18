@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.File;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -45,12 +45,13 @@ public class DashboardController implements Initializable {
         LblWelcome.setText("Welcome " + currentMember.getFirstName());
         tableViewMembers.setItems(listOfMembers);
         tableViewCollection.setItems(listOfItems);
-
     }
 
     @FXML private void BtnLendItemOnAction(ActionEvent event){
         try{
             ClearMessageText();
+            EmptyTextBox(TxtItemCode.getText());
+            EmptyTextBox(TxtMemberIdentifier.getText());
             Items selectedItem = SelectItem(Integer.parseInt(TxtItemCode.getText()));
             CheckNull(selectedItem, "*Member does not exist");
 
@@ -98,6 +99,7 @@ public class DashboardController implements Initializable {
     @FXML private void BtnReceiveItemOnAction(){
         try{
             ClearMessageText();
+            EmptyTextBox(TxtReceiveItemCode.getText());
             Items item = SelectItem(Integer.parseInt(TxtReceiveItemCode.getText()));
 
             CheckNull(item, "*Item not recognized");
@@ -114,10 +116,18 @@ public class DashboardController implements Initializable {
             LblReceiveItemError.setText(ex.getMessage());
         }
     }
+    public void EmptyTextBox(String textBox) throws Exception {
+        if(textBox.isEmpty()){
+            throw new Exception("Please, enter a value");
+        }
+    }
     private void ClearMessageText(){
         LblLendItemError.setText("");
         LblLendItemSuccses.setText("");
         LblReceiveItemError.setText("");
         LblReceiveItemSuccses.setText("");
     }
+
+
+
 }
