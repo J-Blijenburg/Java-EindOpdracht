@@ -11,10 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
-import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,15 +29,27 @@ public class DashboardController implements Initializable {
     @FXML private Label LblWelcome;
     @FXML private Label LblReceiveItemError;
     @FXML private Label LblReceiveItemSuccses;
-    private Members currentMember;
-    private ObservableList<Members> listOfMembers;
-    private ObservableList<Items> listOfItems;
-    private Database db = new Database();
 
-    public DashboardController(Members member){
+    @FXML private VBox VboxMembers;
+
+    @FXML private VBox VboxAddNewMembers;
+
+    @FXML private VBox VboxCollection;
+    @FXML private VBox VboxAddNewItem;
+
+
+
+
+    private final Members currentMember;
+    private final ObservableList<Members> listOfMembers;
+    private final ObservableList<Items> listOfItems;
+    private final Database database;
+
+    public DashboardController(Members member, Database database){
        this.currentMember = member;
-        this.listOfMembers = FXCollections.observableList(this.db.getAllMembers());
-        this.listOfItems = FXCollections.observableList(this.db.getAllItems());
+       this.database = database;
+        this.listOfMembers = FXCollections.observableList(this.database.getAllMembers());
+        this.listOfItems = FXCollections.observableList(this.database.getAllItems());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,6 +63,7 @@ public class DashboardController implements Initializable {
             ClearMessageText();
             EmptyTextBox(TxtItemCode.getText());
             EmptyTextBox(TxtMemberIdentifier.getText());
+
             Items selectedItem = SelectItem(Integer.parseInt(TxtItemCode.getText()));
             CheckNull(selectedItem, "*Member does not exist");
 
@@ -59,8 +71,8 @@ public class DashboardController implements Initializable {
             CheckNull(selectedMember, "*Item not found in this library");
 
             if(selectedItem.getAvailable().equals(true)){
-                selectedMember.AddItem(selectedItem);
                 selectedItem.setAvailable(false);
+                currentMember.AddItem(selectedItem);
             }
             else{
                 throw new Exception("*Item is not available now");
@@ -104,12 +116,17 @@ public class DashboardController implements Initializable {
 
             CheckNull(item, "*Item not recognized");
 
-            if(item.getAvailable().equals(false)){
-                item.setAvailable(true);
-                LblReceiveItemSuccses.setText("*Received item successfully");
+            if(currentMember.getItemsLend().equals(item)){
+                if(item.getAvailable().equals(false)){
+                    item.setAvailable(true);
+                    LblReceiveItemSuccses.setText("*Received item successfully");
+                }
+                else {
+                    throw new Exception("*Item never been lend out");
+                }
             }
-            else {
-                throw new Exception("*Item never been lend out");
+            else{
+                throw new Exception("Member didn't lend this item");
             }
         }
         catch (Exception ex){
@@ -128,6 +145,34 @@ public class DashboardController implements Initializable {
         LblReceiveItemSuccses.setText("");
     }
 
+    @FXML private void BtnAddMemberOnAction(){
+        VboxMembers.setDisable(true);
+        VboxMembers.setOpacity(0);
+        VboxAddNewMembers.setDisable(false);
+        VboxAddNewMembers.setOpacity(1);
 
+    }
+    @FXML private void BtnAddMemberConfirm(){
+
+    }
+
+    @FXML private void BtnCancelNewMember(){
+        VboxMembers.setDisable(false);
+        VboxMembers.setOpacity(1);
+        VboxAddNewMembers.setDisable(true);
+        VboxAddNewMembers.setOpacity(0);
+    }
+
+    @FXML private void BtnAddItemOnAction(){
+
+    }
+
+    @FXML private void BtnAddItemConfirm(){
+
+    }
+
+    @FXML private void BtnCancelNewCancel(){
+
+    }
 
 }

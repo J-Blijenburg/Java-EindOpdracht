@@ -24,7 +24,7 @@
                <content>
                   <AnchorPane id="TabMembers" minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="707.0">
                      <children>
-                        <VBox prefHeight="342.0" prefWidth="707.0">
+                        <VBox fx:id="VboxMembers" prefHeight="342.0" prefWidth="707.0">
                            <children>
                               <AnchorPane prefHeight="87.0" prefWidth="707.0">
                                  <children>
@@ -67,7 +67,27 @@
                                  <children>
                                     <Button id="BtnDelete" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Delete Member" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnEdit" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Edit Member" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                                    <Button id="BtnAdd" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" mnemonicParsing="false" onAction="#BtnAddMemberOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="VboxAddNewMembers" disable="true" opacity="0.0" prefHeight="342.0" prefWidth="707.0">
+                           <children>
+                              <AnchorPane prefHeight="87.0" prefWidth="707.0">
+                                 <children>
+                                    <Label id="LblWelcomeUser" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Add New Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="Calibri" size="29.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="248.0" prefWidth="707.0" />
+                              <AnchorPane prefHeight="92.0" prefWidth="707.0">
+                                 <children>
+                                    <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelNewMember" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddMemberConfirm" prefHeight="30.0" prefWidth="100.0" text="Add Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -80,7 +100,7 @@
                <content>
                   <AnchorPane id="TabMembers" minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="707.0">
                      <children>
-                        <VBox prefHeight="342.0" prefWidth="707.0">
+                        <VBox fx:id="VboxCollection" prefHeight="342.0" prefWidth="707.0">
                            <children>
                               <AnchorPane prefHeight="87.0" prefWidth="707.0">
                                  <children>
@@ -121,9 +141,29 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="92.0" prefWidth="707.0">
                                  <children>
-                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnDelete" layoutX="418.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Delete Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="VboxAddNewItem" disable="true" opacity="0.0" prefHeight="342.0" prefWidth="707.0">
+                           <children>
+                              <AnchorPane prefHeight="87.0" prefWidth="707.0">
+                                 <children>
+                                    <Label id="LblWelcomeUser" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Add Items" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="Calibri" size="29.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="248.0" prefWidth="707.0" />
+                              <AnchorPane prefHeight="92.0" prefWidth="707.0">
+                                 <children>
+                                    <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelNewCancel" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -178,7 +218,7 @@
       </TabPane>
       <ImageView fx:id="DashBoardImage" fitHeight="43.0" fitWidth="264.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Images/LibrarySystem.jpg" />
+            <Image url="@../../../Images/LibrarySystem.jpg" />
          </image></ImageView>
    </children>
 </AnchorPane>

@@ -15,8 +15,6 @@ private List<Items> allItems = new ArrayList<>();
 
 
     public Database() {
-        DatabaseInput();
-        Write();
         Read();
     }
 
@@ -29,16 +27,18 @@ private List<Items> allItems = new ArrayList<>();
     }
 
 
-    private void Write(){
+    public void Write(){
         try{
-            FileOutputStream fileMembers = new FileOutputStream("JavaEindopdrachtMembers.txt");
+            FileOutputStream fileMembers = new FileOutputStream(new File("JavaEindopdrachtMembers.txt"));
             ObjectOutputStream objectMembers = new ObjectOutputStream(fileMembers);
-            FileOutputStream fileItems = new FileOutputStream("JavaEindopdrachtItems.txt");
+            FileOutputStream fileItems = new FileOutputStream(new File("JavaEindopdrachtItems.txt"));
             ObjectOutputStream objectItems = new ObjectOutputStream(fileItems);
 
             for(Members member : allMembers){
                 objectMembers.writeObject(member);
             }
+
+
             for(Items item : allItems){
                 objectItems.writeObject(item);
             }
@@ -98,6 +98,5 @@ private List<Items> allItems = new ArrayList<>();
         this.allItems.add(new Items(3, true, "Java deel 3", "Piet De Vrouw"));
         this.allItems.add(new Items(4, true, "Java deel 4", "Hendrik Anders"));
         this.allItems.add(new Items(5, true, "Java deel 5", "Sjon Nietdom"));
-
     }
 }

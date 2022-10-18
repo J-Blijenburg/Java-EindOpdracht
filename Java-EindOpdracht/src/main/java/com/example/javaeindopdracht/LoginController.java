@@ -5,6 +5,7 @@ import Model.Members;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,17 +13,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.util.Iterator;
+import javafx.stage.WindowEvent;
 
 public class LoginController {
     @FXML public TextField userNametxt;
     @FXML public PasswordField passWordtxt;
     @FXML public Label LblErrorMessage;
-    private Database db = new Database();
+    private Database database = new Database();
     private ObservableList<Members> listOfMembers;
     public LoginController() {
-        this.listOfMembers = FXCollections.observableList(this.db.getAllMembers());
+        this.listOfMembers = FXCollections.observableList(this.database.getAllMembers());
     }
 
     public void loginBtnClick(ActionEvent actionEvent) {
@@ -37,15 +37,19 @@ public class LoginController {
                           throw new Exception("Invalid Password combination");
                       }
                       FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Dashboard-View.fxml"));
-                      DashboardController dashboardController = new DashboardController(member);
+                      DashboardController dashboardController = new DashboardController(member, database);
                       fxmlLoader.setController(dashboardController);
                       Stage stage = new Stage();
                       stage.setScene(new Scene(fxmlLoader.load()));
                       stage.setResizable(false);
                       stage.setTitle("DashBoard");
-
                       stage.show();
                       Start.loginStage.close();
+                      stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                          public void handle(WindowEvent windowEvent) {
+                              database.Write();
+                          }
+                      });
                       break;
                   }
                }
