@@ -164,7 +164,10 @@ public class DashboardController implements Initializable {
     }
 
     @FXML private void BtnAddItemOnAction(){
-
+        VboxCollection.setDisable(true);
+        VboxCollection.setOpacity(0);
+        VboxAddNewItem.setDisable(false);
+        VboxAddNewItem.setOpacity(1);
     }
 
     @FXML private void BtnAddItemConfirm(){
@@ -172,7 +175,10 @@ public class DashboardController implements Initializable {
     }
 
     @FXML private void BtnCancelNewCancel(){
-
+        VboxCollection.setDisable(false);
+        VboxCollection.setOpacity(1);
+        VboxAddNewItem.setDisable(true);
+        VboxAddNewItem.setOpacity(0);
     }
 
 }
