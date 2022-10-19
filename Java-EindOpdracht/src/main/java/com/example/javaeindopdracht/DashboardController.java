@@ -255,6 +255,8 @@ public class DashboardController implements Initializable {
         VboxCollection.setOpacity(0);
         VboxAddNewItem.setDisable(false);
         VboxAddNewItem.setOpacity(1);
+        VboxEditItems.setDisable(true);
+        VboxEditItems.setOpacity(0);
     }
 
     @FXML private void BtnAddItemConfirm(){
@@ -284,27 +286,23 @@ public class DashboardController implements Initializable {
             item.setAuthor(TxtEditItemsAuthor.getText());
         }
         tableViewCollection.refresh();
-        VboxCollection.setDisable(false);
-        VboxCollection.setOpacity(1);
-        VboxAddNewItem.setDisable(true);
-        VboxAddNewItem.setOpacity(0);
-        VboxEditItems.setDisable(true);
-        VboxEditItems.setOpacity(0);
+        BackToItemsMainPage();
     }
     @FXML private void BtnDeleteItem(){
         listOfItems.remove(tableViewCollection.getSelectionModel().getSelectedItem());
         tableViewCollection.refresh();
     }
     @FXML private void BtnCancelNewItem(){
-        VboxCollection.setDisable(false);
-        VboxCollection.setOpacity(1);
-        VboxAddNewItem.setDisable(true);
-        VboxAddNewItem.setOpacity(0);
+        BackToMembersMainPage();
     }
     @FXML private void BtnCancelEditItems(){
         TxtEditItemTitle.setText("");
         TxtEditItemsAuthor.setText("");
 
+        BackToItemsMainPage();
+    }
+
+    private void BackToItemsMainPage(){
         VboxCollection.setDisable(false);
         VboxCollection.setOpacity(1);
         VboxAddNewItem.setDisable(true);
