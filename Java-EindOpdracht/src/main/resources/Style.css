@@ -74,3 +74,11 @@
 #AnchorPaneNewMember{
     -fx-background-color: #FFFFFF;
 }
+
+#LblAddNewMemberErrorMessage{
+    -fx-text-fill: #C60108;
+}
+
+#LblAddNewMemberMessage{
+    -fx-text-fill: #258200;
+}

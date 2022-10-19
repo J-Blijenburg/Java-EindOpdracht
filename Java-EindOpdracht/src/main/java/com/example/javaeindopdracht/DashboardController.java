@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -42,6 +41,9 @@ public class DashboardController implements Initializable {
 
     @FXML private Label LblEditItems;
 
+    @FXML private Label LblAddNewMemberErrorMessage;
+    @FXML private Label LblAddNewMemberMessage;
+
     @FXML private VBox VboxMembers;
 
     @FXML private VBox VboxAddNewMembers;
@@ -54,6 +56,7 @@ public class DashboardController implements Initializable {
     @FXML private VBox VboxEditItems;
     @FXML private DatePicker DataPickerAddNewMember;
     @FXML private DatePicker DataPickerEditMember;
+
 
 
 
@@ -77,19 +80,11 @@ public class DashboardController implements Initializable {
 
     }
 
-    private void EditTableViewCollection(){
-        //tableViewCollection.setEditable(true);
-        //TableColumn tableColumn = (TableColumn) tableViewCollection.getColumns();
-       // tableColumn.setCellValueFactory(cellDataFeatures -> {
-         //   boolean available = cellDataFeatures.GetValue
-        //});
-
-
-    }
 
     @FXML private void BtnLendItemOnAction(ActionEvent event){
         try{
-            ClearMessageText();
+            LblLendItemError.setText("");
+            LblLendItemSuccses.setText("");
             EmptyTextBox(TxtItemCode.getText());
             EmptyTextBox(TxtMemberIdentifier.getText());
 
@@ -139,7 +134,8 @@ public class DashboardController implements Initializable {
 
     @FXML private void BtnReceiveItemOnAction(){
         try{
-            ClearMessageText();
+            LblLendItemError.setText("");
+            LblLendItemSuccses.setText("");
             EmptyTextBox(TxtReceiveItemCode.getText());
             Items item = SelectItem(Integer.parseInt(TxtReceiveItemCode.getText()));
 
@@ -167,11 +163,11 @@ public class DashboardController implements Initializable {
             throw new Exception("Please, enter a value");
         }
     }
-    private void ClearMessageText(){
-        LblLendItemError.setText("");
-        LblLendItemSuccses.setText("");
-        LblReceiveItemError.setText("");
-        LblReceiveItemSuccses.setText("");
+
+
+    private void ClearDatePicker(){
+        DataPickerEditMember.setValue(null);
+        DataPickerAddNewMember.setValue(null);
     }
 
     @FXML private void BtnAddMemberOnAction(){
@@ -184,10 +180,33 @@ public class DashboardController implements Initializable {
 
     }
     @FXML private void BtnAddMemberConfirm(){
-        listOfMembers.add(new Members(listOfMembers.size() + 1,TxtAddMemberFirstName.getText(), TxtAddMemberLastName.getText(), LocalDate.of(DataPickerAddNewMember.getValue().getYear(), DataPickerAddNewMember.getValue().getMonth(), DataPickerAddNewMember.getValue().getDayOfMonth()) , TxtAddMemberFirstName.getText(), TxtAddMemberLastName +  "123"));
+        try{
+            if(TxtAddMemberFirstName.getText() == null | TxtAddMemberLastName.getText() == null | DataPickerAddNewMember.getValue() == null ){
+                throw new Exception("Please, fill in all the fields");
+            }
+            listOfMembers.add(new Members(listOfMembers.size() + 1,TxtAddMemberFirstName.getText(), TxtAddMemberLastName.getText(), LocalDate.of(DataPickerAddNewMember.getValue().getYear(), DataPickerAddNewMember.getValue().getMonth(), DataPickerAddNewMember.getValue().getDayOfMonth()) , TxtAddMemberFirstName.getText(), TxtAddMemberLastName +  "123"));
+
+            tableViewMembers.refresh();
+
+            VboxMembers.setDisable(false);
+            VboxMembers.setOpacity(1);
+            VboxAddNewMembers.setDisable(true);
+            VboxAddNewMembers.setOpacity(0);
+            VboxEditMembers.setDisable(true);
+            VboxEditMembers.setOpacity(0);
+        }
+        catch(Exception ex){
+            LblAddNewMemberErrorMessage.setText(ex.getMessage());
+        }
     }
 
     @FXML private void BtnCancelNewMember(){
+        TxtAddMemberFirstName.setText("");
+        TxtAddMemberLastName.setText("");
+        BackToMembersMainPage();
+    }
+
+    private void BackToMembersMainPage(){
         VboxMembers.setDisable(false);
         VboxMembers.setOpacity(1);
         VboxAddNewMembers.setDisable(true);
@@ -240,7 +259,6 @@ public class DashboardController implements Initializable {
         tableViewMembers.refresh();
 
         VboxMembers.setDisable(false);
-        VboxMembers.setDisable(false);
         VboxMembers.setOpacity(1);
         VboxAddNewMembers.setDisable(true);
         VboxAddNewMembers.setOpacity(0);
@@ -251,7 +269,7 @@ public class DashboardController implements Initializable {
     @FXML private  void BtnCancelEditMember(){
         TxtEditMemberFirstName.setText("");
         TxtEditMemberLastName.setText("");
-        DataPickerEditMember.setValue(null);
+        ClearDatePicker();
 
         VboxMembers.setDisable(false);
         VboxMembers.setOpacity(1);
@@ -312,7 +330,6 @@ public class DashboardController implements Initializable {
             item.setAuthor(TxtEditItemsAuthor.getText());
         }
 
-
         tableViewCollection.refresh();
 
         VboxCollection.setDisable(false);
@@ -322,4 +339,5 @@ public class DashboardController implements Initializable {
         VboxEditItems.setDisable(true);
         VboxEditItems.setOpacity(0);
     }
+
 }
