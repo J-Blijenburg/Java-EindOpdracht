@@ -82,3 +82,19 @@
 #LblAddNewMemberMessage{
     -fx-text-fill: #258200;
 }
+
+#LblEditItemsErrorMessage{
+    -fx-text-fill: #C60108;
+}
+
+#LblEditItemsMessage{
+    -fx-text-fill: #258200;
+}
+
+#LblMembersErrorMessage{
+    -fx-text-fill: #C60108;
+}
+
+#LblItemsErrorMessage{
+    -fx-text-fill: #C60108;
+}

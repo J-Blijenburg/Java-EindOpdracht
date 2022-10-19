@@ -129,6 +129,7 @@
                                     <Button id="BtnDelete" mnemonicParsing="false" onAction="#BtnDeleteMember" prefHeight="30.0" prefWidth="100.0" text="Delete Member" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnEdit" mnemonicParsing="false" onAction="#BtnEditMemberOnAction" prefHeight="30.0" prefWidth="100.0" text="Edit Member" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnAdd" mnemonicParsing="false" onAction="#BtnAddMemberOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                    <Label fx:id="LblMembersErrorMessage" alignment="CENTER_RIGHT" layoutX="69.0" layoutY="15.0" prefHeight="30.0" prefWidth="259.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -202,6 +203,8 @@
                                  <children>
                                     <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelEditItems" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                    <Label fx:id="LblEditItemsErrorMessage" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="381.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="18.0" />
+                                    <Label fx:id="LblEditItemsMessage" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="428.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="18.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -250,6 +253,7 @@
                                     <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemsOnAction" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnDelete" layoutX="418.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnDeleteItem" prefHeight="30.0" prefWidth="100.0" text="Delete Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
+                                    <Label fx:id="LblItemsErrorMessage" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="259.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>
