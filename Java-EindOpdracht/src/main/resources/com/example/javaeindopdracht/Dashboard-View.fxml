@@ -29,7 +29,7 @@
                            <children>
                               <AnchorPane prefHeight="87.0" prefWidth="707.0">
                                  <children>
-                                    <Label id="LblWelcomeUser" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Edit Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                    <Label id="LblWelcomeUser" fx:id="LblEditMember" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Edit Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                        <font>
                                           <Font name="Calibri" size="29.0" />
                                        </font>
@@ -40,9 +40,9 @@
                                  <children>
                                     <AnchorPane id="AnchorPaneNewMember" layoutX="315.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
                                        <children>
-                                          <TextField fx:id="TxtAddMemberFirstName1" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="First name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
-                                          <TextField fx:id="TxtAddMemberLastName1" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Last Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="65.0" />
-                                          <DatePicker fx:id="DataPickerAddNewMember1" layoutX="176.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
+                                          <TextField fx:id="TxtEditMemberFirstName" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="First name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                                          <TextField fx:id="TxtEditMemberLastName" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Last Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="65.0" />
+                                          <DatePicker fx:id="DataPickerEditMember" layoutX="176.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -139,7 +139,72 @@
                <content>
                   <AnchorPane id="TabMembers" minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="707.0">
                      <children>
-                        <VBox fx:id="VboxCollection" disable="true" opacity="0.0" prefHeight="342.0" prefWidth="707.0">
+                        <VBox fx:id="VboxAddNewItem" disable="true" opacity="0.0" prefHeight="342.0" prefWidth="707.0">
+                           <children>
+                              <AnchorPane prefHeight="87.0" prefWidth="707.0">
+                                 <children>
+                                    <Label id="LblWelcomeUser" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Add Items" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="Calibri" size="29.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="248.0" prefWidth="707.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <children>
+                                    <AnchorPane id="AnchorPaneNewMember" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                                       <children>
+                                          <TextField fx:id="TxtAddItemsTitle" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Title" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                                          <TextField fx:id="TxtAddItemsAuthor" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Author" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="65.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children></AnchorPane>
+                              <AnchorPane prefHeight="92.0" prefWidth="707.0">
+                                 <children>
+                                    <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelNewCancel" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="VboxEditItems" disable="true" opacity="0.0" prefHeight="342.0" prefWidth="707.0">
+                           <children>
+                              <AnchorPane prefHeight="87.0" prefWidth="707.0">
+                                 <children>
+                                    <Label id="LblWelcomeUser" fx:id="LblEditItems" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Edit Items" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                       <font>
+                                          <Font name="Calibri" size="29.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="248.0" prefWidth="707.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <children>
+                                    <AnchorPane id="AnchorPaneNewMember" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                                       <children>
+                                          <TextField fx:id="TxtEditItemTitle" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Title" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
+                                          <TextField fx:id="TxtEditItemsAuthor" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Author" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
+                                          <Label layoutX="20.0" layoutY="6.0" text="Title:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                                          <Label layoutX="30.0" layoutY="16.0" text="Author:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="80.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="92.0" prefWidth="707.0">
+                                 <children>
+                                    <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelEditItems" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="VboxCollection" prefHeight="342.0" prefWidth="707.0">
                            <children>
                               <AnchorPane prefHeight="87.0" prefWidth="707.0">
                                  <children>
@@ -183,71 +248,6 @@
                                     <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemsOnAction" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
                                     <Button id="BtnDelete" layoutX="418.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnDeleteItem" prefHeight="30.0" prefWidth="100.0" text="Delete Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </VBox>
-                        <VBox fx:id="VboxAddNewItem" disable="true" opacity="0.0" prefHeight="342.0" prefWidth="707.0">
-                           <children>
-                              <AnchorPane prefHeight="87.0" prefWidth="707.0">
-                                 <children>
-                                    <Label id="LblWelcomeUser" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Add Items" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
-                                       <font>
-                                          <Font name="Calibri" size="29.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="248.0" prefWidth="707.0">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <children>
-                                    <AnchorPane id="AnchorPaneNewMember" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
-                                       <children>
-                                          <TextField fx:id="TxtAddItemsTitle" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Title" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
-                                          <TextField fx:id="TxtAddItemsAuthor" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Author" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="65.0" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children></AnchorPane>
-                              <AnchorPane prefHeight="92.0" prefWidth="707.0">
-                                 <children>
-                                    <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelNewCancel" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </VBox>
-                        <VBox fx:id="VboxEditItems" prefHeight="342.0" prefWidth="707.0">
-                           <children>
-                              <AnchorPane prefHeight="87.0" prefWidth="707.0">
-                                 <children>
-                                    <Label id="LblWelcomeUser" fx:id="LblEditItems" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Edit Items" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
-                                       <font>
-                                          <Font name="Calibri" size="29.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="248.0" prefWidth="707.0">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <children>
-                                    <AnchorPane id="AnchorPaneNewMember" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
-                                       <children>
-                                          <TextField fx:id="TxtEditItemTitle" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Title" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
-                                          <TextField fx:id="TxtEditItemsAuthor" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Author" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
-                                          <Label layoutX="20.0" layoutY="6.0" text="Title:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="20.0" />
-                                          <Label layoutX="30.0" layoutY="16.0" text="Author:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="80.0" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane prefHeight="92.0" prefWidth="707.0">
-                                 <children>
-                                    <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelEditItems" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>

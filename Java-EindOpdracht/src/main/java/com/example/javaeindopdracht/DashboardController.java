@@ -30,12 +30,15 @@ public class DashboardController implements Initializable {
     @FXML private TextField TxtAddItemsAuthor;
     @FXML private TextField TxtEditItemTitle;
     @FXML private TextField TxtEditItemsAuthor;
+    @FXML private TextField TxtEditMemberFirstName;
+    @FXML private TextField TxtEditMemberLastName;
 
     @FXML private Label LblLendItemSuccses;
     @FXML private Label LblLendItemError;
     @FXML private Label LblWelcome;
     @FXML private Label LblReceiveItemError;
     @FXML private Label LblReceiveItemSuccses;
+    @FXML private Label LblEditMember;
 
     @FXML private Label LblEditItems;
 
@@ -50,6 +53,8 @@ public class DashboardController implements Initializable {
 
     @FXML private VBox VboxEditItems;
     @FXML private DatePicker DataPickerAddNewMember;
+    @FXML private DatePicker DataPickerEditMember;
+
 
 
 
@@ -220,10 +225,34 @@ public class DashboardController implements Initializable {
     }
 
     @FXML private void BtnEditMemberConfirm(){
+        Members member = (Members) tableViewMembers.getSelectionModel().getSelectedItem();
 
+        if(!TxtEditMemberFirstName.getText().equals("")){
+            member.setFirstName(TxtEditMemberFirstName.getText());
+        }
+        if(!TxtEditMemberLastName.getText().equals("")){
+            member.setLastName(TxtEditMemberLastName.getText());
+        }
+        if(!DataPickerEditMember.getId().equals("")){
+            member.setBirthDate(DataPickerEditMember.getValue());
+        }
+
+        tableViewMembers.refresh();
+
+        VboxMembers.setDisable(false);
+        VboxMembers.setDisable(false);
+        VboxMembers.setOpacity(1);
+        VboxAddNewMembers.setDisable(true);
+        VboxAddNewMembers.setOpacity(0);
+        VboxEditMembers.setDisable(true);
+        VboxEditMembers.setOpacity(0);
     }
 
     @FXML private  void BtnCancelEditMember(){
+        TxtEditMemberFirstName.setText("");
+        TxtEditMemberLastName.setText("");
+
+
         VboxMembers.setDisable(false);
         VboxMembers.setOpacity(1);
         VboxAddNewMembers.setDisable(true);
@@ -233,6 +262,13 @@ public class DashboardController implements Initializable {
     }
 
     @FXML private void BtnEditMemberOnAction(){
+        Members member = (Members) tableViewMembers.getSelectionModel().getSelectedItem();
+        LblEditMember.setText("Edit Member: " + member.getFirstName());
+        TxtEditMemberFirstName.setPromptText(member.getFirstName());
+        TxtEditMemberLastName.setPromptText(member.getLastName());
+        DataPickerEditMember.setPromptText(member.getBirthDate().toString());
+
+
         VboxMembers.setDisable(true);
         VboxMembers.setOpacity(0);
         VboxAddNewMembers.setDisable(true);
@@ -247,9 +283,6 @@ public class DashboardController implements Initializable {
         TxtEditItemTitle.setPromptText(item.getTitle());
         TxtEditItemsAuthor.setPromptText(item.getAuthor());
 
-
-        
-
         VboxCollection.setDisable(true);
         VboxCollection.setOpacity(0);
         VboxAddNewItem.setDisable(true);
@@ -258,6 +291,9 @@ public class DashboardController implements Initializable {
         VboxEditItems.setOpacity(1);
     }
     @FXML private void BtnCancelEditItems(){
+        TxtEditItemTitle.setText("");
+        TxtEditItemsAuthor.setText("");
+
         VboxCollection.setDisable(false);
         VboxCollection.setOpacity(1);
         VboxAddNewItem.setDisable(true);
@@ -267,6 +303,22 @@ public class DashboardController implements Initializable {
     }
 
     @FXML private void BtnEditItemConfirm(){
+        Items item = (Items) tableViewCollection.getSelectionModel().getSelectedItem();
 
+        if(!TxtEditItemTitle.getText().equals("")){
+            item.setTitle(TxtEditItemTitle.getText());
+        }
+        if(!TxtEditItemsAuthor.getText().equals("")){
+            item.setAuthor(TxtEditItemsAuthor.getText());
+        }
+
+        tableViewCollection.refresh();
+
+        VboxCollection.setDisable(false);
+        VboxCollection.setOpacity(1);
+        VboxAddNewItem.setDisable(true);
+        VboxAddNewItem.setOpacity(0);
+        VboxEditItems.setDisable(true);
+        VboxEditItems.setOpacity(0);
     }
 }
