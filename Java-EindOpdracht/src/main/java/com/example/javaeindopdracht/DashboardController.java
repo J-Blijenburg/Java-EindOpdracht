@@ -251,7 +251,7 @@ public class DashboardController implements Initializable {
     @FXML private  void BtnCancelEditMember(){
         TxtEditMemberFirstName.setText("");
         TxtEditMemberLastName.setText("");
-
+        DataPickerEditMember.setValue(null);
 
         VboxMembers.setDisable(false);
         VboxMembers.setOpacity(1);
@@ -311,6 +311,7 @@ public class DashboardController implements Initializable {
         if(!TxtEditItemsAuthor.getText().equals("")){
             item.setAuthor(TxtEditItemsAuthor.getText());
         }
+
 
         tableViewCollection.refresh();
 
