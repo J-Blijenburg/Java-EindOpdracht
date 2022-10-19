@@ -8,13 +8,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -24,6 +24,11 @@ public class DashboardController implements Initializable {
     @FXML private TextField TxtItemCode;
     @FXML private TextField TxtMemberIdentifier;
     @FXML private TextField TxtReceiveItemCode;
+    @FXML private TextField TxtAddMemberFirstName;
+    @FXML private TextField TxtAddMemberLastName;
+    @FXML private TextField TxtAddItemsTitle;
+    @FXML private TextField TxtAddItemsAuthor;
+
     @FXML private Label LblLendItemSuccses;
     @FXML private Label LblLendItemError;
     @FXML private Label LblWelcome;
@@ -37,7 +42,7 @@ public class DashboardController implements Initializable {
     @FXML private VBox VboxCollection;
     @FXML private VBox VboxAddNewItem;
 
-
+    @FXML private DatePicker DataPickerAddNewMember;
 
 
     private final Members currentMember;
@@ -56,6 +61,17 @@ public class DashboardController implements Initializable {
         LblWelcome.setText("Welcome " + currentMember.getFirstName());
         tableViewMembers.setItems(listOfMembers);
         tableViewCollection.setItems(listOfItems);
+
+    }
+
+    private void EditTableViewCollection(){
+        //tableViewCollection.setEditable(true);
+        //TableColumn tableColumn = (TableColumn) tableViewCollection.getColumns();
+       // tableColumn.setCellValueFactory(cellDataFeatures -> {
+         //   boolean available = cellDataFeatures.GetValue
+        //});
+
+
     }
 
     @FXML private void BtnLendItemOnAction(ActionEvent event){
@@ -153,7 +169,7 @@ public class DashboardController implements Initializable {
 
     }
     @FXML private void BtnAddMemberConfirm(){
-
+        listOfMembers.add(new Members(listOfMembers.size() + 1,TxtAddMemberFirstName.getText(), TxtAddMemberLastName.getText(), LocalDate.of(DataPickerAddNewMember.getValue().getYear(), DataPickerAddNewMember.getValue().getMonth(), DataPickerAddNewMember.getValue().getDayOfMonth()) , TxtAddMemberFirstName.getText(), TxtAddMemberLastName +  "123"));
     }
 
     @FXML private void BtnCancelNewMember(){
@@ -171,7 +187,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML private void BtnAddItemConfirm(){
-
+        listOfItems.add(new Items(listOfItems.size() + 1, true, TxtAddItemsTitle.getText(),TxtAddItemsAuthor.getText()));
     }
 
     @FXML private void BtnCancelNewCancel(){

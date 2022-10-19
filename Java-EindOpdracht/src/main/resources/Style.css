@@ -70,3 +70,7 @@
 #LblReceiveItemError{
     -fx-text-fill: #C60108;
 }
+
+#AnchorPaneNewMember{
+    -fx-background-color: #FFFFFF;
+}
