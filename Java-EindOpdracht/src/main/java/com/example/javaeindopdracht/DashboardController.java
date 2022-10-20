@@ -18,8 +18,8 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
     @FXML private ImageView DashBoardImage;
-    @FXML private TableView tableViewMembers;
-    @FXML private TableView tableViewCollection;
+    @FXML private TableView<Members> tableViewMembers;
+    @FXML private TableView<Items> tableViewCollection;
     @FXML private TextField TxtItemCode;
     @FXML private TextField TxtMemberIdentifier;
     @FXML private TextField TxtReceiveItemCode;
@@ -31,7 +31,6 @@ public class DashboardController implements Initializable {
     @FXML private TextField TxtEditItemsAuthor;
     @FXML private TextField TxtEditMemberFirstName;
     @FXML private TextField TxtEditMemberLastName;
-
     @FXML private Label LblLendItemSuccses;
     @FXML private Label LblLendItemError;
     @FXML private Label LblWelcome;
@@ -39,48 +38,41 @@ public class DashboardController implements Initializable {
     @FXML private Label LblReceiveItemSuccses;
     @FXML private Label LblEditMember;
     @FXML private Label LblEditItemsErrorMessage;
-
     @FXML private Label LblEditItems;
-
     @FXML private Label LblAddNewMemberErrorMessage;
     @FXML private Label LblAddNewMemberMessage;
     @FXML private Label LblEditItemsMessage;
     @FXML private Label LblMembersErrorMessage;
     @FXML private Label LblItemsErrorMessage;
     @FXML private VBox VboxMembers;
-
     @FXML private VBox VboxAddNewMembers;
     @FXML private VBox VboxEditMembers;
-
     @FXML private VBox VboxCollection;
-
     @FXML private VBox VboxAddNewItem;
-
     @FXML private VBox VboxEditItems;
     @FXML private DatePicker DataPickerAddNewMember;
     @FXML private DatePicker DataPickerEditMember;
-
-
-
-
-
+    @FXML private TabPane TabPane;
+    @FXML private Tab TabLendingReceiving;
     private final Members currentMember;
     private final ObservableList<Members> listOfMembers;
     private final ObservableList<Items> listOfItems;
     private final Database database;
 
+    //Receive the current member and database from the Login-controller
     public DashboardController(Members member, Database database){
        this.currentMember = member;
        this.database = database;
         this.listOfMembers = FXCollections.observableList(this.database.getAllMembers());
         this.listOfItems = FXCollections.observableList(this.database.getAllItems());
     }
+    //Greet the current member and load all the list in the correct tableView. It also makes sure that the right Tap is opened
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LblWelcome.setText("Welcome " + currentMember.getFirstName());
         tableViewMembers.setItems(listOfMembers);
         tableViewCollection.setItems(listOfItems);
-
+        TabPane.getSelectionModel().select(TabLendingReceiving);
     }
 
 
@@ -113,7 +105,6 @@ public class DashboardController implements Initializable {
     private Members SelectMember(){
         for(Members member : listOfMembers){
             if(member.getId() == Integer.parseInt(TxtMemberIdentifier.getText())){
-
                 return member;
             }
         }
@@ -170,7 +161,6 @@ public class DashboardController implements Initializable {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~Evrything of the member TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @FXML private void BtnAddMemberOnAction(){
         GoToNewObjectPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
-
     }
     @FXML private void BtnAddMemberConfirm(){
         try{
@@ -187,8 +177,9 @@ public class DashboardController implements Initializable {
             LblAddNewMemberErrorMessage.setText(ex.getMessage());
         }
     }
+    //If information of the member is changed this button is going to confirm the changes
     @FXML private void BtnEditMemberConfirm(){
-        Members member = (Members) tableViewMembers.getSelectionModel().getSelectedItem();
+        Members member = tableViewMembers.getSelectionModel().getSelectedItem();
 
         if(!TxtEditMemberFirstName.getText().equals("")){
             member.setFirstName(TxtEditMemberFirstName.getText());
@@ -204,11 +195,11 @@ public class DashboardController implements Initializable {
 
         GoToMainPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
     }
+    //Check if a member is selected and bring that member to the editpage.
     @FXML private void BtnEditMemberOnAction(){
-
         try{
             if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
-                Members member = (Members) tableViewMembers.getSelectionModel().getSelectedItem();
+                Members member = tableViewMembers.getSelectionModel().getSelectedItem();
                 LblEditMember.setText("Edit Member: " + member.getFirstName());
                 TxtEditMemberFirstName.setPromptText(member.getFirstName());
                 TxtEditMemberLastName.setPromptText(member.getLastName());
@@ -219,11 +210,11 @@ public class DashboardController implements Initializable {
             else{
                 throw new Exception("Please, Select an member");
             }
-
         }catch(Exception ex){
             LblMembersErrorMessage.setText(ex.getMessage());
         }
     }
+    //Check if a member is selected. If so delete the member
     @FXML private void BtnDeleteMember(){
         try{
             if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
@@ -237,6 +228,7 @@ public class DashboardController implements Initializable {
             LblMembersErrorMessage.setText(ex.getMessage());
         }
     }
+    //While editing a member cancel the process and reset all the values
     @FXML private  void BtnCancelEditMember(){
         TxtEditMemberFirstName.setText("");
         TxtEditMemberLastName.setText("");
@@ -244,6 +236,7 @@ public class DashboardController implements Initializable {
         RefreshLabels();
         GoToMainPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
     }
+    //While creating a new member cancel the process and reset all the values
     @FXML private void BtnCancelNewMember(){
         TxtAddMemberFirstName.setText("");
         TxtAddMemberLastName.setText("");
@@ -251,8 +244,7 @@ public class DashboardController implements Initializable {
         RefreshLabels();
         GoToMainPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
     }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~Evrything of the Item TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~Everything of the Item TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @FXML private void BtnAddItemOnAction(){
         GoToNewObjectPage(VboxCollection, VboxAddNewItem, VboxEditItems);
     }
@@ -274,7 +266,7 @@ public class DashboardController implements Initializable {
     @FXML private void BtnEditItemsOnAction(){
         try{
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                Items item = (Items) tableViewCollection.getSelectionModel().getSelectedItem();
+                Items item = tableViewCollection.getSelectionModel().getSelectedItem();
                 LblEditItems.setText("Edit item: " + item.getTitle());
                 TxtEditItemTitle.setPromptText(item.getTitle());
                 TxtEditItemsAuthor.setPromptText(item.getAuthor());
@@ -292,7 +284,7 @@ public class DashboardController implements Initializable {
 
         try{
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                Items item = (Items) tableViewCollection.getSelectionModel().getSelectedItem();
+                Items item = tableViewCollection.getSelectionModel().getSelectedItem();
 
                 if(!TxtEditItemTitle.getText().equals("")){
                     item.setTitle(TxtEditItemTitle.getText());
@@ -326,6 +318,8 @@ public class DashboardController implements Initializable {
         }
     }
     @FXML private void BtnCancelNewItem(){
+        TxtAddItemsAuthor.setText("");
+        TxtAddItemsTitle.setText("");
         GoToMainPage(VboxCollection, VboxAddNewItem, VboxEditItems);
         RefreshLabels();
 

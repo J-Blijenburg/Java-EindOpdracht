@@ -19,7 +19,7 @@
 
 <AnchorPane id="DashBoardAnchorPane" prefHeight="400.0" prefWidth="700.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TabPane id="DashboardTabPane" layoutY="31.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="369.0" prefWidth="707.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane id="DashboardTabPane" fx:id="TabPane" layoutY="31.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="369.0" prefWidth="707.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Members">
                <content>
@@ -262,7 +262,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Lending/receiving">
+            <Tab fx:id="TabLendingReceiving" text="Lending/receiving">
                <content>
                   <AnchorPane id="TabLending" minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="694.0">
                      <children>
