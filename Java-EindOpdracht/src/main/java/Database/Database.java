@@ -13,7 +13,6 @@ private List<Members> allMembers = new ArrayList<>();
 private List<Items> allItems = new ArrayList<>();
 
 
-
     public Database() {
         Read();
     }
@@ -58,8 +57,6 @@ private List<Items> allItems = new ArrayList<>();
 
     private void Read() {
         try {
-
-
             FileInputStream fileMembers = new FileInputStream("JavaEindopdrachtMembers.txt");
             ObjectInputStream objectMembers = new ObjectInputStream(fileMembers);
 
@@ -84,6 +81,7 @@ private List<Items> allItems = new ArrayList<>();
 
         }
     }
+
 
     //This method does nothing but is only here so there is always a backup incase something went wrong with the files
     private void DatabaseInput(){

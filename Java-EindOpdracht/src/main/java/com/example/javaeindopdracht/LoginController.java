@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
 import java.io.IOException;
 
 public class LoginController {
@@ -23,14 +24,25 @@ public class LoginController {
     @FXML public Label LblErrorMessage;
     private Database database = new Database();
     private ObservableList<Members> listOfMembers;
+    private File memberFile = new File("JavaEindopdrachtMembers.txt");
+    private File itemFile = new File("JavaEindopdrachtItems.txt");
+
     public LoginController() {
         this.listOfMembers = FXCollections.observableList(this.database.getAllMembers());
+    }
+
+    public void CheckDataBase(File file) throws Exception {
+        if(!file.exists()){
+            throw new Exception("Database file " + file.getName() + " does not exist!");
+        }
     }
 
     //loop through every single member to identify the correct username and password
     public void loginBtnClick(ActionEvent actionEvent) {
        try{
-            CheckUsernameAndPassword();
+           CheckDataBase(memberFile);
+           CheckDataBase(itemFile);
+           CheckUsernameAndPassword();
            for(Members member : listOfMembers){
                if (this.userNametxt.getText().equals(member.getFirstName())) {
                    if (!this.passWordtxt.getText().equals(member.getPassWord())) {
