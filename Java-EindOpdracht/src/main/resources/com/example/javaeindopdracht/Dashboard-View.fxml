@@ -115,7 +115,7 @@
                                                 <PropertyValueFactory property="lastName" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="215.0" text="Birth date">
+                                          <TableColumn fx:id="TableViewMembersBirthDay" prefWidth="215.0" text="Birth date">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="birthDate" />
                                              </cellValueFactory>

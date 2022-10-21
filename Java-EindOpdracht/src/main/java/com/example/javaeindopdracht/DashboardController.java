@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -65,6 +66,7 @@ public class DashboardController implements Initializable {
     @FXML private Tab TabLendingReceiving;
     @FXML private TableColumn<Items, String> TableViewItemsLendOutBy;
     @FXML private TableColumn<Items, String > TableViewItemsAvailable;
+    @FXML private TableColumn<Members, String > TableViewMembersBirthDay;
     private final Members currentMember;
     private final ObservableList<Members> listOfMembers;
     private final ObservableList<Items> listOfItems;
@@ -87,8 +89,17 @@ public class DashboardController implements Initializable {
 
         ChangeTableViewAvailable();
         ChangeTableViewLendOutBy();
+        ChangeTableViewBirthDate();
         SelectionChangedTab();
     }
+    //Changes the birthdate cell of members listview to the correct date format
+    private void ChangeTableViewBirthDate(){
+        TableViewMembersBirthDay.setCellValueFactory(cellData -> {
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            return new SimpleStringProperty(dateFormat.format(cellData.getValue().getBirthDate()));
+        });
+    }
+
     //Receives the data what in the cell is displayed and change it to the right string
     private void ChangeTableViewLendOutBy(){
         TableViewItemsLendOutBy.setCellValueFactory(cellData -> {
