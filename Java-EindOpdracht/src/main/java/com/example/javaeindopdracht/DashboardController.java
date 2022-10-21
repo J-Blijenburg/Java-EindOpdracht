@@ -3,21 +3,15 @@ package com.example.javaeindopdracht;
 import Database.Database;
 import Model.Items;
 import Model.Members;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
@@ -67,6 +61,10 @@ public class DashboardController implements Initializable {
     @FXML private TableColumn<Items, String> TableViewItemsLendOutBy;
     @FXML private TableColumn<Items, String > TableViewItemsAvailable;
     @FXML private TableColumn<Members, String > TableViewMembersBirthDay;
+    private int dateCheck;
+    private int deadLine = 21;
+    private int totalDaysToLate = dateCheck - deadLine;
+
     private final Members currentMember;
     private final ObservableList<Members> listOfMembers;
     private final ObservableList<Items> listOfItems;
@@ -190,37 +188,44 @@ public class DashboardController implements Initializable {
             ClearCurrentTextOfLabel();
             Items item = SelectItem(CheckForInt(TxtReceiveItemCode.getText()));
 
-            int dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
-            int deadLine = 2;
-            int totalDaysToLate = dateCheck - deadLine;
+            CalculateLendTime(item);
+            checkLendOutBy(item);
 
             CheckNull(item, "Item not recognized");
-
-            if(item.getLendOutBy().equals(currentMember)){
-                if(item.getAvailable().equals(false)){
-                    if(dateCheck < deadLine){
-                        LblReceiveItemSuccses.setText("Received item successfully");
-                    }
-                    else{
-                        LblReceiveItemError.setText("Item is " + totalDaysToLate + " days to late!");
-                    }
-                    item.setAvailable(true);
-                    item.setLendOutBy(null);
-                    item.setLendOutDate(null);
-                }
-                else {
-                    throw new Exception("Item never been lend out");
-                }
-            }
-            else{
-                throw new Exception("Member didn't lend this item");
-            }
 
         }
         catch (Exception ex){
             LblReceiveItemError.setText(ex.getMessage());
         }
     }
+    //check if the member actually lend the item
+    private void checkLendOutBy(Items item) throws Exception {
+        if(item.getLendOutBy().equals(currentMember)){
+            checkDeadLine();
+            normalItemSettings(item);
+        }
+        else{
+            throw new Exception("Member didn't lend this item");
+        }
+    }
+    private void checkDeadLine(){
+        if(dateCheck < deadLine){
+            LblReceiveItemSuccses.setText("Received item successfully");
+        }
+        else{
+            LblReceiveItemError.setText("Item is " + totalDaysToLate + " days to late!");
+        }
+    }
+    //set item settings back to normal
+    private void normalItemSettings(Items item){
+        item.setAvailable(true);
+        item.setLendOutBy(null);
+        item.setLendOutDate(null);
+    }
+    private void CalculateLendTime(Items item){
+        dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
+    }
+
     //If the object is null throw an exception
     private void CheckNull(Object object, String errorMessage) throws Exception {
         if (object == null) {
@@ -236,6 +241,9 @@ public class DashboardController implements Initializable {
     }
 
 
+
+
+
     //~~~~~~~~~~~~~~~~~~~~~~~~~~Everything of the member TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //It will show the right tab to create a new object of in this case a new member
     @FXML private void BtnAddMemberOnAction(){
@@ -248,7 +256,7 @@ public class DashboardController implements Initializable {
             if(TxtAddMemberFirstName.getText() == null | TxtAddMemberLastName.getText() == null | DataPickerAddNewMember.getValue() == null ){
                 throw new Exception("Please, fill in all the fields");
             }
-            listOfMembers.add(new Members(listOfMembers.size() + 1,TxtAddMemberFirstName.getText(), TxtAddMemberLastName.getText(), LocalDate.of(DataPickerAddNewMember.getValue().getYear(), DataPickerAddNewMember.getValue().getMonth(), DataPickerAddNewMember.getValue().getDayOfMonth()) , TxtAddMemberFirstName.getText(), TxtAddMemberLastName +  "123"));
+            listOfMembers.add(new Members(listOfMembers.size() + 1,TxtAddMemberFirstName.getText(), TxtAddMemberLastName.getText(), LocalDate.of(DataPickerAddNewMember.getValue().getYear(), DataPickerAddNewMember.getValue().getMonth(), DataPickerAddNewMember.getValue().getDayOfMonth()) , TxtAddMemberFirstName.getText(), TxtAddMemberLastName.getText() +  "123"));
             tableViewMembers.refresh();
             GoToMainPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
 
