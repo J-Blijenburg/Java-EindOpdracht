@@ -69,48 +69,47 @@ public class DashboardController implements Initializable {
     //Greet the current member and load all the list in the correct tableView. It also makes sure that the right Tap is opened
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        LblWelcome.setText("Welcome " + currentMember.getFirstName());
+        LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
         tableViewMembers.setItems(listOfMembers);
         tableViewCollection.setItems(listOfItems);
         TabPane.getSelectionModel().select(TabLendingReceiving);
     }
 
-
+    //Check if both Textboxes are filled. Assign the selected item to the selected member
     @FXML private void BtnLendItemOnAction(ActionEvent event){
         try{
-            LblLendItemError.setText("");
-            LblLendItemSuccses.setText("");
-            EmptyTextBox(TxtItemCode.getText());
-            EmptyTextBox(TxtMemberIdentifier.getText());
+            ClearCurrentTextOfLabel();
+            EmptyTextBoxCheck(TxtItemCode.getText());
+            EmptyTextBoxCheck(TxtMemberIdentifier.getText());
 
             Items selectedItem = SelectItem(Integer.parseInt(TxtItemCode.getText()));
-            CheckNull(selectedItem, "*Member does not exist");
+            CheckNull(selectedItem, "Member does not exist");
 
-            Members selectedMember = SelectMember();
-            CheckNull(selectedMember, "*Item not found in this library");
+            Members selectedMember = SelectMember(Integer.parseInt(TxtMemberIdentifier.getText()));
+            CheckNull(selectedMember, "Item not found in this library");
 
             if(selectedItem.getAvailable().equals(true)){
+                selectedItem.setLendOutBy(selectedMember);
                 selectedItem.setAvailable(false);
-                currentMember.AddItem(selectedItem);
             }
             else{
-                throw new Exception("*Item is not available now");
+                throw new Exception("Item is not available now");
             }
-            LblLendItemSuccses.setText("*Item is lent out successfully");
+            LblLendItemSuccses.setText("Item is lent out successfully");
         }catch(Exception ex){
             LblLendItemError.setText(ex.getMessage());
         }
-
     }
-    private Members SelectMember(){
+    //Goes through every member to search the member with the correct member id
+    private Members SelectMember(int selectedMember){
         for(Members member : listOfMembers){
-            if(member.getId() == Integer.parseInt(TxtMemberIdentifier.getText())){
+            if(member.getId() == selectedMember){
                 return member;
             }
         }
         return null;
     }
-
+    //Goes through every item to search the item with the correct item code
     private Items SelectItem(int selectedItem){
         for(Items item : listOfItems){
             if(item.getItemCode() == selectedItem){
@@ -120,43 +119,53 @@ public class DashboardController implements Initializable {
         return null;
     }
 
-    private void CheckNull(Object object, String errorMessage) throws Exception {
-        if(object == null){
-            throw new Exception(errorMessage);
-        }
-    }
-
+    //Receive the selected item and check if the item is lent out by the current member
     @FXML private void BtnReceiveItemOnAction(){
         try{
-            LblLendItemError.setText("");
-            LblLendItemSuccses.setText("");
-            EmptyTextBox(TxtReceiveItemCode.getText());
+            ClearCurrentTextOfLabel();
+            EmptyTextBoxCheck(TxtReceiveItemCode.getText());
             Items item = SelectItem(Integer.parseInt(TxtReceiveItemCode.getText()));
 
-            CheckNull(item, "*Item not recognized");
+            CheckNull(item, "Item not recognized");
 
-            if(currentMember.getItemsLend().equals(item)){
+            if(item.getLendOutBy().equals(currentMember)){
                 if(item.getAvailable().equals(false)){
                     item.setAvailable(true);
-                    LblReceiveItemSuccses.setText("*Received item successfully");
+                    LblReceiveItemSuccses.setText("Received item successfully");
                 }
                 else {
-                    throw new Exception("*Item never been lend out");
+                    throw new Exception("Item never been lend out");
                 }
             }
             else{
                 throw new Exception("Member didn't lend this item");
             }
+
         }
         catch (Exception ex){
             LblReceiveItemError.setText(ex.getMessage());
         }
     }
-    public void EmptyTextBox(String textBox) throws Exception {
+    //If the object is null throw an exception
+    private void CheckNull(Object object, String errorMessage) throws Exception {
+        if(object == null){
+            throw new Exception(errorMessage);
+        }
+    }
+    //if the textbox is empty throw an exception
+    private void EmptyTextBoxCheck(String textBox) throws Exception {
         if(textBox.isEmpty()){
             throw new Exception("Please, enter a value");
         }
     }
+    //set the current text of the label to not
+    private void ClearCurrentTextOfLabel(){
+        LblLendItemError.setText(null);
+        LblLendItemSuccses.setText(null);
+        LblReceiveItemSuccses.setText(null);
+        LblReceiveItemError.setText(null);
+    }
+
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~Evrything of the member TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @FXML private void BtnAddMemberOnAction(){

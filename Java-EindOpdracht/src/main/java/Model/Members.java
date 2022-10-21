@@ -11,7 +11,6 @@ public class Members implements Serializable {
     private LocalDate birthDate;
     private String userName;
     private String passWord;
-    private List<Items> itemsLend;
 
     public Members(int id, String firstName, String lastName, LocalDate birthDate, String userName, String passWord) {
         this.id = id;
@@ -20,25 +19,7 @@ public class Members implements Serializable {
         this.birthDate = birthDate;
         this.userName = userName;
         this.passWord = passWord;
-        this.itemsLend = new ArrayList<>();
     }
-
-    public List<Items> getItemsLend() {
-        return itemsLend;
-    }
-
-    public void setItemsLend(List<Items> itemsLend) {
-        this.itemsLend = itemsLend;
-    }
-
-    public void AddItem(Items item){
-        itemsLend.add(item);
-    }
-
-    public void RemoveItem(Items item){
-        itemsLend.remove(item);
-    }
-
     public int getId() {
         return id;
     }

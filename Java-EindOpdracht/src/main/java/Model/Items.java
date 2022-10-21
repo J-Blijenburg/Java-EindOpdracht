@@ -7,6 +7,9 @@ public class Items implements Serializable {
     private Boolean available;
     private String title;
     private String author;
+    private Members lendOutBy;
+
+
 
     public Items(int itemCode, Boolean available, String title, String author) {
         this.itemCode = itemCode;
@@ -14,7 +17,13 @@ public class Items implements Serializable {
         this.title = title;
         this.author = author;
     }
+    public Members getLendOutBy() {
+        return lendOutBy;
+    }
 
+    public void setLendOutBy(Members lendOutBy) {
+        this.lendOutBy = lendOutBy;
+    }
     public int getItemCode() {
         return itemCode;
     }
