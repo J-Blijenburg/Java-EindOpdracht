@@ -126,13 +126,10 @@ public class DashboardController implements Initializable {
     @FXML private void BtnLendItemOnAction(ActionEvent event){
         try{
             ClearCurrentTextOfLabel();
-            EmptyTextBoxCheck(TxtItemCode.getText());
-            EmptyTextBoxCheck(TxtMemberIdentifier.getText());
-
-            Items selectedItem = SelectItem(Integer.parseInt(TxtItemCode.getText()));
+            Items selectedItem = SelectItem(CheckForInt(TxtItemCode.getText()));
             CheckNull(selectedItem, "Member does not exist");
 
-            Members selectedMember = SelectMember(Integer.parseInt(TxtMemberIdentifier.getText()));
+            Members selectedMember = SelectMember(CheckForInt(TxtMemberIdentifier.getText()));
             CheckNull(selectedMember, "Item not found in this library");
 
             if(selectedItem.getAvailable().equals(true)){
@@ -149,6 +146,14 @@ public class DashboardController implements Initializable {
             LblLendItemError.setText(ex.getMessage());
         }
     }
+    private Integer CheckForInt(String text) throws Exception {
+        try{
+            return Integer.parseInt(text);
+        }catch (NumberFormatException ex){
+            throw new Exception("Please, Enter a valid number");
+        }
+    }
+
     //Goes through every member to search the member with the correct member id
     private Members SelectMember(int selectedMember){
         for(Members member : listOfMembers){
@@ -172,8 +177,7 @@ public class DashboardController implements Initializable {
     @FXML private void BtnReceiveItemOnAction(){
         try{
             ClearCurrentTextOfLabel();
-            EmptyTextBoxCheck(TxtReceiveItemCode.getText());
-            Items item = SelectItem(Integer.parseInt(TxtReceiveItemCode.getText()));
+            Items item = SelectItem(CheckForInt(TxtReceiveItemCode.getText()));
 
             int dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
             int deadLine = 2;
@@ -208,14 +212,8 @@ public class DashboardController implements Initializable {
     }
     //If the object is null throw an exception
     private void CheckNull(Object object, String errorMessage) throws Exception {
-        if(object == null){
+        if (object == null) {
             throw new Exception(errorMessage);
-        }
-    }
-    //if the textbox is empty throw an exception
-    private void EmptyTextBoxCheck(String textBox) throws Exception {
-        if(textBox.isEmpty()){
-            throw new Exception("Please, enter a value");
         }
     }
     //set the current text of the label to not
