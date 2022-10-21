@@ -229,7 +229,7 @@
                                                 <PropertyValueFactory property="itemCode" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="70.0" text="Available">
+                                          <TableColumn fx:id="TableViewItemsAvailable" prefWidth="70.0" text="Available">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="available" />
                                              </cellValueFactory>
@@ -244,7 +244,7 @@
                                                 <PropertyValueFactory property="author" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn minWidth="0.0" prefWidth="140.0" text="Lend Out By">
+                                          <TableColumn fx:id="TableViewItemsLendOutBy" minWidth="0.0" prefWidth="140.0" text="Lend Out By">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="lendOutBy" />
                                              </cellValueFactory>

@@ -3,12 +3,17 @@ package com.example.javaeindopdracht;
 import Database.Database;
 import Model.Items;
 import Model.Members;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
@@ -54,6 +59,8 @@ public class DashboardController implements Initializable {
     @FXML private DatePicker DataPickerEditMember;
     @FXML private TabPane TabPane;
     @FXML private Tab TabLendingReceiving;
+    @FXML private TableColumn<Items, String> TableViewItemsLendOutBy;
+    @FXML private TableColumn<Items, String > TableViewItemsAvailable;
     private final Members currentMember;
     private final ObservableList<Members> listOfMembers;
     private final ObservableList<Items> listOfItems;
@@ -73,6 +80,30 @@ public class DashboardController implements Initializable {
         tableViewMembers.setItems(listOfMembers);
         tableViewCollection.setItems(listOfItems);
         TabPane.getSelectionModel().select(TabLendingReceiving);
+
+        ChangeTableViewAvailable();
+        ChangeTableViewLendOutBy();
+    }
+    //Receives the data what in the cell is displayed and change it to the right string
+    private void ChangeTableViewAvailable(){
+        TableViewItemsAvailable.setCellValueFactory(cellData -> {
+            Items item = cellData.getValue();
+            if(item.getAvailable()){
+                return new SimpleStringProperty("Yes");
+            }
+
+            return  new SimpleStringProperty("No");
+        });
+    }
+    //Receives the data what in the cell is displayed and change it to the right string
+    private void ChangeTableViewLendOutBy(){
+        TableViewItemsLendOutBy.setCellValueFactory(cellData -> {
+            Items item = cellData.getValue();
+            if(item.getLendOutBy() != null){
+                return new SimpleStringProperty(cellData.getValue().getLendOutBy().getFirstName());
+            }
+            return new SimpleStringProperty(null);
+        });
     }
 
     //Check if both Textboxes are filled. Assign the selected item to the selected member
@@ -96,6 +127,7 @@ public class DashboardController implements Initializable {
                 throw new Exception("Item is not available now");
             }
             LblLendItemSuccses.setText("Item is lent out successfully");
+            RefreshTableView();
         }catch(Exception ex){
             LblLendItemError.setText(ex.getMessage());
         }
@@ -131,7 +163,9 @@ public class DashboardController implements Initializable {
             if(item.getLendOutBy().equals(currentMember)){
                 if(item.getAvailable().equals(false)){
                     item.setAvailable(true);
+                    RefreshTableView();
                     LblReceiveItemSuccses.setText("Received item successfully");
+
                 }
                 else {
                     throw new Exception("Item never been lend out");
@@ -353,8 +387,7 @@ public class DashboardController implements Initializable {
 
 
 
-    //These method will make sure that the right Vbox is shown
-
+    //These methods will make sure that the right Vbox is shown
     //the 'Main page' of the TabPane
     private void GoToMainPage(VBox vbox1, VBox vBox2, VBox vBox3){
         vbox1.setDisable(false);
@@ -387,5 +420,10 @@ public class DashboardController implements Initializable {
     private void RefreshLabels(){
         LblItemsErrorMessage.setText("");
         LblMembersErrorMessage.setText("");
+    }
+
+    private void RefreshTableView(){
+        tableViewMembers.refresh();
+        tableViewCollection.refresh();
     }
 }
