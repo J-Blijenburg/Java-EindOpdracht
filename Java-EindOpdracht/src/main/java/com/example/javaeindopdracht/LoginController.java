@@ -15,6 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
+
 public class LoginController {
     @FXML public TextField userNametxt;
     @FXML public PasswordField passWordtxt;
@@ -25,41 +27,50 @@ public class LoginController {
         this.listOfMembers = FXCollections.observableList(this.database.getAllMembers());
     }
 
+    //loop through every single member to identify the correct username and password
     public void loginBtnClick(ActionEvent actionEvent) {
        try{
-           if(!(!this.userNametxt.getText().equals("") | !this.passWordtxt.getText().equals(""))){
-               throw new Exception("Please, Enter a Username and Password.");
-           }
-           else{
-              for(Members member : listOfMembers){
-                  if (this.userNametxt.getText().equals(member.getFirstName())) {
-                      if (!this.passWordtxt.getText().equals(member.getPassWord())) {
-                          throw new Exception("Invalid Password combination");
-                      }
-                      FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Dashboard-View.fxml"));
-                      DashboardController dashboardController = new DashboardController(member, database);
-                      fxmlLoader.setController(dashboardController);
-                      Stage stage = new Stage();
-                      stage.setScene(new Scene(fxmlLoader.load()));
-                      stage.setResizable(false);
-                      stage.setTitle("DashBoard");
-                      stage.show();
-                      Start.loginStage.close();
-                      stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                          public void handle(WindowEvent windowEvent) {
-                              database.Write();
-                          }
-                      });
-                      break;
-                  }
+            CheckUsernameAndPassword();
+           for(Members member : listOfMembers){
+               if (this.userNametxt.getText().equals(member.getFirstName())) {
+                   if (!this.passWordtxt.getText().equals(member.getPassWord())) {
+                       throw new Exception("Invalid Password combination");
+                   }
+                   OpenNewStage(member);
+                   break;
                }
-               throw new Exception("Username does not exist!");
            }
+           throw new Exception("Username does not exist!");
        }
        catch(Exception ex){
            this.LblErrorMessage.setText("");
            this.LblErrorMessage.setText(ex.getMessage());
        }
     }
+    //If there is no input remind the user to fill in a valid input
+    private void CheckUsernameAndPassword() throws Exception {
+        if(this.userNametxt.getText().equals("") | this.passWordtxt.getText().equals("")){
+            throw new Exception("Please, Enter a Username and Password.");
+        }
+    }
+
+    //Create a new stage with settings
+    private void OpenNewStage(Members member) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Dashboard-View.fxml"));
+        DashboardController dashboardController = new DashboardController(member, database);
+        fxmlLoader.setController(dashboardController);
+        Stage stage = new Stage();
+        stage.setScene(new Scene(fxmlLoader.load()));
+        stage.setResizable(false);
+        stage.setTitle("DashBoard");
+        stage.show();
+        Start.loginStage.close();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            public void handle(WindowEvent windowEvent) {
+                database.Write();
+            }
+        });
+    }
+
 
 }

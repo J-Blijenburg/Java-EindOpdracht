@@ -168,9 +168,12 @@ public class DashboardController implements Initializable {
 
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~Evrything of the member TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //It will show the right tab to create a new object of in this case a new member
     @FXML private void BtnAddMemberOnAction(){
         GoToNewObjectPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
     }
+
+    //When entering all the needed information you can add the new member
     @FXML private void BtnAddMemberConfirm(){
         try{
             if(TxtAddMemberFirstName.getText() == null | TxtAddMemberLastName.getText() == null | DataPickerAddNewMember.getValue() == null ){
@@ -185,24 +188,6 @@ public class DashboardController implements Initializable {
         catch(Exception ex){
             LblAddNewMemberErrorMessage.setText(ex.getMessage());
         }
-    }
-    //If information of the member is changed this button is going to confirm the changes
-    @FXML private void BtnEditMemberConfirm(){
-        Members member = tableViewMembers.getSelectionModel().getSelectedItem();
-
-        if(!TxtEditMemberFirstName.getText().equals("")){
-            member.setFirstName(TxtEditMemberFirstName.getText());
-        }
-        if(!TxtEditMemberLastName.getText().equals("")){
-            member.setLastName(TxtEditMemberLastName.getText());
-        }
-        if(!DataPickerEditMember.getId().equals("")){
-            member.setBirthDate(DataPickerEditMember.getValue());
-        }
-
-        tableViewMembers.refresh();
-
-        GoToMainPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
     }
     //Check if a member is selected and bring that member to the editpage.
     @FXML private void BtnEditMemberOnAction(){
@@ -223,6 +208,25 @@ public class DashboardController implements Initializable {
             LblMembersErrorMessage.setText(ex.getMessage());
         }
     }
+    //If information of the member is changed this button is going to confirm the changes
+    @FXML private void BtnEditMemberConfirm(){
+        Members member = tableViewMembers.getSelectionModel().getSelectedItem();
+
+        if(!TxtEditMemberFirstName.getText().equals("")){
+            member.setFirstName(TxtEditMemberFirstName.getText());
+        }
+        if(!TxtEditMemberLastName.getText().equals("")){
+            member.setLastName(TxtEditMemberLastName.getText());
+        }
+        if(!DataPickerEditMember.getId().equals("")){
+            member.setBirthDate(DataPickerEditMember.getValue());
+        }
+
+        tableViewMembers.refresh();
+
+        GoToMainPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
+    }
+
     //Check if a member is selected. If so delete the member
     @FXML private void BtnDeleteMember(){
         try{
@@ -254,10 +258,12 @@ public class DashboardController implements Initializable {
         GoToMainPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~Everything of the Item TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //It will show the right tab to create a new object of in this case a new Item
     @FXML private void BtnAddItemOnAction(){
         GoToNewObjectPage(VboxCollection, VboxAddNewItem, VboxEditItems);
     }
 
+    //When entering all the needed information you can add the new item
     @FXML private void BtnAddItemConfirm(){
         try{
             if(TxtAddItemsTitle.getText() != null | TxtAddItemsAuthor.getText() != null){
@@ -271,7 +277,7 @@ public class DashboardController implements Initializable {
             LblEditItemsErrorMessage.setText(ex.getMessage());
         }
     }
-
+    //Check if a item is selected and bring that item to the editpage.
     @FXML private void BtnEditItemsOnAction(){
         try{
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
@@ -289,6 +295,7 @@ public class DashboardController implements Initializable {
             LblItemsErrorMessage.setText(ex.getMessage());
         }
     }
+    //If information of the selected item is changed this button is going to confirm the changes
     @FXML private void BtnEditItemConfirm(){
 
         try{
@@ -312,6 +319,7 @@ public class DashboardController implements Initializable {
             LblItemsErrorMessage.setText(ex.getMessage());
         }
     }
+    //Check if a item is selected. If so delete the item
     @FXML private void BtnDeleteItem(){
 
         try{
@@ -326,6 +334,8 @@ public class DashboardController implements Initializable {
             LblItemsErrorMessage.setText(ex.getMessage());
         }
     }
+
+    //While creating a new item cancel the process and reset all the values
     @FXML private void BtnCancelNewItem(){
         TxtAddItemsAuthor.setText("");
         TxtAddItemsTitle.setText("");
@@ -333,6 +343,7 @@ public class DashboardController implements Initializable {
         RefreshLabels();
 
     }
+    //While editing an item cancel the process and reset all the values
     @FXML private void BtnCancelEditItems(){
         TxtEditItemTitle.setText("");
         TxtEditItemsAuthor.setText("");
@@ -342,7 +353,9 @@ public class DashboardController implements Initializable {
 
 
 
-    //This method will make sure that the right Vbox is shown
+    //These method will make sure that the right Vbox is shown
+
+    //the 'Main page' of the TabPane
     private void GoToMainPage(VBox vbox1, VBox vBox2, VBox vBox3){
         vbox1.setDisable(false);
         vbox1.setOpacity(1);
@@ -351,6 +364,7 @@ public class DashboardController implements Initializable {
         vBox3.setDisable(true);
         vBox3.setOpacity(0);
     }
+    //the 'Create a new object' of the TabPane
     private void GoToNewObjectPage(VBox vbox1, VBox vBox2, VBox vBox3){
         vbox1.setDisable(true);
         vbox1.setOpacity(0);
@@ -359,6 +373,7 @@ public class DashboardController implements Initializable {
         vBox3.setDisable(true);
         vBox3.setOpacity(0);
     }
+    //the 'edit a selected object' of the TabPane
     private void GoToEditObjectPage(VBox vbox1, VBox vBox2, VBox vBox3){
         vbox1.setDisable(true);
         vbox1.setOpacity(0);
@@ -367,7 +382,6 @@ public class DashboardController implements Initializable {
         vBox3.setDisable(false);
         vBox3.setOpacity(1);
     }
-
 
     //Reset the chosen labels
     private void RefreshLabels(){

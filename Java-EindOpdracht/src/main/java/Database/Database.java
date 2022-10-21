@@ -15,8 +15,7 @@ private List<Items> allItems = new ArrayList<>();
 
 
     public Database() {
-
-        DatabaseInput();
+        Read();
     }
 
     public List<Members> getAllMembers() {
