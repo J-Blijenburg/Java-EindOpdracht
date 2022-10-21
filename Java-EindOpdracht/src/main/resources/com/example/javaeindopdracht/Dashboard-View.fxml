@@ -224,24 +224,29 @@
                                  <children>
                                     <TableView fx:id="tableViewCollection" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                        <columns>
-                                          <TableColumn prefWidth="75.0" text="Item code">
+                                          <TableColumn prefWidth="70.0" text="Item code">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="itemCode" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn fx:id="TableViewItemsAvailable" prefWidth="160.0" text="Available">
+                                          <TableColumn fx:id="TableViewItemsAvailable" prefWidth="70.0" text="Available">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="available" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn prefWidth="215.0" text="title">
+                                          <TableColumn prefWidth="200.0" text="title">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="title" />
                                              </cellValueFactory>
                                           </TableColumn>
-                                          <TableColumn minWidth="0.0" prefWidth="215.0" text="author">
+                                          <TableColumn minWidth="0.0" prefWidth="185.0" text="author">
                                              <cellValueFactory>
                                                 <PropertyValueFactory property="author" />
+                                             </cellValueFactory>
+                                          </TableColumn>
+                                          <TableColumn fx:id="TableViewItemsLendOutBy" minWidth="0.0" prefWidth="140.0" text="Lend Out By">
+                                             <cellValueFactory>
+                                                <PropertyValueFactory property="lendOutBy" />
                                              </cellValueFactory>
                                           </TableColumn>
                                        </columns>

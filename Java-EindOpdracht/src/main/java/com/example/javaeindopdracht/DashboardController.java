@@ -86,7 +86,18 @@ public class DashboardController implements Initializable {
         TabPane.getSelectionModel().select(TabLendingReceiving);
 
         ChangeTableViewAvailable();
+        ChangeTableViewLendOutBy();
         SelectionChangedTab();
+    }
+    //Receives the data what in the cell is displayed and change it to the right string
+    private void ChangeTableViewLendOutBy(){
+        TableViewItemsLendOutBy.setCellValueFactory(cellData -> {
+            Items item = cellData.getValue();
+            if(item.getLendOutBy() != null){
+                return new SimpleStringProperty(cellData.getValue().getLendOutBy().getFirstName());
+            }
+            return new SimpleStringProperty(null);
+        });
     }
 
     private void SelectionChangedTab(){
@@ -172,13 +183,15 @@ public class DashboardController implements Initializable {
 
             if(item.getLendOutBy().equals(currentMember)){
                 if(item.getAvailable().equals(false)){
-                    item.setAvailable(true);
                     if(dateCheck < deadLine){
                         LblReceiveItemSuccses.setText("Received item successfully");
                     }
                     else{
                         LblReceiveItemError.setText("Item is " + totalDaysToLate + " days to late!");
                     }
+                    item.setAvailable(true);
+                    item.setLendOutBy(null);
+                    item.setLendOutDate(null);
                 }
                 else {
                     throw new Exception("Item never been lend out");
