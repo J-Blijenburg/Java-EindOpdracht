@@ -7,9 +7,13 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -82,7 +86,18 @@ public class DashboardController implements Initializable {
         TabPane.getSelectionModel().select(TabLendingReceiving);
 
         ChangeTableViewAvailable();
-        ChangeTableViewLendOutBy();
+        SelectionChangedTab();
+    }
+
+    private void SelectionChangedTab(){
+        TabPane.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                RefreshTableView();
+                RefreshLabels();
+                RefreshTxtField();
+            }
+        });
     }
     //Receives the data what in the cell is displayed and change it to the right string
     private void ChangeTableViewAvailable(){
@@ -93,16 +108,6 @@ public class DashboardController implements Initializable {
             }
 
             return  new SimpleStringProperty("No");
-        });
-    }
-    //Receives the data what in the cell is displayed and change it to the right string
-    private void ChangeTableViewLendOutBy(){
-        TableViewItemsLendOutBy.setCellValueFactory(cellData -> {
-            Items item = cellData.getValue();
-            if(item.getLendOutBy() != null){
-                return new SimpleStringProperty(cellData.getValue().getLendOutBy().getFirstName());
-            }
-            return new SimpleStringProperty(null);
         });
     }
 
@@ -163,9 +168,7 @@ public class DashboardController implements Initializable {
             if(item.getLendOutBy().equals(currentMember)){
                 if(item.getAvailable().equals(false)){
                     item.setAvailable(true);
-                    RefreshTableView();
                     LblReceiveItemSuccses.setText("Received item successfully");
-
                 }
                 else {
                     throw new Exception("Item never been lend out");
@@ -416,14 +419,22 @@ public class DashboardController implements Initializable {
         vBox3.setOpacity(1);
     }
 
-    //Reset the chosen labels
+    //Refresh the chosen labels
     private void RefreshLabels(){
         LblItemsErrorMessage.setText("");
         LblMembersErrorMessage.setText("");
     }
 
+    //Refresh the chosen tableView
     private void RefreshTableView(){
         tableViewMembers.refresh();
         tableViewCollection.refresh();
+    }
+
+    //Refresh the chosen Txtfields
+    private void RefreshTxtField(){
+        TxtItemCode.setText("");
+        TxtMemberIdentifier.setText("");
+        TxtReceiveItemCode.setText("");
     }
 }
