@@ -125,6 +125,7 @@ public class DashboardController implements Initializable {
             CheckNull(selectedMember, "Item not found in this library");
 
             if(selectedItem.getAvailable().equals(true)){
+                selectedItem.setLendOutDate(LocalDate.now());
                 selectedItem.setLendOutBy(selectedMember);
                 selectedItem.setAvailable(false);
             }
@@ -163,12 +164,21 @@ public class DashboardController implements Initializable {
             EmptyTextBoxCheck(TxtReceiveItemCode.getText());
             Items item = SelectItem(Integer.parseInt(TxtReceiveItemCode.getText()));
 
+            int dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
+            int deadLine = 2;
+            int totalDaysToLate = dateCheck - deadLine;
+
             CheckNull(item, "Item not recognized");
 
             if(item.getLendOutBy().equals(currentMember)){
                 if(item.getAvailable().equals(false)){
                     item.setAvailable(true);
-                    LblReceiveItemSuccses.setText("Received item successfully");
+                    if(dateCheck < deadLine){
+                        LblReceiveItemSuccses.setText("Received item successfully");
+                    }
+                    else{
+                        LblReceiveItemError.setText("Item is " + totalDaysToLate + " days to late!");
+                    }
                 }
                 else {
                     throw new Exception("Item never been lend out");
@@ -204,7 +214,7 @@ public class DashboardController implements Initializable {
     }
 
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~Evrything of the member TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~Everything of the member TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //It will show the right tab to create a new object of in this case a new member
     @FXML private void BtnAddMemberOnAction(){
         GoToNewObjectPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
@@ -217,10 +227,9 @@ public class DashboardController implements Initializable {
                 throw new Exception("Please, fill in all the fields");
             }
             listOfMembers.add(new Members(listOfMembers.size() + 1,TxtAddMemberFirstName.getText(), TxtAddMemberLastName.getText(), LocalDate.of(DataPickerAddNewMember.getValue().getYear(), DataPickerAddNewMember.getValue().getMonth(), DataPickerAddNewMember.getValue().getDayOfMonth()) , TxtAddMemberFirstName.getText(), TxtAddMemberLastName +  "123"));
-
             tableViewMembers.refresh();
-
             GoToMainPage(VboxMembers, VboxAddNewMembers, VboxEditMembers);
+
         }
         catch(Exception ex){
             LblAddNewMemberErrorMessage.setText(ex.getMessage());
@@ -436,5 +445,6 @@ public class DashboardController implements Initializable {
         TxtItemCode.setText("");
         TxtMemberIdentifier.setText("");
         TxtReceiveItemCode.setText("");
+
     }
 }

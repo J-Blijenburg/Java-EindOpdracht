@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Items implements Serializable {
     private int itemCode;
@@ -8,7 +9,7 @@ public class Items implements Serializable {
     private String title;
     private String author;
     private Members lendOutBy;
-
+    private LocalDate lendOutDate;
 
 
     public Items(int itemCode, Boolean available, String title, String author) {
@@ -17,6 +18,15 @@ public class Items implements Serializable {
         this.title = title;
         this.author = author;
     }
+
+    public LocalDate getLendOutDate() {
+        return lendOutDate;
+    }
+
+    public void setLendOutDate(LocalDate lendOutDate) {
+        this.lendOutDate = lendOutDate;
+    }
+
     public Members getLendOutBy() {
         return lendOutBy;
     }
