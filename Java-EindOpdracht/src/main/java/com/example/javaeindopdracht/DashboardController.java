@@ -4,15 +4,12 @@ import Database.Database;
 import Model.Items;
 import Model.Members;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -21,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
-    @FXML private ImageView DashBoardImage;
     @FXML private TableView<Members> tableViewMembers;
     @FXML private TableView<Items> tableViewCollection;
     @FXML private TextField TxtItemCode;
@@ -44,8 +40,6 @@ public class DashboardController implements Initializable {
     @FXML private Label LblEditItemsErrorMessage;
     @FXML private Label LblEditItems;
     @FXML private Label LblAddNewMemberErrorMessage;
-    @FXML private Label LblAddNewMemberMessage;
-    @FXML private Label LblEditItemsMessage;
     @FXML private Label LblMembersErrorMessage;
     @FXML private Label LblItemsErrorMessage;
     @FXML private VBox VboxMembers;
@@ -62,24 +56,23 @@ public class DashboardController implements Initializable {
     @FXML private TableColumn<Items, String > TableViewItemsAvailable;
     @FXML private TableColumn<Members, String > TableViewMembersBirthDay;
     private int dateCheck;
-    private int deadLine = 21;
-    private int totalDaysToLate = dateCheck - deadLine;
-
-    private final Members currentMember;
-    private final ObservableList<Members> listOfMembers;
-    private final ObservableList<Items> listOfItems;
+    private final int deadLine = 21;
+    private final int totalDaysToLate = dateCheck - deadLine;
     private final Database database;
+    private final Members currentMember;
+    private ObservableList<Members> listOfMembers;
+    private ObservableList<Items> listOfItems;
 
     //Receive the current member and database from the Login-controller
     public DashboardController(Members member, Database database){
-       this.currentMember = member;
-       this.database = database;
-        this.listOfMembers = FXCollections.observableList(this.database.getAllMembers());
-        this.listOfItems = FXCollections.observableList(this.database.getAllItems());
+        this.currentMember = member;
+        this.database = database;
     }
     //Greet the current member and load all the list in the correct tableView. It also makes sure that the right Tap is opened
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.listOfMembers = FXCollections.observableList(database.getAllMembers());
+        this.listOfItems = FXCollections.observableList(database.getAllItems());
         LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
         tableViewMembers.setItems(listOfMembers);
         tableViewCollection.setItems(listOfItems);
@@ -110,13 +103,10 @@ public class DashboardController implements Initializable {
     }
 
     private void SelectionChangedTab(){
-        TabPane.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                RefreshTableView();
-                RefreshLabels();
-                RefreshTxtField();
-            }
+        TabPane.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, t1) -> {
+            RefreshTableView();
+            RefreshLabels();
+            RefreshTxtField();
         });
     }
     //Receives the data what in the cell is displayed and change it to the right string
@@ -173,13 +163,13 @@ public class DashboardController implements Initializable {
         return null;
     }
     //Goes through every item to search the item with the correct item code
-    private Items SelectItem(int selectedItem){
+    private Items SelectItem(int selectedItem) throws Exception {
         for(Items item : listOfItems){
             if(item.getItemCode() == selectedItem){
                 return item;
             }
         }
-        return null;
+        throw new Exception("Item not recognized");
     }
 
     //Receive the selected item and check if the item is lent out by the current member
@@ -265,7 +255,7 @@ public class DashboardController implements Initializable {
             LblAddNewMemberErrorMessage.setText(ex.getMessage());
         }
     }
-    //Check if a member is selected and bring that member to the editpage.
+    //Check if a member is selected and bring that member to the edit-page.
     @FXML private void BtnEditMemberOnAction(){
         try{
             if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
@@ -353,7 +343,7 @@ public class DashboardController implements Initializable {
             LblEditItemsErrorMessage.setText(ex.getMessage());
         }
     }
-    //Check if a item is selected and bring that item to the editpage.
+    //Check if an item is selected and bring that item to the edit-page.
     @FXML private void BtnEditItemsOnAction(){
         try{
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
@@ -395,7 +385,7 @@ public class DashboardController implements Initializable {
             LblItemsErrorMessage.setText(ex.getMessage());
         }
     }
-    //Check if a item is selected. If so delete the item
+    //Check if an item is selected. If so delete the item
     @FXML private void BtnDeleteItem(){
 
         try{
