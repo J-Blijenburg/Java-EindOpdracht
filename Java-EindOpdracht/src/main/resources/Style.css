@@ -10,9 +10,6 @@
     -fx-background-color: #E5E5E5;
 }
 
-#TabCollection{
-    -fx-background-color: #E5E5E5;
-}
 
 #TabLending{
     -fx-background-color: #E5E5E5;
@@ -55,19 +52,19 @@
     -fx-text-fill: #E7F2FB;
 }
 
-#LblLendItemSuccses{
+#lblLendItemSuccses{
     -fx-text-fill: #258200;
 }
 
-#LblLendItemError{
+#lblLendItemError{
     -fx-text-fill: #C60108;
 }
 
-#LblReceiveItemSuccses{
+#lblReceiveItemSuccses{
     -fx-text-fill: #258200;
 }
 
-#LblReceiveItemError{
+#lblReceiveItemError{
     -fx-text-fill: #C60108;
 }
 
@@ -75,33 +72,20 @@
     -fx-background-color: #FFFFFF;
 }
 
-#LblAddNewMemberErrorMessage{
+#lblAddNewMemberErrorMessage{
     -fx-text-fill: #C60108;
 }
 
-#LblAddNewMemberMessage{
-    -fx-text-fill: #258200;
-}
-
-#LblEditItemsErrorMessage{
+#lblEditItemsErrorMessage{
     -fx-text-fill: #C60108;
 }
 
-#LblEditItemsMessage{
-    -fx-text-fill: #258200;
-}
-
-#LblMembersErrorMessage{
+#lblMembersErrorMessage{
     -fx-text-fill: #C60108;
 }
 
-#LblItemsErrorMessage{
+#lblItemsErrorMessage{
     -fx-text-fill: #C60108;
-}
-
-#BtnSearchItem{
-    -fx-background-color: #0078D7;
-    -fx-text-fill: #FFFFFF;
 }
 
 #TabPaneSearchItem{
