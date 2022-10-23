@@ -85,13 +85,9 @@ public class DashboardController implements Initializable {
         ChangeTableViewBirthDate();
         SelectionChangedTab();
 
-        txtSearchItem.textProperty().addListener((obs, oldText, newText) -> {
-            SearchItem();
-        });
+        txtSearchItem.textProperty().addListener((obs, oldText, newText) -> SearchItem());
 
-        txtSearchMember.textProperty().addListener((obs, oldText, newText) -> {
-            SearchMember();
-        });
+        txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
     }
     //Changes the birthdate cell of members listview to the correct date format
     private void ChangeTableViewBirthDate(){
@@ -200,7 +196,7 @@ public class DashboardController implements Initializable {
     }
     //check if the member actually lend the item
     private void checkLendOutBy(Items item) throws Exception {
-        if(item.getLendOutBy().equals(currentMember)){
+        if(item.getLendOutBy().getId() == (currentMember.getId())){
             checkDeadLine();
             normalItemSettings(item);
         }

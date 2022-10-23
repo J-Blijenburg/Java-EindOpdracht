@@ -28,9 +28,9 @@ private List<Items> allItems = new ArrayList<>();
 
     public void Write(){
         try{
-            FileOutputStream fileMembers = new FileOutputStream(new File("JavaEindopdrachtMembers.txt"));
+            FileOutputStream fileMembers = new FileOutputStream("JavaEindopdrachtMembers.txt");
             ObjectOutputStream objectMembers = new ObjectOutputStream(fileMembers);
-            FileOutputStream fileItems = new FileOutputStream(new File("JavaEindopdrachtItems.txt"));
+            FileOutputStream fileItems = new FileOutputStream("JavaEindopdrachtItems.txt");
             ObjectOutputStream objectItems = new ObjectOutputStream(fileItems);
 
             for(Members member : allMembers){
@@ -83,7 +83,7 @@ private List<Items> allItems = new ArrayList<>();
     }
 
 
-    //This method does nothing but is only here so there is always a backup incase something went wrong with the files
+    //This method does nothing but is only here so there is always a backup might something went wrong with the files
     private void DatabaseInput(){
         this.allMembers.add(new Members(1, "Jens", "Blijenburg", LocalDate.of(100, 2, 11), "Jens", "Jens123"));
         this.allMembers.add(new Members(2, "Serena", "Kenter", LocalDate.of(102, 8, 10), "Serena", "Kenter123"));
