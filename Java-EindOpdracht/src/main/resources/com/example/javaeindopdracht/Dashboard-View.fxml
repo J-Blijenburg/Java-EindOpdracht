@@ -94,6 +94,7 @@
                                           <Font name="Calibri" size="29.0" />
                                        </font>
                                     </Label>
+                                    <TextField fx:id="TxtSearchMember" alignment="CENTER_RIGHT" layoutX="43.0" layoutY="30.0" promptText="Search Member" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="248.0" prefWidth="707.0">
@@ -218,11 +219,13 @@
                                           <Font name="Calibri" size="29.0" />
                                        </font>
                                     </Label>
+                                    <Label fx:id="LblItemsErrorMessage" alignment="CENTER_RIGHT" layoutX="199.0" layoutY="17.0" prefHeight="30.0" prefWidth="259.0" AnchorPane.rightAnchor="249.0" AnchorPane.topAnchor="17.0" />
+                                    <TextField fx:id="TxtSearchItem" alignment="CENTER_RIGHT" layoutX="33.0" layoutY="20.0" promptText="Search Item" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="248.0" prefWidth="707.0">
                                  <children>
-                                    <TableView fx:id="tableViewCollection" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                    <TableView id="TabPaneSearchItem" fx:id="tableViewCollection" layoutX="20.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="661.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                        <columns>
                                           <TableColumn prefWidth="70.0" text="Item code">
                                              <cellValueFactory>
@@ -255,10 +258,9 @@
                               </AnchorPane>
                               <AnchorPane prefHeight="92.0" prefWidth="707.0">
                                  <children>
-                                    <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                                    <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemsOnAction" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                                    <Button id="BtnDelete" layoutX="418.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnDeleteItem" prefHeight="30.0" prefWidth="100.0" text="Delete Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
-                                    <Label fx:id="LblItemsErrorMessage" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="259.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnAdd" fx:id="BtnAddItem" cancelButton="true" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnEdit" fx:id="BtnEditItem" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemsOnAction" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                                    <Button id="BtnDelete" fx:id="BtnDeleteItem" layoutX="418.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnDeleteItem" prefHeight="30.0" prefWidth="100.0" text="Delete Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                            </children>

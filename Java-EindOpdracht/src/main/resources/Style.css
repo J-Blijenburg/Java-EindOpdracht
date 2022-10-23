@@ -98,3 +98,12 @@
 #LblItemsErrorMessage{
     -fx-text-fill: #C60108;
 }
+
+#BtnSearchItem{
+    -fx-background-color: #0078D7;
+    -fx-text-fill: #FFFFFF;
+}
+
+#TabPaneSearchItem{
+    -fx-background-color: #FFFFFF;
+}

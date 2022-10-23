@@ -31,6 +31,8 @@ public class DashboardController implements Initializable {
     @FXML private TextField TxtEditItemsAuthor;
     @FXML private TextField TxtEditMemberFirstName;
     @FXML private TextField TxtEditMemberLastName;
+    @FXML private TextField TxtSearchItem;
+    @FXML private TextField TxtSearchMember;
     @FXML private Label LblLendItemSuccses;
     @FXML private Label LblLendItemError;
     @FXML private Label LblWelcome;
@@ -82,6 +84,14 @@ public class DashboardController implements Initializable {
         ChangeTableViewLendOutBy();
         ChangeTableViewBirthDate();
         SelectionChangedTab();
+
+        TxtSearchItem.textProperty().addListener((obs, oldText, newText) -> {
+            SearchItem();
+        });
+
+        TxtSearchMember.textProperty().addListener((obs, oldText, newText) -> {
+            SearchMember();
+        });
     }
     //Changes the birthdate cell of members listview to the correct date format
     private void ChangeTableViewBirthDate(){
@@ -467,4 +477,38 @@ public class DashboardController implements Initializable {
         TxtReceiveItemCode.setText("");
 
     }
+
+    //search function for items
+    private void SearchItem(){
+        String searchItem = TxtSearchItem.getText().toLowerCase();
+        if(TxtSearchItem.getText().equals("")){
+            tableViewCollection.setItems(listOfItems);
+        }
+        else{
+            ObservableList<Items> filter = FXCollections.observableArrayList();
+            for(Items item : listOfItems){
+                if(item.getTitle().toLowerCase().contains(searchItem) | item.getAuthor().toLowerCase().contains(searchItem)){
+                    filter.add(item);
+                }
+            }
+            tableViewCollection.setItems(filter);
+        }
+    }
+    //search function for members
+    private void SearchMember(){
+        String searchMember = TxtSearchMember.getText().toLowerCase();
+        if(TxtSearchMember.getText().equals("")){
+            tableViewMembers.setItems(listOfMembers);
+        }
+        else{
+            ObservableList<Members> filter = FXCollections.observableArrayList();
+            for(Members members : listOfMembers){
+                if(members.getFirstName().toLowerCase().contains(searchMember) | members.getLastName().toLowerCase().contains(searchMember)){
+                    filter.add(members);
+                }
+            }
+            tableViewMembers.setItems(filter);
+        }
+    }
+
 }
