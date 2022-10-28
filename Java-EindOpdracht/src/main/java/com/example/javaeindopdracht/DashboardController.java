@@ -19,7 +19,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
-
     @FXML private Label lblMembersErrorMessage;
     @FXML private VBox vboxMembers;
     @FXML private VBox vboxAddNewMembers;
@@ -27,21 +26,12 @@ public class DashboardController implements Initializable {
     @FXML private VBox vboxCollection;
     @FXML private VBox vboxAddNewItem;
     @FXML private VBox vboxEditItems;
-
-
     @FXML private TabPane tabPane;
     @FXML private Tab tabLendingReceiving;
-
-
-
     @FXML private AnchorPane dashBoardAnchorPane;
-
-
-
     private final Database database;
     private final Members currentMember;
     private ObservableList<Members> listOfMembers;
-
     private ObservableList<Items> listOfItems;
     //Receive the current member and database from the Login-controller
     public DashboardController(Members member, Database database){
@@ -55,12 +45,9 @@ public class DashboardController implements Initializable {
             setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml");
             this.listOfMembers = FXCollections.observableList(database.getAllMembers());
             this.listOfItems = FXCollections.observableList(database.getAllItems());
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
     @FXML private void membersOnAction() throws IOException{
         setScene(new MembersController(dashBoardAnchorPane, listOfMembers),"Members-View.fxml");
@@ -68,7 +55,6 @@ public class DashboardController implements Initializable {
     @FXML private void collectionOnAction() throws IOException{
         setScene(new CollectionController(dashBoardAnchorPane, listOfItems), "Collection-View.fxml");
     }
-
     @FXML private void lendingReceivingOnAction() throws IOException {
         setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml");
     }
@@ -81,39 +67,4 @@ public class DashboardController implements Initializable {
         AnchorPane an =  loader.load();
         dashBoardAnchorPane.getChildren().setAll(an);
     }
-
-
-
-
-
-
-
-
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~Everything of the Item TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-
-
-
-    //These methods will make sure that the right Vbox is shown
-
-
-    //Refresh the chosen labels
-    private void RefreshLabels(){
-        //lblItemsErrorMessage.setText("");
-        lblMembersErrorMessage.setText("");
-    }
-
-    //Refresh the chosen Txtfields
-    private void RefreshTxtField(){
-        //txtItemCode.setText("");
-        //txtMemberIdentifier.setText("");
-       // txtReceiveItemCode.setText("");
-
-    }
-
-
-
 }

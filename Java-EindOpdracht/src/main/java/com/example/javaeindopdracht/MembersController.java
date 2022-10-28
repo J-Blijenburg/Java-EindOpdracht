@@ -53,7 +53,7 @@ public class MembersController implements Initializable {
         try{
             if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
                 Members member = tableViewMembers.getSelectionModel().getSelectedItem();
-                lblEditMember.setText("Edit Member: " + member.getFirstName());
+                //lblEditMember.setText("Edit Member: " + member.getFirstName());
                 //txtEditMemberFirstName.setPromptText(member.getFirstName());
                 //txtEditMemberLastName.setPromptText(member.getLastName());
                 //dataPickerEditMember.setPromptText(member.getBirthDate().toString());
@@ -69,7 +69,7 @@ public class MembersController implements Initializable {
     }
     //it will show the view on how to add a new member
     @FXML public void btnAddMemberOnAction(ActionEvent event) throws IOException {
-        setScene(new AddMemberController(anchorPane, tableViewMembers), "AddMember-View.fxml");
+        setScene(new AddMemberController(anchorPane, listOfMembers, tableViewMembers), "AddMember-View.fxml");
     }
 
     private void setScene(Object controller, String nameOfFxmlFile) throws IOException {

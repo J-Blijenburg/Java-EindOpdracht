@@ -43,6 +43,7 @@ public class EditCollectionController {
                     item.setAuthor(txtEditItemsAuthor.getText());
                 }
                 tableViewCollection.refresh();
+                setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
             }
             else{
                 throw new Exception("Please, Select an item");

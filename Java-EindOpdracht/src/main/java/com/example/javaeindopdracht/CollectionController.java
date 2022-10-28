@@ -42,11 +42,11 @@ public class CollectionController implements Initializable {
         try{
             //Check if an item is selected and bring that item to the edit-page.
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                setScene(new EditCollectionController(anchorPane, listOfItems, tableViewCollection), "EditCollection-View.fxml");
                 Items item = tableViewCollection.getSelectionModel().getSelectedItem();
                 lblEditItems.setText("Edit item: " + item.getTitle());
                 //txtEditItemTitle.setPromptText(item.getTitle());
                 //txtEditItemsAuthor.setPromptText(item.getAuthor());
+                setScene(new EditCollectionController(anchorPane, listOfItems, tableViewCollection), "EditCollection-View.fxml");
             }
             else{
                 throw new Exception("Please, Select an item");
@@ -93,7 +93,6 @@ public class CollectionController implements Initializable {
             if(item.getAvailable()){
                 return new SimpleStringProperty("Yes");
             }
-
             return  new SimpleStringProperty("No");
         });
     }

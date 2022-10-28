@@ -24,8 +24,9 @@ public class AddMemberController  {
     @FXML private Label lblAddNewMemberErrorMessage;
     @FXML private TableView<Members> tableViewMembers;
 
-    public AddMemberController(AnchorPane anchorPane, TableView<Members> tableViewMembers) {
+    public AddMemberController(AnchorPane anchorPane, ObservableList<Members> listOfMembers, TableView<Members> tableViewMembers) {
         this.anchorPane = anchorPane;
+        this.listOfMembers = listOfMembers;
         this.tableViewMembers = tableViewMembers;
     }
 
