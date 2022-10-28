@@ -1,31 +1,154 @@
 package com.example.javaeindopdracht;
 
+import Model.Items;
 import Model.Members;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class LendingReceivingController implements Initializable {
+    @FXML private TextField txtReceiveItemCode;
     @FXML private Label LblWelcome;
-    private Members currentMember;
+    @FXML private Label lblLendItemError;
+    @FXML private Label lblLendItemSuccses;
+    @FXML private Label lblReceiveItemSuccses;
+    @FXML private Label lblReceiveItemError;
+    @FXML private TextField txtItemCode;
+    @FXML private TextField txtMemberIdentifier;
+    private ObservableList<Items> listOfItems;
+    private ObservableList<Members> listOfMembers;
 
-    public LendingReceivingController(Members currentMember) {
+    private Members currentMember;
+    private int dateCheck;
+    private final int deadLine = 21;
+    private final int totalDaysToLate = dateCheck - deadLine;
+
+    public LendingReceivingController(ObservableList<Items> listOfItems, ObservableList<Members> listOfMembers, Members currentMember) {
+        this.listOfItems = listOfItems;
+        this.listOfMembers = listOfMembers;
         this.currentMember = currentMember;
     }
 
-    @FXML public void BtnReceiveItemOnAction(ActionEvent event) {
+    //Receive the selected item and check if the item is lent out by the current member
+    @FXML public void btnReceiveItemOnAction(ActionEvent event) {
+        try{
+            clearCurrentTextOfLabel();
+            Items item = SelectItem(checkForInt(txtReceiveItemCode.getText()));
+
+            CalculateLendTime(item);
+            checkLendOutBy(item);
+
+            CheckNull(item, "Item not recognized");
+
+        }
+        catch (Exception ex){
+            lblReceiveItemError.setText(ex.getMessage());
+        }
     }
 
+    //Check if both Textboxes are filled. Assign the selected item to the selected member
+    @FXML public void btnLendItemOnAction(ActionEvent event) {
+        try{
+            clearCurrentTextOfLabel();
+            Items selectedItem = SelectItem(checkForInt(txtItemCode.getText()));
+            CheckNull(selectedItem, "Member does not exist");
 
-    @FXML public void BtnLendItemOnAction(ActionEvent event) {
+            Members selectedMember = SelectMember(checkForInt(txtMemberIdentifier.getText()));
+            CheckNull(selectedMember, "Item not found in this library");
+
+            if(selectedItem.getAvailable().equals(true)){
+                selectedItem.setLendOutDate(LocalDate.now());
+                selectedItem.setLendOutBy(selectedMember);
+                selectedItem.setAvailable(false);
+            }
+            else{
+                throw new Exception("Item is not available now");
+            }
+            lblLendItemSuccses.setText("Item is lent out successfully");
+        }catch(Exception ex){
+            lblLendItemError.setText(ex.getMessage());
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
+    }
+    //set the current text of the label to not
+    private void clearCurrentTextOfLabel(){
+        lblLendItemError.setText(null);
+        lblLendItemSuccses.setText(null);
+        lblReceiveItemSuccses.setText(null);
+        lblReceiveItemError.setText(null);
+    }
+
+    private Integer checkForInt(String text) throws Exception {
+        try{
+            return Integer.parseInt(text);
+        }catch (NumberFormatException ex){
+            throw new Exception("Please, Enter a valid number");
+        }
+    }
+    //Goes through every item to search the item with the correct item code
+    private Items SelectItem(int selectedItem) throws Exception {
+        for(Items item : listOfItems){
+            if(item.getItemCode() == selectedItem){
+                return item;
+            }
+        }
+        throw new Exception("Item not recognized");
+    }
+    //If the object is null throw an exception
+    private void CheckNull(Object object, String errorMessage) throws Exception {
+        if (object == null) {
+            throw new Exception(errorMessage);
+        }
+    }
+
+    //Goes through every member to search the member with the correct member id
+    private Members SelectMember(int selectedMember){
+        for(Members member : listOfMembers){
+            if(member.getId() == selectedMember){
+                return member;
+            }
+        }
+        return null;
+    }
+    private void CalculateLendTime(Items item){
+        dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
+    }
+
+
+    //check if the member actually lend the item
+    private void checkLendOutBy(Items item) throws Exception {
+        if(item.getLendOutBy().getId() == (currentMember.getId())){
+            checkDeadLine();
+            normalItemSettings(item);
+        }
+        else{
+            throw new Exception("Member didn't lend this item");
+        }
+    }
+    private void checkDeadLine(){
+        if(dateCheck < deadLine){
+            lblReceiveItemSuccses.setText("Received item successfully");
+        }
+        else{
+            lblReceiveItemError.setText("Item is " + totalDaysToLate + " days to late!");
+        }
+    }
+
+    //set item settings back to normal
+    private void normalItemSettings(Items item){
+        item.setAvailable(true);
+        item.setLendOutBy(null);
+        item.setLendOutDate(null);
     }
 }

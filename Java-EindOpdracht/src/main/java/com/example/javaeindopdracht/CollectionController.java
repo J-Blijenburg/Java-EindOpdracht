@@ -33,6 +33,7 @@ public class CollectionController implements Initializable {
         this.listOfItems = listOfItems;
     }
 
+    //display the view to create/add a new item
     @FXML public void btnAddItemOnAction(ActionEvent event) throws IOException {
         setScene(new AddCollectionController(anchorPane, listOfItems, tableViewCollection), "AddCollection-View.fxml");
     }
