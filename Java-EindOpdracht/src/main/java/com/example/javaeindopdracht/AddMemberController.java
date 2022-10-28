@@ -1,11 +1,31 @@
 package com.example.javaeindopdracht;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class AddMemberController {
-    public void BtnCancelNewMember(ActionEvent event) {
+
+    @FXML private AnchorPane anchorPane;
+
+    public AddMemberController(AnchorPane anchorPane) {
+        this.anchorPane = anchorPane;
     }
 
-    public void BtnAddMemberConfirm(ActionEvent event) {
+    public void btnCancelNewMember(ActionEvent event) throws IOException {
+        setScene(new MembersController(anchorPane), "Members-View.fxml");
+    }
+
+    public void btnAddMemberConfirm(ActionEvent event) {
+    }
+
+    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
+        loader.setController(controller);
+        AnchorPane an =  loader.load();
+        anchorPane.getChildren().setAll(an);
     }
 }

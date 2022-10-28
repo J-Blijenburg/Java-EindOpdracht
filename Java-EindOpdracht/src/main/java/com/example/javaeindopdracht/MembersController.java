@@ -25,9 +25,8 @@ public class MembersController {
 
     public void btnAddMemberOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AddMember-View.fxml"));
-        loader.setController(new AddMemberController());
+        loader.setController(new AddMemberController(anchorPane));
         AnchorPane an =  loader.load();
-
         anchorPane.getChildren().setAll(an);
     }
 }
