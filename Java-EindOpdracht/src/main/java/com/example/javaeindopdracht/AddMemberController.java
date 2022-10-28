@@ -29,7 +29,11 @@ public class AddMemberController  {
         this.tableViewMembers = tableViewMembers;
     }
 
+    //While creating a new member cancel the process and reset all the values
     @FXML public void btnCancelNewMember(ActionEvent event) throws IOException {
+        txtAddMemberFirstName.setText("");
+        txtAddMemberLastName.setText("");
+        dataPickerAddNewMember.setValue(null);
         setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
     }
     //When entering all the needed information you can add the new member

@@ -3,21 +3,22 @@ package com.example.javaeindopdracht;
 import Database.Database;
 import Model.Items;
 import Model.Members;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -57,9 +58,9 @@ public class DashboardController implements Initializable {
 
     @FXML private TabPane tabPane;
     @FXML private Tab tabLendingReceiving;
-    @FXML private TableColumn<Items, String> tableViewItemsLendOutBy;
-    @FXML private TableColumn<Items, String > tableViewItemsAvailable;
-    @FXML private TableColumn<Members, String > tableViewMembersBirthDay;
+
+
+
     @FXML private AnchorPane dashBoardAnchorPane;
     private int dateCheck;
     private final int deadLine = 21;
@@ -87,13 +88,6 @@ public class DashboardController implements Initializable {
             throw new RuntimeException(e);
         }
 
-
-
-        //tabPane.getSelectionModel().select(tabLendingReceiving);
-
-        //ChangeTableViewAvailable();
-        //ChangeTableViewLendOutBy();
-        //ChangeTableViewBirthDate();
         //SelectionChangedTab();
 
         //txtSearchItem.textProperty().addListener((obs, oldText, newText) -> SearchItem());
@@ -121,24 +115,9 @@ public class DashboardController implements Initializable {
         dashBoardAnchorPane.getChildren().setAll(an);
     }
 
-    //Changes the birthdate cell of members listview to the correct date format
-    private void ChangeTableViewBirthDate(){
-        tableViewMembersBirthDay.setCellValueFactory(cellData -> {
-            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            return new SimpleStringProperty(dateFormat.format(cellData.getValue().getBirthDate()));
-        });
-    }
 
-    //Receives the data what in the cell is displayed and change it to the right string
-    private void ChangeTableViewLendOutBy(){
-        tableViewItemsLendOutBy.setCellValueFactory(cellData -> {
-            Items item = cellData.getValue();
-            if(item.getLendOutBy() != null){
-                return new SimpleStringProperty(cellData.getValue().getLendOutBy().getFirstName());
-            }
-            return new SimpleStringProperty(null);
-        });
-    }
+
+
 
     private void SelectionChangedTab(){
         tabPane.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, t1) -> {
@@ -147,17 +126,7 @@ public class DashboardController implements Initializable {
             RefreshTxtField();
         });
     }
-    //Receives the data what in the cell is displayed and change it to the right string
-    private void ChangeTableViewAvailable(){
-        tableViewItemsAvailable.setCellValueFactory(cellData -> {
-            Items item = cellData.getValue();
-            if(item.getAvailable()){
-                return new SimpleStringProperty("Yes");
-            }
 
-            return  new SimpleStringProperty("No");
-        });
-    }
 
     //Check if both Textboxes are filled. Assign the selected item to the selected member
     @FXML private void BtnLendItemOnAction(ActionEvent event){
@@ -269,29 +238,6 @@ public class DashboardController implements Initializable {
     }
 
 
-
-
-
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~Everything of the member TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //It will show the right tab to create a new object of in this case a new member
-
-
-    //While editing a member cancel the process and reset all the values
-    @FXML private  void BtnCancelEditMember(){
-        txtEditMemberFirstName.setText("");
-        txtEditMemberLastName.setText("");
-        dataPickerEditMember.setValue(null);
-        RefreshLabels();
-        GoToMainPage(vboxMembers, vboxAddNewMembers, vboxEditMembers);
-    }
-    //While creating a new member cancel the process and reset all the values
-    @FXML private void BtnCancelNewMember(){
-        txtAddMemberFirstName.setText("");
-        txtAddMemberLastName.setText("");
-        dataPickerAddNewMember.setValue(null);
-        RefreshLabels();
-        GoToMainPage(vboxMembers, vboxAddNewMembers, vboxEditMembers);
-    }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~Everything of the Item TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //It will show the right tab to create a new object of in this case a new Item
     @FXML private void BtnAddItemOnAction(){
@@ -363,7 +309,7 @@ public class DashboardController implements Initializable {
 
     //Refresh the chosen tableView
     private void RefreshTableView(){
-        tableViewMembers.refresh();
+        //tableViewMembers.refresh();
        // tableViewCollection.refresh();
     }
 
@@ -395,7 +341,7 @@ public class DashboardController implements Initializable {
     private void SearchMember(){
         String searchMember = txtSearchMember.getText().toLowerCase();
         if(txtSearchMember.getText().equals("")){
-            tableViewMembers.setItems(listOfMembers);
+           // tableViewMembers.setItems(listOfMembers);
         }
         else{
             ObservableList<Members> filter = FXCollections.observableArrayList();
@@ -404,7 +350,7 @@ public class DashboardController implements Initializable {
                     filter.add(members);
                 }
             }
-            tableViewMembers.setItems(filter);
+           // tableViewMembers.setItems(filter);
         }
     }
 

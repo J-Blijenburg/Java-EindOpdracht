@@ -1,12 +1,15 @@
 package com.example.javaeindopdracht;
 
 import Model.Items;
+import Model.Members;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
@@ -15,6 +18,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CollectionController implements Initializable {
+    @FXML private TableColumn<Items, String> tableViewItemsLendOutBy;
+    @FXML private TableColumn<Items, String > tableViewItemsAvailable;
+
     @FXML private ObservableList<Items> listOfItems;
     @FXML private TableView<Items> tableViewCollection;
     @FXML private Label lblEditItems;
@@ -72,5 +78,31 @@ public class CollectionController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tableViewCollection.setItems(listOfItems);
+        ChangeTableViewAvailable();
+        ChangeTableViewLendOutBy();
+
     }
+
+    //Receives the data what in the cell is displayed and change it to the right string
+    private void ChangeTableViewAvailable(){
+        tableViewItemsAvailable.setCellValueFactory(cellData -> {
+            Items item = cellData.getValue();
+            if(item.getAvailable()){
+                return new SimpleStringProperty("Yes");
+            }
+
+            return  new SimpleStringProperty("No");
+        });
+    }
+    //Receives the data what in the cell is displayed and change it to the right string
+    private void ChangeTableViewLendOutBy(){
+        tableViewItemsLendOutBy.setCellValueFactory(cellData -> {
+            Items item = cellData.getValue();
+            if(item.getLendOutBy() != null){
+                return new SimpleStringProperty(cellData.getValue().getLendOutBy().getFirstName());
+            }
+            return new SimpleStringProperty(null);
+        });
+    }
+
 }

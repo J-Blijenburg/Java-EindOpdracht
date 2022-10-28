@@ -1,20 +1,24 @@
 package com.example.javaeindopdracht;
 
 import Model.Members;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class MembersController implements Initializable {
+    @FXML private TableColumn<Members, String > tableViewMembersBirthDay;
 
     @FXML private AnchorPane anchorPane;
     @FXML private Label lblMembersErrorMessage;
@@ -77,5 +81,13 @@ public class MembersController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tableViewMembers.setItems(listOfMembers);
+        ChangeTableViewBirthDate();
+    }
+    //Changes the birthdate cell of members listview to the correct date format
+    private void ChangeTableViewBirthDate(){
+        tableViewMembersBirthDay.setCellValueFactory(cellData -> {
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            return new SimpleStringProperty(dateFormat.format(cellData.getValue().getBirthDate()));
+        });
     }
 }

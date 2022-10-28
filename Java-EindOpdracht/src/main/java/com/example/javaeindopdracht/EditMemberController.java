@@ -25,8 +25,11 @@ public class EditMemberController {
         this.listOfMembers = listOfMembers;
         this.tableViewMembers = tableViewMembers;
     }
-
+    //While editing a member cancel the process and reset all the values
     @FXML public void btnCancelEditMember(ActionEvent event) throws IOException {
+        txtEditMemberFirstName.setText("");
+        txtEditMemberLastName.setText("");
+        dataPickerEditMember.setValue(null);
         setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
     }
 
