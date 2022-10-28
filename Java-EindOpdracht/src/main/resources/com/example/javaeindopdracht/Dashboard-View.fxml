@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="Vboxtest" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox>
          <children>
@@ -17,10 +17,10 @@
                </image>
             </ImageView>
             <Button mnemonicParsing="false" onAction="#lendingReceivingOnAction" text="Lending/Receiving" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" onAction="#collectionOnAction" text="Collection" />
             <Button mnemonicParsing="false" text="Button" />
          </children>
       </HBox>
-      <AnchorPane fx:id="dashBoardAnchorPane" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane fx:id="dashBoardAnchorPane" prefHeight="342.0" prefWidth="707.0" />
    </children>
 </VBox>

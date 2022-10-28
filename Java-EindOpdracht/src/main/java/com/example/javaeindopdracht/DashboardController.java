@@ -96,6 +96,13 @@ public class DashboardController implements Initializable {
         //txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
 
     }
+    @FXML private void collectionOnAction() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Collection-View.fxml"));
+        loader.setController(new CollectionController());
+        AnchorPane an =  loader.load() ;
+        dashBoardAnchorPane.getChildren().setAll(an);
+    }
+
     @FXML private void lendingReceivingOnAction() throws IOException {
         //https://stackoverflow.com/questions/53127331/javafx-swap-anchorpane-element-with-fxml-from-another-file
 
