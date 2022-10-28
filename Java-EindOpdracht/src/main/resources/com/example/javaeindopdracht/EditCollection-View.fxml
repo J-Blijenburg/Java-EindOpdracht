@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="vboxEditItems" prefHeight="342.0" prefWidth="707.0">
+         <children>
+            <AnchorPane prefHeight="87.0" prefWidth="707.0">
+               <children>
+                  <Label id="LblWelcomeUser" fx:id="lblEditItems" alignment="CENTER_RIGHT" layoutX="24.0" layoutY="8.0" prefHeight="44.0" prefWidth="656.0" text="Edit Items" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Calibri" size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="248.0" prefWidth="707.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <AnchorPane id="AnchorPaneNewMember" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0">
+                     <children>
+                        <TextField fx:id="txtEditItemTitle" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Title" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
+                        <TextField fx:id="txtEditItemsAuthor" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Author" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="100.0" />
+                        <Label layoutX="20.0" layoutY="6.0" text="Title:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                        <Label layoutX="30.0" layoutY="16.0" text="Author:" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="80.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="92.0" prefWidth="707.0">
+               <children>
+                  <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelEditItems" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                  <Label fx:id="lblEditItemsErrorMessage" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="381.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="18.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
