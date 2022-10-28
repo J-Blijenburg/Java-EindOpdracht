@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
     @FXML private TableView<Members> tableViewMembers;
-    @FXML private TableView<Items> tableViewCollection;
+
     @FXML private TextField txtItemCode;
     @FXML private TextField txtMemberIdentifier;
     @FXML private TextField txtReceiveItemCode;
@@ -30,23 +30,23 @@ public class DashboardController implements Initializable {
     @FXML private TextField txtAddMemberLastName;
     @FXML private TextField txtAddItemsTitle;
     @FXML private TextField txtAddItemsAuthor;
-    @FXML private TextField txtEditItemTitle;
-    @FXML private TextField txtEditItemsAuthor;
+
+
     @FXML private TextField txtEditMemberFirstName;
     @FXML private TextField txtEditMemberLastName;
     @FXML private TextField txtSearchItem;
     @FXML private TextField txtSearchMember;
     @FXML private Label lblLendItemSuccses;
     @FXML private Label lblLendItemError;
-    @FXML private Label LblWelcome;
+
     @FXML private Label lblReceiveItemError;
     @FXML private Label lblReceiveItemSuccses;
     @FXML private Label lblEditMember;
     @FXML private Label lblEditItemsErrorMessage;
-    @FXML private Label lblEditItems;
+
     @FXML private Label lblAddNewMemberErrorMessage;
     @FXML private Label lblMembersErrorMessage;
-    @FXML private Label lblItemsErrorMessage;
+
     @FXML private VBox vboxMembers;
     @FXML private VBox vboxAddNewMembers;
     @FXML private VBox vboxEditMembers;
@@ -78,7 +78,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            setScene(new LendingReceivingController(), "LendingReceiving-View.fxml");
+            setScene(new LendingReceivingController(currentMember), "LendingReceiving-View.fxml");
             this.listOfMembers = FXCollections.observableList(database.getAllMembers());
             this.listOfItems = FXCollections.observableList(database.getAllItems());
 
@@ -87,12 +87,8 @@ public class DashboardController implements Initializable {
             throw new RuntimeException(e);
         }
 
-
-
-
-        //LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
         //tableViewMembers.setItems(listOfMembers);
-        //tableViewCollection.setItems(listOfItems);
+
         //tabPane.getSelectionModel().select(tabLendingReceiving);
 
         //ChangeTableViewAvailable();
@@ -113,7 +109,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML private void lendingReceivingOnAction() throws IOException {
-        setScene(new LendingReceivingController(), "LendingReceiving-View.fxml");
+        setScene(new LendingReceivingController(currentMember), "LendingReceiving-View.fxml");
     }
 
     //set the scene with the given controller and fxml-file
@@ -385,63 +381,6 @@ public class DashboardController implements Initializable {
             lblEditItemsErrorMessage.setText(ex.getMessage());
         }
     }
-    //Check if an item is selected and bring that item to the edit-page.
-    @FXML private void BtnEditItemsOnAction(){
-        try{
-            if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                Items item = tableViewCollection.getSelectionModel().getSelectedItem();
-                lblEditItems.setText("Edit item: " + item.getTitle());
-                txtEditItemTitle.setPromptText(item.getTitle());
-                txtEditItemsAuthor.setPromptText(item.getAuthor());
-
-                GoToEditObjectPage(vboxCollection, vboxAddNewItem, vboxEditItems);
-            }
-            else{
-                throw new Exception("Please, Select an item");
-            }
-        }catch(Exception ex){
-            lblItemsErrorMessage.setText(ex.getMessage());
-        }
-    }
-    //If information of the selected item is changed this button is going to confirm the changes
-    @FXML private void BtnEditItemConfirm(){
-
-        try{
-            if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                Items item = tableViewCollection.getSelectionModel().getSelectedItem();
-
-                if(!txtEditItemTitle.getText().equals("")){
-                    item.setTitle(txtEditItemTitle.getText());
-                }
-                if(!txtEditItemsAuthor.getText().equals("")){
-                    item.setAuthor(txtEditItemsAuthor.getText());
-                }
-                tableViewCollection.refresh();
-                GoToMainPage(vboxCollection, vboxAddNewItem, vboxEditItems);
-            }
-            else{
-                throw new Exception("Please, Select an item");
-            }
-
-        }catch(Exception ex){
-            lblItemsErrorMessage.setText(ex.getMessage());
-        }
-    }
-    //Check if an item is selected. If so delete the item
-    @FXML private void BtnDeleteItem(){
-
-        try{
-            if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                listOfItems.remove(tableViewCollection.getSelectionModel().getSelectedItem());
-                tableViewCollection.refresh();
-            }
-            else{
-                throw new Exception("Please, Select an item");
-            }
-        }catch (Exception ex){
-            lblItemsErrorMessage.setText(ex.getMessage());
-        }
-    }
 
     //While creating a new item cancel the process and reset all the values
     @FXML private void BtnCancelNewItem(){
@@ -451,13 +390,8 @@ public class DashboardController implements Initializable {
         RefreshLabels();
 
     }
-    //While editing an item cancel the process and reset all the values
-    @FXML private void BtnCancelEditItems(){
-        txtEditItemTitle.setText("");
-        txtEditItemsAuthor.setText("");
-        RefreshLabels();
-        GoToMainPage(vboxCollection, vboxAddNewItem, vboxEditItems);
-    }
+
+
 
 
 
@@ -492,14 +426,14 @@ public class DashboardController implements Initializable {
 
     //Refresh the chosen labels
     private void RefreshLabels(){
-        lblItemsErrorMessage.setText("");
+        //lblItemsErrorMessage.setText("");
         lblMembersErrorMessage.setText("");
     }
 
     //Refresh the chosen tableView
     private void RefreshTableView(){
         tableViewMembers.refresh();
-        tableViewCollection.refresh();
+       // tableViewCollection.refresh();
     }
 
     //Refresh the chosen Txtfields
@@ -514,7 +448,7 @@ public class DashboardController implements Initializable {
     private void SearchItem(){
         String searchItem = txtSearchItem.getText().toLowerCase();
         if(txtSearchItem.getText().equals("")){
-            tableViewCollection.setItems(listOfItems);
+            //tableViewCollection.setItems(listOfItems);
         }
         else{
             ObservableList<Items> filter = FXCollections.observableArrayList();
@@ -523,7 +457,7 @@ public class DashboardController implements Initializable {
                     filter.add(item);
                 }
             }
-            tableViewCollection.setItems(filter);
+            //tableViewCollection.setItems(filter);
         }
     }
     //search function for members

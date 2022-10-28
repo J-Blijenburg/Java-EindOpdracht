@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -13,10 +14,12 @@ public class AddCollectionController {
 
     @FXML private AnchorPane anchorPane;
     @FXML private ObservableList<Items> listOfItems;
+    @FXML private TableView<Items> tableViewCollection;
 
-    public AddCollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems) {
+    public AddCollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems, TableView<Items> tableViewCollection) {
         this.anchorPane = anchorPane;
         this.listOfItems = listOfItems;
+        this.tableViewCollection = tableViewCollection;
     }
 
     @FXML public void BtnCancelNewItem(ActionEvent event) throws IOException {
