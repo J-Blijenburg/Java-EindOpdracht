@@ -35,8 +35,8 @@ public class DashboardController implements Initializable {
 
 
 
-    @FXML private TextField txtSearchItem;
-    @FXML private TextField txtSearchMember;
+
+
     @FXML private Label lblLendItemSuccses;
     @FXML private Label lblLendItemError;
 
@@ -90,9 +90,9 @@ public class DashboardController implements Initializable {
 
         //SelectionChangedTab();
 
-        //txtSearchItem.textProperty().addListener((obs, oldText, newText) -> SearchItem());
 
-        //txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
+
+
 
     }
     @FXML private void membersOnAction() throws IOException{
@@ -321,37 +321,6 @@ public class DashboardController implements Initializable {
 
     }
 
-    //search function for items
-    private void SearchItem(){
-        String searchItem = txtSearchItem.getText().toLowerCase();
-        if(txtSearchItem.getText().equals("")){
-            //tableViewCollection.setItems(listOfItems);
-        }
-        else{
-            ObservableList<Items> filter = FXCollections.observableArrayList();
-            for(Items item : listOfItems){
-                if(item.getTitle().toLowerCase().contains(searchItem) | item.getAuthor().toLowerCase().contains(searchItem)){
-                    filter.add(item);
-                }
-            }
-            //tableViewCollection.setItems(filter);
-        }
-    }
-    //search function for members
-    private void SearchMember(){
-        String searchMember = txtSearchMember.getText().toLowerCase();
-        if(txtSearchMember.getText().equals("")){
-           // tableViewMembers.setItems(listOfMembers);
-        }
-        else{
-            ObservableList<Members> filter = FXCollections.observableArrayList();
-            for(Members members : listOfMembers){
-                if(members.getFirstName().toLowerCase().contains(searchMember) | members.getLastName().toLowerCase().contains(searchMember)){
-                    filter.add(members);
-                }
-            }
-           // tableViewMembers.setItems(filter);
-        }
-    }
+
 
 }

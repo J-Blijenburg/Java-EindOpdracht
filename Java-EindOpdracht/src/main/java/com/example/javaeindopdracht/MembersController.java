@@ -2,6 +2,7 @@ package com.example.javaeindopdracht;
 
 import Model.Members;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.util.ResourceBundle;
 
 public class MembersController implements Initializable {
     @FXML private TableColumn<Members, String > tableViewMembersBirthDay;
-
+    @FXML private TextField txtSearchMember;
     @FXML private AnchorPane anchorPane;
     @FXML private Label lblMembersErrorMessage;
     @FXML private ObservableList<Members> listOfMembers;
@@ -82,6 +84,7 @@ public class MembersController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tableViewMembers.setItems(listOfMembers);
         ChangeTableViewBirthDate();
+        txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
     }
     //Changes the birthdate cell of members listview to the correct date format
     private void ChangeTableViewBirthDate(){
@@ -89,5 +92,21 @@ public class MembersController implements Initializable {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             return new SimpleStringProperty(dateFormat.format(cellData.getValue().getBirthDate()));
         });
+    }
+    //search function for members
+    private void SearchMember(){
+        String searchMember = txtSearchMember.getText().toLowerCase();
+        if(txtSearchMember.getText().equals("")){
+            tableViewMembers.setItems(listOfMembers);
+        }
+        else{
+            ObservableList<Members> filter = FXCollections.observableArrayList();
+            for(Members members : listOfMembers){
+                if(members.getFirstName().toLowerCase().contains(searchMember) | members.getLastName().toLowerCase().contains(searchMember)){
+                    filter.add(members);
+                }
+            }
+            tableViewMembers.setItems(filter);
+        }
     }
 }

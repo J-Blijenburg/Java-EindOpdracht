@@ -1,8 +1,8 @@
 package com.example.javaeindopdracht;
 
 import Model.Items;
-import Model.Members;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class CollectionController implements Initializable {
     @FXML private Label lblEditItems;
     @FXML private Label lblItemsErrorMessage;
     @FXML private AnchorPane anchorPane;
+    @FXML private TextField txtSearchItem;
     public CollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems) {
         this.anchorPane = anchorPane;
         this.listOfItems = listOfItems;
@@ -78,13 +80,13 @@ public class CollectionController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tableViewCollection.setItems(listOfItems);
-        ChangeTableViewAvailable();
-        ChangeTableViewLendOutBy();
-
+        changeTableViewAvailable();
+        changeTableViewLendOutBy();
+        txtSearchItem.textProperty().addListener((obs, oldText, newText) -> searchItem());
     }
 
     //Receives the data what in the cell is displayed and change it to the right string
-    private void ChangeTableViewAvailable(){
+    private void changeTableViewAvailable(){
         tableViewItemsAvailable.setCellValueFactory(cellData -> {
             Items item = cellData.getValue();
             if(item.getAvailable()){
@@ -95,7 +97,7 @@ public class CollectionController implements Initializable {
         });
     }
     //Receives the data what in the cell is displayed and change it to the right string
-    private void ChangeTableViewLendOutBy(){
+    private void changeTableViewLendOutBy(){
         tableViewItemsLendOutBy.setCellValueFactory(cellData -> {
             Items item = cellData.getValue();
             if(item.getLendOutBy() != null){
@@ -105,4 +107,20 @@ public class CollectionController implements Initializable {
         });
     }
 
+    //search function for items
+    private void searchItem(){
+        String searchItem = txtSearchItem.getText().toLowerCase();
+        if(txtSearchItem.getText().equals("")){
+            tableViewCollection.setItems(listOfItems);
+        }
+        else{
+            ObservableList<Items> filter = FXCollections.observableArrayList();
+            for(Items item : listOfItems){
+                if(item.getTitle().toLowerCase().contains(searchItem) | item.getAuthor().toLowerCase().contains(searchItem)){
+                    filter.add(item);
+                }
+            }
+            tableViewCollection.setItems(filter);
+        }
+    }
 }
