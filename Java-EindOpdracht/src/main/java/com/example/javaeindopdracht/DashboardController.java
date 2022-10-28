@@ -12,12 +12,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -60,6 +62,7 @@ public class DashboardController implements Initializable {
     @FXML private TableColumn<Items, String> tableViewItemsLendOutBy;
     @FXML private TableColumn<Items, String > tableViewItemsAvailable;
     @FXML private TableColumn<Members, String > tableViewMembersBirthDay;
+    @FXML private AnchorPane dashBoardAnchorPane;
     private int dateCheck;
     private final int deadLine = 21;
     private final int totalDaysToLate = dateCheck - deadLine;
@@ -78,36 +81,26 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        this.listOfMembers = FXCollections.observableList(database.getAllMembers());
-        this.listOfItems = FXCollections.observableList(database.getAllItems());
-        LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
-        tableViewMembers.setItems(listOfMembers);
-        tableViewCollection.setItems(listOfItems);
-        tabPane.getSelectionModel().select(tabLendingReceiving);
+        //this.listOfMembers = FXCollections.observableList(database.getAllMembers());
+        //this.listOfItems = FXCollections.observableList(database.getAllItems());
+        //LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
+        //tableViewMembers.setItems(listOfMembers);
+        //tableViewCollection.setItems(listOfItems);
+        //tabPane.getSelectionModel().select(tabLendingReceiving);
 
-        ChangeTableViewAvailable();
-        ChangeTableViewLendOutBy();
-        ChangeTableViewBirthDate();
-        SelectionChangedTab();
+        //ChangeTableViewAvailable();
+        //ChangeTableViewLendOutBy();
+        //ChangeTableViewBirthDate();
+        //SelectionChangedTab();
 
-        txtSearchItem.textProperty().addListener((obs, oldText, newText) -> SearchItem());
+        //txtSearchItem.textProperty().addListener((obs, oldText, newText) -> SearchItem());
 
-        txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
+        //txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
 
-
-
-
-        try {
-            Tab tab = new Tab();
-            tabPane.getTabs().add(tab);
-            tab.setContent((Node)FXMLLoader.load(this.getClass().getResource("LendingReceiving-View.fxml")));
-
-
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+    }
+    @FXML private void lendingReceivingOnAction() throws IOException {
+        Node node = (Node) FXMLLoader.load(Objects.requireNonNull(getClass().getResource(("LendingReceiving-View.fxml"))));
+        dashBoardAnchorPane.getChildren().setAll(node);
     }
 
     //Changes the birthdate cell of members listview to the correct date format
