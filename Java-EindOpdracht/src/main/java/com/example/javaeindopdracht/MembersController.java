@@ -17,14 +17,14 @@ public class MembersController {
         this.anchorPane = anchorPane;
     }
 
-    public void BtnDeleteMemberOnAction(ActionEvent event) {
+    @FXML public void BtnDeleteMemberOnAction(ActionEvent event) {
     }
 
-    public void BtnEditMemberOnAction(ActionEvent event) throws IOException {
+    @FXML public void BtnEditMemberOnAction(ActionEvent event) throws IOException {
         setScene(new EditMemberController(anchorPane), "EditMember-View.fxml");
     }
 
-    public void btnAddMemberOnAction(ActionEvent event) throws IOException {
+    @FXML public void btnAddMemberOnAction(ActionEvent event) throws IOException {
         setScene(new AddMemberController(anchorPane), "AddMember-View.fxml");
     }
 

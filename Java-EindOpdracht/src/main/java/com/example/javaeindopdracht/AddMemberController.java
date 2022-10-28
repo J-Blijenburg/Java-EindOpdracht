@@ -15,11 +15,11 @@ public class AddMemberController  {
         this.anchorPane = anchorPane;
     }
 
-    public void btnCancelNewMember(ActionEvent event) throws IOException {
+    @FXML public void btnCancelNewMember(ActionEvent event) throws IOException {
         setScene(new MembersController(anchorPane), "Members-View.fxml");
     }
 
-    public void btnAddMemberConfirm(ActionEvent event) {
+    @FXML public void btnAddMemberConfirm(ActionEvent event) {
     }
 
     //set the scene with the given controller and fxml-file

@@ -9,22 +9,21 @@ import java.io.IOException;
 
 public class CollectionController {
 
-    @FXML
-    private AnchorPane anchorPane;
+    @FXML private AnchorPane anchorPane;
 
     public CollectionController(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
     }
 
-    public void btnAddItemOnAction(ActionEvent event) throws IOException {
+    @FXML public void btnAddItemOnAction(ActionEvent event) throws IOException {
         setScene(new AddCollectionController(anchorPane), "AddCollection-View.fxml");
     }
 
-    public void btnEditItemsOnAction(ActionEvent event) throws IOException {
+    @FXML public void btnEditItemsOnAction(ActionEvent event) throws IOException {
         setScene(new EditCollectionController(anchorPane), "EditCollection-View.fxml");
     }
 
-    public void btnDeleteItemOnAction(ActionEvent event) {
+    @FXML public void btnDeleteItemOnAction(ActionEvent event) {
     }
 
     //set the scene with the given controller and fxml-file

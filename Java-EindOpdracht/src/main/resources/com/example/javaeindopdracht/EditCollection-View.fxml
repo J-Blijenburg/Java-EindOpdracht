@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="vboxEditItems" prefHeight="342.0" prefWidth="707.0">
@@ -39,8 +38,8 @@
             </AnchorPane>
             <AnchorPane prefHeight="92.0" prefWidth="707.0">
                <children>
-                  <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelEditItems" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                  <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnCancelEditItems" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnEditItemConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                   <Label fx:id="lblEditItemsErrorMessage" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="381.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="18.0" />
                </children>
             </AnchorPane>

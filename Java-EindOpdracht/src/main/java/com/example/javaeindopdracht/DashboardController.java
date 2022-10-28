@@ -60,7 +60,7 @@ public class DashboardController implements Initializable {
     @FXML private TableColumn<Items, String> tableViewItemsLendOutBy;
     @FXML private TableColumn<Items, String > tableViewItemsAvailable;
     @FXML private TableColumn<Members, String > tableViewMembersBirthDay;
-    @FXML public AnchorPane dashBoardAnchorPane;
+    @FXML private AnchorPane dashBoardAnchorPane;
     private int dateCheck;
     private final int deadLine = 21;
     private final int totalDaysToLate = dateCheck - deadLine;

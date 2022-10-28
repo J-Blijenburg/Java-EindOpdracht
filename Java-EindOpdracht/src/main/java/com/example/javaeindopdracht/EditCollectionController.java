@@ -15,11 +15,11 @@ public class EditCollectionController {
         this.anchorPane = anchorPane;
     }
 
-    public void BtnCancelEditItems(ActionEvent event) throws IOException {
+    @FXML public void btnCancelEditItems(ActionEvent event) throws IOException {
         setScene(new CollectionController(anchorPane), "Collection-View.fxml");
     }
 
-    public void BtnEditItemConfirm(ActionEvent event) {
+    @FXML public void btnEditItemConfirm(ActionEvent event) {
     }
     //set the scene with the given controller and fxml-file
     private void setScene(Object controller, String nameOfFxmlFile) throws IOException {

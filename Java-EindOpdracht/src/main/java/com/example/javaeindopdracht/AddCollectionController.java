@@ -8,18 +8,18 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class AddCollectionController {
-    @FXML
-    private AnchorPane anchorPane;
+
+    @FXML private AnchorPane anchorPane;
 
     public AddCollectionController(AnchorPane anchorPane) {
         this.anchorPane = anchorPane;
     }
 
-    public void BtnCancelNewItem(ActionEvent event) throws IOException {
+    @FXML public void BtnCancelNewItem(ActionEvent event) throws IOException {
         setScene(new CollectionController(anchorPane), "Collection-View.fxml");
     }
 
-    public void BtnAddItemConfirm(ActionEvent event) {
+    @FXML public void BtnAddItemConfirm(ActionEvent event) {
     }
 
     //set the scene with the given controller and fxml-file
