@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="vboxEditMembers" prefHeight="342.0" prefWidth="707.0">
@@ -35,7 +34,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="92.0" prefWidth="707.0">
                <children>
-                  <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnCancelEditMember" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnCancelEditMember" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
                   <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditMemberConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>

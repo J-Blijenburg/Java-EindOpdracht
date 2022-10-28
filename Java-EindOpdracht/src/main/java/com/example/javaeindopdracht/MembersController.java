@@ -20,12 +20,18 @@ public class MembersController {
     public void BtnDeleteMemberOnAction(ActionEvent event) {
     }
 
-    public void BtnEditMemberOnAction(ActionEvent event) {
+    public void BtnEditMemberOnAction(ActionEvent event) throws IOException {
+        setScene(new EditMemberController(anchorPane), "EditMember-View.fxml");
     }
 
     public void btnAddMemberOnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddMember-View.fxml"));
-        loader.setController(new AddMemberController(anchorPane));
+        setScene(new AddMemberController(anchorPane), "AddMember-View.fxml");
+    }
+
+    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
+        //https://stackoverflow.com/questions/53127331/javafx-swap-anchorpane-element-with-fxml-from-another-file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
+        loader.setController(controller);
         AnchorPane an =  loader.load();
         anchorPane.getChildren().setAll(an);
     }

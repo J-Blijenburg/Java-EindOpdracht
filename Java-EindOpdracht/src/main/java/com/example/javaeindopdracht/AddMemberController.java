@@ -7,7 +7,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class AddMemberController {
+public class AddMemberController  {
 
     @FXML private AnchorPane anchorPane;
 
