@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javaeindopdracht.MembersController">
    <children>
       <VBox fx:id="vboxEditMembers" disable="true" layoutX="10.0" layoutY="10.0" opacity="0.0" prefHeight="342.0" prefWidth="707.0">
