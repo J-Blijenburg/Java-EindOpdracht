@@ -77,10 +77,19 @@ public class DashboardController implements Initializable {
     //Greet the current member and load all the list in the correct tableView. It also makes sure that the right Tap is opened
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            setScene(new LendingReceivingController(), "LendingReceiving-View.fxml");
+            this.listOfMembers = FXCollections.observableList(database.getAllMembers());
+            this.listOfItems = FXCollections.observableList(database.getAllItems());
 
 
-        //this.listOfMembers = FXCollections.observableList(database.getAllMembers());
-        //this.listOfItems = FXCollections.observableList(database.getAllItems());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
         //LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
         //tableViewMembers.setItems(listOfMembers);
         //tableViewCollection.setItems(listOfItems);
@@ -97,10 +106,10 @@ public class DashboardController implements Initializable {
 
     }
     @FXML private void membersOnAction() throws IOException{
-        setScene(new MembersController(dashBoardAnchorPane),"Members-View.fxml");
+        setScene(new MembersController(dashBoardAnchorPane, listOfMembers),"Members-View.fxml");
     }
     @FXML private void collectionOnAction() throws IOException{
-        setScene(new CollectionController(dashBoardAnchorPane), "Collection-View.fxml");
+        setScene(new CollectionController(dashBoardAnchorPane, listOfItems), "Collection-View.fxml");
     }
 
     @FXML private void lendingReceivingOnAction() throws IOException {

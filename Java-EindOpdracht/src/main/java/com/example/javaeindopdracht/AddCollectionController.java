@@ -1,5 +1,7 @@
 package com.example.javaeindopdracht;
 
+import Model.Items;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,13 +12,15 @@ import java.io.IOException;
 public class AddCollectionController {
 
     @FXML private AnchorPane anchorPane;
+    @FXML private ObservableList<Items> listOfItems;
 
-    public AddCollectionController(AnchorPane anchorPane) {
+    public AddCollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems) {
         this.anchorPane = anchorPane;
+        this.listOfItems = listOfItems;
     }
 
     @FXML public void BtnCancelNewItem(ActionEvent event) throws IOException {
-        setScene(new CollectionController(anchorPane), "Collection-View.fxml");
+        setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
     }
 
     @FXML public void BtnAddItemConfirm(ActionEvent event) {
