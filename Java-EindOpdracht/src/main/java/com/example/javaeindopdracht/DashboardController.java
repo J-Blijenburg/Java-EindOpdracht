@@ -21,19 +21,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
-    @FXML private TableView<Members> tableViewMembers;
+
 
     @FXML private TextField txtItemCode;
     @FXML private TextField txtMemberIdentifier;
     @FXML private TextField txtReceiveItemCode;
-    @FXML private TextField txtAddMemberFirstName;
-    @FXML private TextField txtAddMemberLastName;
+
+
     @FXML private TextField txtAddItemsTitle;
     @FXML private TextField txtAddItemsAuthor;
 
 
-    @FXML private TextField txtEditMemberFirstName;
-    @FXML private TextField txtEditMemberLastName;
+
+
     @FXML private TextField txtSearchItem;
     @FXML private TextField txtSearchMember;
     @FXML private Label lblLendItemSuccses;
@@ -41,10 +41,10 @@ public class DashboardController implements Initializable {
 
     @FXML private Label lblReceiveItemError;
     @FXML private Label lblReceiveItemSuccses;
-    @FXML private Label lblEditMember;
+
     @FXML private Label lblEditItemsErrorMessage;
 
-    @FXML private Label lblAddNewMemberErrorMessage;
+
     @FXML private Label lblMembersErrorMessage;
 
     @FXML private VBox vboxMembers;
@@ -53,8 +53,8 @@ public class DashboardController implements Initializable {
     @FXML private VBox vboxCollection;
     @FXML private VBox vboxAddNewItem;
     @FXML private VBox vboxEditItems;
-    @FXML private DatePicker dataPickerAddNewMember;
-    @FXML private DatePicker dataPickerEditMember;
+
+
     @FXML private TabPane tabPane;
     @FXML private Tab tabLendingReceiving;
     @FXML private TableColumn<Items, String> tableViewItemsLendOutBy;
@@ -87,7 +87,7 @@ public class DashboardController implements Initializable {
             throw new RuntimeException(e);
         }
 
-        //tableViewMembers.setItems(listOfMembers);
+
 
         //tabPane.getSelectionModel().select(tabLendingReceiving);
 
@@ -274,77 +274,8 @@ public class DashboardController implements Initializable {
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~Everything of the member TapPane~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //It will show the right tab to create a new object of in this case a new member
-    @FXML private void BtnAddMemberOnAction(){
-        GoToNewObjectPage(vboxMembers, vboxAddNewMembers, vboxEditMembers);
-    }
 
-    //When entering all the needed information you can add the new member
-    @FXML private void BtnAddMemberConfirm(){
-        try{
-            if(txtAddMemberFirstName.getText() == null | txtAddMemberLastName.getText() == null | dataPickerAddNewMember.getValue() == null ){
-                throw new Exception("Please, fill in all the fields");
-            }
-            listOfMembers.add(new Members(listOfMembers.size() + 1,txtAddMemberFirstName.getText(), txtAddMemberLastName.getText(), LocalDate.of(dataPickerAddNewMember.getValue().getYear(), dataPickerAddNewMember.getValue().getMonth(), dataPickerAddNewMember.getValue().getDayOfMonth()) , txtAddMemberFirstName.getText(), txtAddMemberLastName.getText() +  "123"));
-            tableViewMembers.refresh();
-            GoToMainPage(vboxMembers, vboxAddNewMembers, vboxEditMembers);
 
-        }
-        catch(Exception ex){
-            lblAddNewMemberErrorMessage.setText(ex.getMessage());
-        }
-    }
-    //Check if a member is selected and bring that member to the edit-page.
-    @FXML private void BtnEditMemberOnAction(){
-        try{
-            if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
-                Members member = tableViewMembers.getSelectionModel().getSelectedItem();
-                lblEditMember.setText("Edit Member: " + member.getFirstName());
-                txtEditMemberFirstName.setPromptText(member.getFirstName());
-                txtEditMemberLastName.setPromptText(member.getLastName());
-                dataPickerEditMember.setPromptText(member.getBirthDate().toString());
-
-                GoToEditObjectPage(vboxMembers, vboxAddNewMembers, vboxEditMembers);
-            }
-            else{
-                throw new Exception("Please, Select an member");
-            }
-        }catch(Exception ex){
-            lblMembersErrorMessage.setText(ex.getMessage());
-        }
-    }
-    //If information of the member is changed this button is going to confirm the changes
-    @FXML private void BtnEditMemberConfirm(){
-        Members member = tableViewMembers.getSelectionModel().getSelectedItem();
-
-        if(!txtEditMemberFirstName.getText().equals("")){
-            member.setFirstName(txtEditMemberFirstName.getText());
-        }
-        if(!txtEditMemberLastName.getText().equals("")){
-            member.setLastName(txtEditMemberLastName.getText());
-        }
-        if(!dataPickerEditMember.getId().equals("")){
-            member.setBirthDate(dataPickerEditMember.getValue());
-        }
-
-        tableViewMembers.refresh();
-
-        GoToMainPage(vboxMembers, vboxAddNewMembers, vboxEditMembers);
-    }
-
-    //Check if a member is selected. If so delete the member
-    @FXML private void BtnDeleteMember(){
-        try{
-            if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
-                listOfMembers.remove(tableViewMembers.getSelectionModel().getSelectedItem());
-                tableViewMembers.refresh();
-            }
-            else{
-                throw new Exception("Please, Select an member");
-            }
-        }catch(Exception ex){
-            lblMembersErrorMessage.setText(ex.getMessage());
-        }
-    }
     //While editing a member cancel the process and reset all the values
     @FXML private  void BtnCancelEditMember(){
         txtEditMemberFirstName.setText("");

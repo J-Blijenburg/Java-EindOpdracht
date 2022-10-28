@@ -19,8 +19,6 @@ public class CollectionController implements Initializable {
     @FXML private TableView<Items> tableViewCollection;
     @FXML private Label lblEditItems;
     @FXML private Label lblItemsErrorMessage;
-
-
     @FXML private AnchorPane anchorPane;
     public CollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems) {
         this.anchorPane = anchorPane;
