@@ -8,10 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -73,6 +76,8 @@ public class DashboardController implements Initializable {
     //Greet the current member and load all the list in the correct tableView. It also makes sure that the right Tap is opened
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
         this.listOfMembers = FXCollections.observableList(database.getAllMembers());
         this.listOfItems = FXCollections.observableList(database.getAllItems());
         LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
@@ -88,7 +93,23 @@ public class DashboardController implements Initializable {
         txtSearchItem.textProperty().addListener((obs, oldText, newText) -> SearchItem());
 
         txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
+
+
+
+
+        try {
+            Tab tab = new Tab();
+            tabPane.getTabs().add(tab);
+            tab.setContent((Node)FXMLLoader.load(this.getClass().getResource("LendingReceiving-View.fxml")));
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
     //Changes the birthdate cell of members listview to the correct date format
     private void ChangeTableViewBirthDate(){
         tableViewMembersBirthDay.setCellValueFactory(cellData -> {
