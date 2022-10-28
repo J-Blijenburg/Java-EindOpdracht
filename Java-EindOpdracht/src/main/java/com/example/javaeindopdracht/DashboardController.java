@@ -97,23 +97,21 @@ public class DashboardController implements Initializable {
 
     }
     @FXML private void membersOnAction() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Members-View.fxml"));
-        loader.setController(new MembersController(dashBoardAnchorPane));
-        AnchorPane an =  loader.load();
-        dashBoardAnchorPane.getChildren().setAll(an);
+        setScene(new MembersController(dashBoardAnchorPane),"Members-View.fxml");
     }
     @FXML private void collectionOnAction() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Collection-View.fxml"));
-        loader.setController(new CollectionController());
-        AnchorPane an =  loader.load();
-        dashBoardAnchorPane.getChildren().setAll(an);
+        setScene(new CollectionController(), "Collection-View.fxml");
     }
 
     @FXML private void lendingReceivingOnAction() throws IOException {
-        //https://stackoverflow.com/questions/53127331/javafx-swap-anchorpane-element-with-fxml-from-another-file
+        setScene(new LendingReceivingController(), "LendingReceiving-View.fxml");
+    }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LendingReceiving-View.fxml"));
-        loader.setController(new LendingReceivingController());
+    //set the scene with the given controller and fxml-file
+    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
+        //https://stackoverflow.com/questions/53127331/javafx-swap-anchorpane-element-with-fxml-from-another-file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
+        loader.setController(controller);
         AnchorPane an =  loader.load();
         dashBoardAnchorPane.getChildren().setAll(an);
     }

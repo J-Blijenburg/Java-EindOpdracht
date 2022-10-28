@@ -22,6 +22,7 @@ public class AddMemberController {
     public void btnAddMemberConfirm(ActionEvent event) {
     }
 
+    //set the scene with the given controller and fxml-file
     private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
         loader.setController(controller);
