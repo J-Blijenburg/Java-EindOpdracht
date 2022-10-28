@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="TabLending" minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="TabLending" minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox layoutX="-1.0" layoutY="53.0" prefHeight="287.0" prefWidth="707.0">
+      <HBox layoutY="49.0" prefHeight="287.0" prefWidth="707.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <AnchorPane id="AnchorPaneLendingRight" prefHeight="287.0" prefWidth="377.0">
                <children>
@@ -41,7 +41,7 @@
             </AnchorPane>
          </children>
       </HBox>
-      <Label id="LblWelcomeUser" fx:id="LblWelcome" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="9.0" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.topAnchor="10.0">
+      <Label id="LblWelcomeUser" fx:id="LblWelcome" alignment="CENTER_RIGHT" layoutX="28.0" layoutY="6.0" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0">
          <font>
             <Font name="Calibri" size="29.0" />
          </font>

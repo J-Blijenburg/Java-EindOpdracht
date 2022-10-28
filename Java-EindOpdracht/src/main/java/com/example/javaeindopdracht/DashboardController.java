@@ -96,6 +96,12 @@ public class DashboardController implements Initializable {
         //txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
 
     }
+    @FXML private void membersOnAction() throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Members-View.fxml"));
+        loader.setController(new MembersController());
+        AnchorPane an =  loader.load() ;
+        dashBoardAnchorPane.getChildren().setAll(an);
+    }
     @FXML private void collectionOnAction() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Collection-View.fxml"));
         loader.setController(new CollectionController());

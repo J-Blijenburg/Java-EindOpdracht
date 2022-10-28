@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"  >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="vboxAddNewItem" disable="true" layoutX="10.0" layoutY="10.0" opacity="0.0" prefHeight="342.0" prefWidth="707.0">
          <children>
@@ -80,7 +80,7 @@
             </AnchorPane>
          </children>
       </VBox>
-      <VBox fx:id="vboxCollection" prefHeight="342.0" prefWidth="707.0">
+      <VBox fx:id="vboxCollection" layoutY="10.0" prefHeight="342.0" prefWidth="707.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <AnchorPane prefHeight="87.0" prefWidth="707.0">
                <children>
