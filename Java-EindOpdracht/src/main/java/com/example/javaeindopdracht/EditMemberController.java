@@ -22,7 +22,7 @@ public class EditMemberController {
     public void BtnEditMemberConfirm(ActionEvent event) {
     }
 
-    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
+    public void setScene(Object controller, String nameOfFxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
         loader.setController(controller);
         AnchorPane an =  loader.load();

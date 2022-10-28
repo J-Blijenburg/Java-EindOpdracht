@@ -60,9 +60,9 @@
             </AnchorPane>
             <AnchorPane prefHeight="92.0" prefWidth="707.0">
                <children>
-                  <Button id="BtnAdd" fx:id="BtnAddItem" cancelButton="true" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnAddItemOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                  <Button id="BtnEdit" fx:id="BtnEditItem" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnEditItemsOnAction" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                  <Button id="BtnDelete" fx:id="BtnDeleteItem" layoutX="418.0" layoutY="17.0" mnemonicParsing="false" onAction="#BtnDeleteItem" prefHeight="30.0" prefWidth="100.0" text="Delete Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnAdd" fx:id="BtnAddItem" cancelButton="true" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnAddItemOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Item" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnEdit" fx:id="BtnEditItem" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnEditItemsOnAction" prefHeight="30.0" prefWidth="100.0" text="Edit Item" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnDelete" fx:id="BtnDeleteItem" layoutX="418.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnDeleteItemOnAction" prefHeight="30.0" prefWidth="100.0" text="Delete Item" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
          </children>

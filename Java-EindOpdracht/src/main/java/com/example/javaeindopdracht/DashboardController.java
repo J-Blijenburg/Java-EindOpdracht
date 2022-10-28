@@ -100,7 +100,7 @@ public class DashboardController implements Initializable {
         setScene(new MembersController(dashBoardAnchorPane),"Members-View.fxml");
     }
     @FXML private void collectionOnAction() throws IOException{
-        setScene(new CollectionController(), "Collection-View.fxml");
+        setScene(new CollectionController(dashBoardAnchorPane), "Collection-View.fxml");
     }
 
     @FXML private void lendingReceivingOnAction() throws IOException {
