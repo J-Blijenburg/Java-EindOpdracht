@@ -98,14 +98,14 @@ public class DashboardController implements Initializable {
     }
     @FXML private void membersOnAction() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Members-View.fxml"));
-        loader.setController(new MembersController());
-        AnchorPane an =  loader.load() ;
+        loader.setController(new MembersController(dashBoardAnchorPane));
+        AnchorPane an =  loader.load();
         dashBoardAnchorPane.getChildren().setAll(an);
     }
     @FXML private void collectionOnAction() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Collection-View.fxml"));
         loader.setController(new CollectionController());
-        AnchorPane an =  loader.load() ;
+        AnchorPane an =  loader.load();
         dashBoardAnchorPane.getChildren().setAll(an);
     }
 
@@ -114,7 +114,7 @@ public class DashboardController implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LendingReceiving-View.fxml"));
         loader.setController(new LendingReceivingController());
-        AnchorPane an =  loader.load() ;
+        AnchorPane an =  loader.load();
         dashBoardAnchorPane.getChildren().setAll(an);
     }
 

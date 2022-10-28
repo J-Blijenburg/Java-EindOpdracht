@@ -1,26 +1,33 @@
 package com.example.javaeindopdracht;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class MembersController {
-    public void BtnCancelEditMember(ActionEvent event) {
+
+    @FXML private AnchorPane anchorPane;
+    @FXML private Label lblMembersErrorMessage;
+
+    public MembersController(AnchorPane anchorPane) {
+        this.anchorPane = anchorPane;
     }
 
-    public void BtnEditMemberConfirm(ActionEvent event) {
-    }
-
-    public void BtnCancelNewMember(ActionEvent event) {
-    }
-
-    public void BtnAddMemberConfirm(ActionEvent event) {
-    }
-
-    public void BtnDeleteMember(ActionEvent event) {
+    public void BtnDeleteMemberOnAction(ActionEvent event) {
     }
 
     public void BtnEditMemberOnAction(ActionEvent event) {
     }
 
-    public void BtnAddMemberOnAction(ActionEvent event) {
+    public void btnAddMemberOnAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddMember-View.fxml"));
+        loader.setController(new AddMemberController());
+        AnchorPane an =  loader.load();
+
+        anchorPane.getChildren().setAll(an);
     }
 }

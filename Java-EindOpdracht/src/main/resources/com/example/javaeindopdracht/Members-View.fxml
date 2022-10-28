@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="memberAnchorPane" prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="vboxMembers" layoutX="5.0" layoutY="5.0" prefHeight="342.0" prefWidth="707.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -54,9 +54,9 @@
             </AnchorPane>
             <AnchorPane prefHeight="92.0" prefWidth="707.0">
                <children>
-                  <Button id="BtnDelete" mnemonicParsing="false" onAction="#BtnDeleteMember" prefHeight="30.0" prefWidth="100.0" text="Delete Member" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnDelete" mnemonicParsing="false" onAction="#BtnDeleteMemberOnAction" prefHeight="30.0" prefWidth="100.0" text="Delete Member" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="15.0" />
                   <Button id="BtnEdit" mnemonicParsing="false" onAction="#BtnEditMemberOnAction" prefHeight="30.0" prefWidth="100.0" text="Edit Member" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                  <Button id="BtnAdd" mnemonicParsing="false" onAction="#BtnAddMemberOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="BtnAdd" mnemonicParsing="false" onAction="#btnAddMemberOnAction" prefHeight="30.0" prefWidth="100.0" text="Add Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
                   <Label fx:id="lblMembersErrorMessage" alignment="CENTER_RIGHT" layoutX="69.0" layoutY="15.0" prefHeight="30.0" prefWidth="259.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="15.0" />
                </children>
             </AnchorPane>
