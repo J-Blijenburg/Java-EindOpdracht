@@ -40,7 +40,7 @@ public class LendingReceivingController implements Initializable {
         try{
             clearCurrentTextOfLabel();
             Items item = SelectItem(checkForInt(txtReceiveItemCode.getText()));
-            
+
             if(item.getAvailable()){
                 throw new Exception("Item is not lend out");
             }
