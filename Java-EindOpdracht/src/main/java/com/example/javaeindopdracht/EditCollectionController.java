@@ -5,18 +5,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class EditCollectionController {
+public class EditCollectionController implements Initializable {
     @FXML private AnchorPane anchorPane;
     @FXML  private ObservableList<Items> listOfItems;
     @FXML private TableView<Items> tableViewCollection;
     @FXML private Label lblItemsErrorMessage;
+    @FXML private Label lblEditItems;
     @FXML private TextField txtEditItemTitle;
     @FXML private TextField txtEditItemsAuthor;
 
@@ -59,5 +63,13 @@ public class EditCollectionController {
         loader.setController(controller);
         AnchorPane an =  loader.load();
         anchorPane.getChildren().setAll(an);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Items item = tableViewCollection.getSelectionModel().getSelectedItem();
+        lblEditItems.setText("Edit item: " + item.getTitle());
+        txtEditItemTitle.setPromptText(item.getTitle());
+        txtEditItemsAuthor.setPromptText(item.getAuthor());
     }
 }

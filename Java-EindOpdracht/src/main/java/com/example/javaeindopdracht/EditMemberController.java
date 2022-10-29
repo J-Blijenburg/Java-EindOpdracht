@@ -5,20 +5,28 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
-public class EditMemberController {
+public class EditMemberController implements Initializable {
     @FXML private AnchorPane anchorPane;
     @FXML private ObservableList<Members> listOfMembers;
     @FXML private TableView<Members> tableViewMembers;
     @FXML private TextField txtEditMemberFirstName;
     @FXML private TextField txtEditMemberLastName;
     @FXML private DatePicker dataPickerEditMember;
+    @FXML private Label lblEditMember;
+    @FXML private Label lblEditMemberErrorMessage;
 
     public EditMemberController(AnchorPane anchorPane, ObservableList<Members> listOfMembers, TableView<Members> tableViewMembers) {
         this.anchorPane = anchorPane;
@@ -36,7 +44,11 @@ public class EditMemberController {
     //If information of the member is changed this button is going to confirm the changes
     @FXML public void btnEditMemberConfirm(ActionEvent event) {
         try {
+
+
             Members member = tableViewMembers.getSelectionModel().getSelectedItem();
+
+
 
             if(!txtEditMemberFirstName.getText().equals("")){
                 member.setFirstName(txtEditMemberFirstName.getText());
@@ -44,14 +56,23 @@ public class EditMemberController {
             if(!txtEditMemberLastName.getText().equals("")){
                 member.setLastName(txtEditMemberLastName.getText());
             }
-            if(!dataPickerEditMember.getId().equals("")){
+            if(dataPickerEditMember.getValue() != null){
+                checkDate(dataPickerEditMember.getValue());
                 member.setBirthDate(dataPickerEditMember.getValue());
-            }
 
+            }
             tableViewMembers.refresh();
             setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            lblEditMemberErrorMessage.setText(ex.getMessage());
+        }
+    }
+    private void checkDate(LocalDate datePicker) throws Exception {
+        try{
+            DateTimeFormatter ft = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            ft.parse(datePicker.toString());
+        }catch(Exception exception){
+            throw new Exception("Please, enter a valid Datum Picker Value. For example: 11-02-2000");
         }
     }
 
@@ -60,5 +81,14 @@ public class EditMemberController {
         loader.setController(controller);
         AnchorPane an =  loader.load();
         anchorPane.getChildren().setAll(an);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Members member = tableViewMembers.getSelectionModel().getSelectedItem();
+        lblEditMember.setText("Edit Member: " + member.getFirstName());
+        txtEditMemberFirstName.setPromptText(member.getFirstName());
+        txtEditMemberLastName.setPromptText(member.getLastName());
+        dataPickerEditMember.setPromptText(member.getBirthDate().toString());
     }
 }

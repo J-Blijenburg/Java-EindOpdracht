@@ -1,93 +1,32 @@
-#DashBoardAnchorPane{
+#dashBoardVBox{
     -fx-background-color: #000000;
+
 }
 
-#DashboardTabPane.tab-pane .tab-header-area .tab-header-background{
-    -fx-background-color: #000000;
-}
-
-#TabMembers{
+#dashBoardLendingReceivingBtn, #dashBoardCollectionBtn, #dashBoardMembersBtn{
     -fx-background-color: #E5E5E5;
 }
 
-
-#TabLending{
+#collectionAnchorPane, #membersAnchorPane, #lendingReceivingAnchorPane, #newMemberAnchorPane, #newCollectionAnchorPane, #editCollectionAnchorPane, #addCollectionAnchorPane{
     -fx-background-color: #E5E5E5;
 }
 
-#AnchorPaneLendingLeft{
-    -fx-background-color: #FFFFFF;
-}
-
-#AnchorPaneLendingRight{
-    -fx-background-color: #FFFFFF;
-}
-
-#LblWelcomeUser{
-    -fx-text-fill: #6F6F6F;
-}
-
-#BtnLendItem{
+#btnAddMembers, #btnAddItem, #btnLendItem, #btnReceiveItem, #btnAddNewMember, #btnEditItem, #btnEditMember, #btnAddNewItem{
     -fx-background-color: #0078D7;
     -fx-text-fill: #E7F2FB;
 }
 
-#BtnReceiveItem{
-    -fx-background-color: #0078D7;
-    -fx-text-fill: #E7F2FB;
-}
-
-#BtnAdd{
-    -fx-background-color: #0078D7;
-    -fx-text-fill: #E7F2FB;
-}
-
-#BtnDelete{
-    -fx-background-color:  #C60108;
-    -fx-text-fill: #E7F2FB;
-}
-
-#BtnEdit{
+#btnEditCollection, #btnEditMembers, #btnCancelNewMember, #btnCancelEditItems, #btnCancelEditMember, #btnCancelNewItem{
     -fx-background-color: #797979;
     -fx-text-fill: #E7F2FB;
 }
 
-#lblLendItemSuccses{
-    -fx-text-fill: #258200;
-}
-
-#lblLendItemError{
-    -fx-text-fill: #C60108;
-}
-
-#lblReceiveItemSuccses{
-    -fx-text-fill: #258200;
-}
-
-#lblReceiveItemError{
-    -fx-text-fill: #C60108;
-}
-
-#AnchorPaneNewMember{
-    -fx-background-color: #FFFFFF;
-}
-
-#lblAddNewMemberErrorMessage{
-    -fx-text-fill: #C60108;
-}
-
-#lblEditItemsErrorMessage{
-    -fx-text-fill: #C60108;
-}
-
-#lblMembersErrorMessage{
-    -fx-text-fill: #C60108;
+#btnDeleteMember, #btnDeleteItems{
+    -fx-background-color:  #C60108;
+    -fx-text-fill: #E7F2FB;
 }
 
 #lblItemsErrorMessage{
     -fx-text-fill: #C60108;
 }
 
-#TabPaneSearchItem{
-    -fx-background-color: #FFFFFF;
-}

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="newCollectionAnchorPane" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="vboxEditMembers" prefHeight="342.0" prefWidth="707.0">
          <children>
@@ -27,15 +27,16 @@
                      <children>
                         <TextField fx:id="txtEditMemberFirstName" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="First name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
                         <TextField fx:id="txtEditMemberLastName" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Last Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="65.0" />
-                        <DatePicker fx:id="dataPickerEditMember" layoutX="176.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
+                        <DatePicker fx:id="dataPickerEditMember" layoutX="176.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
                      </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="92.0" prefWidth="707.0">
                <children>
-                  <Button id="BtnEdit" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnCancelEditMember" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
-                  <Button id="BtnAdd" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnEditMemberConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="btnCancelEditMember" layoutX="436.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnCancelEditMember" prefHeight="30.0" prefWidth="100.0" text="Cancel" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="15.0" />
+                  <Button id="btnEditMember" layoutX="526.0" layoutY="17.0" mnemonicParsing="false" onAction="#btnEditMemberConfirm" prefHeight="30.0" prefWidth="100.0" text="Edit Member" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                  <Label fx:id="lblEditMemberErrorMessage" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="381.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="18.0" />
                </children>
             </AnchorPane>
          </children>

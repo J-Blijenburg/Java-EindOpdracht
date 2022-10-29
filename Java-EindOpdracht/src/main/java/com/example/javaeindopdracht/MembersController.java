@@ -52,11 +52,6 @@ public class MembersController implements Initializable {
     @FXML public void btnEditMemberOnAction(ActionEvent event) throws IOException {
         try{
             if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
-                Members member = tableViewMembers.getSelectionModel().getSelectedItem();
-                //lblEditMember.setText("Edit Member: " + member.getFirstName());
-                //txtEditMemberFirstName.setPromptText(member.getFirstName());
-                //txtEditMemberLastName.setPromptText(member.getLastName());
-                //dataPickerEditMember.setPromptText(member.getBirthDate().toString());
                 setScene(new EditMemberController(anchorPane, listOfMembers, tableViewMembers), "EditMember-View.fxml");
             }
             else{

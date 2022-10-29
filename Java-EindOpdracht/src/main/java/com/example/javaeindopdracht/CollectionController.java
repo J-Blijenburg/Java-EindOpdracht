@@ -24,7 +24,7 @@ public class CollectionController implements Initializable {
 
     @FXML private ObservableList<Items> listOfItems;
     @FXML private TableView<Items> tableViewCollection;
-    @FXML private Label lblEditItems;
+
     @FXML private Label lblItemsErrorMessage;
     @FXML private AnchorPane anchorPane;
     @FXML private TextField txtSearchItem;
@@ -42,10 +42,6 @@ public class CollectionController implements Initializable {
         try{
             //Check if an item is selected and bring that item to the edit-page.
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                Items item = tableViewCollection.getSelectionModel().getSelectedItem();
-                lblEditItems.setText("Edit item: " + item.getTitle());
-                //txtEditItemTitle.setPromptText(item.getTitle());
-                //txtEditItemsAuthor.setPromptText(item.getAuthor());
                 setScene(new EditCollectionController(anchorPane, listOfItems, tableViewCollection), "EditCollection-View.fxml");
             }
             else{
