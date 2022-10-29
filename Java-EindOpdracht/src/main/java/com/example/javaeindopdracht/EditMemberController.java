@@ -21,6 +21,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -95,6 +96,6 @@ public class EditMemberController implements Initializable {
         lblEditMember.setText("Edit Member: " + member.getFirstName());
         txtEditMemberFirstName.setPromptText(member.getFirstName());
         txtEditMemberLastName.setPromptText(member.getLastName());
-        dataPickerEditMember.setPromptText(member.getBirthDate().toString());
+        dataPickerEditMember.setPromptText(member.getBirthDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
 }

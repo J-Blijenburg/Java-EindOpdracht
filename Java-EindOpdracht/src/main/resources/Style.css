@@ -26,7 +26,10 @@
     -fx-text-fill: #E7F2FB;
 }
 
-#lblItemsErrorMessage{
+#lblItemsErrorMessage, #lblLendingReceivingError, #lblMembersErrorMessage{
     -fx-text-fill: #C60108;
+}
+#lblLendingReceivingSucces{
+    -fx-text-fill:  #1D741B;
 }
 

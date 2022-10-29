@@ -20,7 +20,6 @@ private List<Items> allItems = new ArrayList<>();
     public List<Members> getAllMembers() {
         return allMembers;
     }
-
     public List<Items> getAllItems() {
         return allItems;
     }
