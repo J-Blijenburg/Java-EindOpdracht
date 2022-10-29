@@ -14,8 +14,14 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EditMemberController implements Initializable {
@@ -44,21 +50,16 @@ public class EditMemberController implements Initializable {
     //If information of the member is changed this button is going to confirm the changes
     @FXML public void btnEditMemberConfirm(ActionEvent event) {
         try {
-
-
             Members member = tableViewMembers.getSelectionModel().getSelectedItem();
-
-
-
             if(!txtEditMemberFirstName.getText().equals("")){
                 member.setFirstName(txtEditMemberFirstName.getText());
             }
             if(!txtEditMemberLastName.getText().equals("")){
                 member.setLastName(txtEditMemberLastName.getText());
             }
-            if(dataPickerEditMember.getValue() != null){
-                //checkDate(dataPickerEditMember.getValue());
-                member.setBirthDate(dataPickerEditMember.getValue());
+            if(!dataPickerEditMember.getEditor().getText().equals("")){
+                LocalDate dateOfBirth =  checkDate(dataPickerEditMember);
+                member.setBirthDate(dateOfBirth);
 
             }
             tableViewMembers.refresh();
@@ -67,14 +68,19 @@ public class EditMemberController implements Initializable {
             lblEditMemberErrorMessage.setText(ex.getMessage());
         }
     }
-    private void checkDate(LocalDate datePicker) throws Exception {
-        try{
-            DateTimeFormatter ft = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            ft.parse(datePicker.toString());
-        }catch(Exception exception){
-            throw new Exception("Please, enter a valid Date Picker Value. For example: 11-02-2000");
-        }
+    private LocalDate checkDate(DatePicker dateTimePicker) throws ParseException {
+        //https://stackoverflow.com/questions/21242110/convert-java-util-date-to-java-time-localdate
+        DateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = (Date) sd.parse(dateTimePicker.getEditor().getText());
+        Instant instant = date.toInstant();
+        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.systemDefault());
+        LocalDate ld = zonedDateTime.toLocalDate();
+
+        return ld;
     }
+
+
+
 
     public void setScene(Object controller, String nameOfFxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));

@@ -29,7 +29,6 @@ public class AddCollectionController {
     @FXML public void btnCancelNewItem(ActionEvent event) throws IOException {
         txtAddItemsAuthor.setText("");
         txtAddItemsTitle.setText("");
-        //RefreshLabels();
         setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
     }
 

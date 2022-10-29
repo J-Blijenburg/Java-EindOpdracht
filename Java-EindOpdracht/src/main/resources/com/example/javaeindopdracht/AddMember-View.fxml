@@ -27,7 +27,7 @@
                      <children>
                         <TextField fx:id="txtAddMemberFirstName" layoutX="490.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="First name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
                         <TextField fx:id="txtAddMemberLastName" layoutX="293.0" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" promptText="Last Name" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="65.0" />
-                        <DatePicker fx:id="dataPickerAddNewMember" editable="false" layoutX="176.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="Day Of Birth" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
+                        <DatePicker fx:id="dataPickerAddNewMember" editable="true" layoutX="176.0" layoutY="20.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="200.0" promptText="Day Of Birth" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="20.0" />
                      </children>
                   </AnchorPane>
                </children>

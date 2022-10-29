@@ -12,7 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Date;
 
 public class AddMemberController  {
 
@@ -40,10 +47,12 @@ public class AddMemberController  {
     //When entering all the needed information you can add the new member
     @FXML public void btnAddMemberConfirm(ActionEvent event) {
         try{
-            if(txtAddMemberFirstName.getText() == null | txtAddMemberLastName.getText() == null | dataPickerAddNewMember.getValue() == null ){
+            if(txtAddMemberFirstName.getText().equals("")| txtAddMemberLastName.getText().equals("") | dataPickerAddNewMember.getEditor().getText().equals("") ){
                 throw new Exception("Please, fill in all the fields");
             }
-            listOfMembers.add(new Members(listOfMembers.size() + 1,txtAddMemberFirstName.getText(), txtAddMemberLastName.getText(), LocalDate.of(dataPickerAddNewMember.getValue().getYear(), dataPickerAddNewMember.getValue().getMonth(), dataPickerAddNewMember.getValue().getDayOfMonth()) , txtAddMemberFirstName.getText(), txtAddMemberLastName.getText() +  "123"));
+            LocalDate dateOfBirth = checkDate(dataPickerAddNewMember);
+
+            listOfMembers.add(new Members(listOfMembers.size() + 1,txtAddMemberFirstName.getText(), txtAddMemberLastName.getText(), dateOfBirth , txtAddMemberFirstName.getText(), txtAddMemberLastName.getText() +  "123"));
 
             setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
         }
@@ -59,4 +68,16 @@ public class AddMemberController  {
         AnchorPane an =  loader.load();
         anchorPane.getChildren().setAll(an);
     }
+
+    private LocalDate checkDate(DatePicker dateTimePicker) throws ParseException {
+        //https://stackoverflow.com/questions/21242110/convert-java-util-date-to-java-time-localdate
+        DateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = (Date) sd.parse(dateTimePicker.getEditor().getText());
+        Instant instant = date.toInstant();
+        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.systemDefault());
+        LocalDate ld = zonedDateTime.toLocalDate();
+
+        return ld;
+    }
+
 }

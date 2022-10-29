@@ -78,9 +78,14 @@ public class MembersController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tableViewMembers.setItems(listOfMembers);
-        ChangeTableViewBirthDate();
-        txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
+        try{
+            tableViewMembers.setItems(listOfMembers);
+            ChangeTableViewBirthDate();
+            txtSearchMember.textProperty().addListener((obs, oldText, newText) -> SearchMember());
+        }catch(Exception ex){
+           lblMembersErrorMessage.setText(ex.getMessage());
+        }
+
     }
     //Changes the birthdate cell of members listview to the correct date format
     private void ChangeTableViewBirthDate(){
