@@ -42,9 +42,10 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml");
             this.listOfMembers = FXCollections.observableList(database.getAllMembers());
             this.listOfItems = FXCollections.observableList(database.getAllItems());
+            setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml");
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

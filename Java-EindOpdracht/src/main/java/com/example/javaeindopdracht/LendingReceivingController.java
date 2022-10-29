@@ -11,13 +11,12 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class LendingReceivingController implements Initializable {
     @FXML private TextField txtReceiveItemCode;
     @FXML private Label LblWelcome;
-    @FXML private Label lblLendItemError;
-    @FXML private Label lblLendItemSuccses;
     @FXML private Label lblReceiveItemSuccses;
     @FXML private Label lblReceiveItemError;
     @FXML private TextField txtItemCode;
@@ -28,7 +27,7 @@ public class LendingReceivingController implements Initializable {
     private Members currentMember;
     private int dateCheck;
     private final int deadLine = 21;
-    private final int totalDaysToLate = dateCheck - deadLine;
+    private final int totalDaysToLate = Math.abs(dateCheck - deadLine);
 
     public LendingReceivingController(ObservableList<Items> listOfItems, ObservableList<Members> listOfMembers, Members currentMember) {
         this.listOfItems = listOfItems;
@@ -41,11 +40,13 @@ public class LendingReceivingController implements Initializable {
         try{
             clearCurrentTextOfLabel();
             Items item = SelectItem(checkForInt(txtReceiveItemCode.getText()));
+            
+            if(item.getAvailable()){
+                throw new Exception("Item is not lend out");
+            }
 
-            CalculateLendTime(item);
+            dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
             checkLendOutBy(item);
-
-            CheckNull(item, "Item not recognized");
 
         }
         catch (Exception ex){
@@ -71,9 +72,9 @@ public class LendingReceivingController implements Initializable {
             else{
                 throw new Exception("Item is not available now");
             }
-            lblLendItemSuccses.setText("Item is lent out successfully");
+            lblReceiveItemSuccses.setText("Item " + selectedItem.getTitle() + " is lent out by " +selectedMember.getFirstName() +  " successfully on " + selectedItem.getLendOutDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         }catch(Exception ex){
-            lblLendItemError.setText(ex.getMessage());
+            lblReceiveItemError.setText(ex.getMessage());
         }
     }
 
@@ -83,8 +84,6 @@ public class LendingReceivingController implements Initializable {
     }
     //set the current text of the label to not
     private void clearCurrentTextOfLabel(){
-        lblLendItemError.setText(null);
-        lblLendItemSuccses.setText(null);
         lblReceiveItemSuccses.setText(null);
         lblReceiveItemError.setText(null);
     }
@@ -121,14 +120,15 @@ public class LendingReceivingController implements Initializable {
         }
         return null;
     }
-    private void CalculateLendTime(Items item){
-        dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
-    }
 
 
     //check if the member actually lend the item
     private void checkLendOutBy(Items item) throws Exception {
-        if(item.getLendOutBy().getId() == (currentMember.getId())){
+        if(item.getLendOutBy() == null){
+            throw new Exception("Member didn't lend this item");
+        }
+
+        if(item.getLendOutBy().getId() == currentMember.getId()){
             checkDeadLine();
             normalItemSettings(item);
         }
