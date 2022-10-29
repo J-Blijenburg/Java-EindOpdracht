@@ -57,7 +57,7 @@ public class EditMemberController implements Initializable {
                 member.setLastName(txtEditMemberLastName.getText());
             }
             if(dataPickerEditMember.getValue() != null){
-                checkDate(dataPickerEditMember.getValue());
+                //checkDate(dataPickerEditMember.getValue());
                 member.setBirthDate(dataPickerEditMember.getValue());
 
             }
@@ -72,7 +72,7 @@ public class EditMemberController implements Initializable {
             DateTimeFormatter ft = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             ft.parse(datePicker.toString());
         }catch(Exception exception){
-            throw new Exception("Please, enter a valid Datum Picker Value. For example: 11-02-2000");
+            throw new Exception("Please, enter a valid Date Picker Value. For example: 11-02-2000");
         }
     }
 

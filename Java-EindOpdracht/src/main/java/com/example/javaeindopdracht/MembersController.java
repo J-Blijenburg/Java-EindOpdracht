@@ -39,7 +39,8 @@ public class MembersController implements Initializable {
         try{
             if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
                 listOfMembers.remove(tableViewMembers.getSelectionModel().getSelectedItem());
-                tableViewMembers.refresh();
+                tableViewMembers.setItems(listOfMembers);
+                txtSearchMember.setText("");
             }
             else{
                 throw new Exception("Please, Select an member");

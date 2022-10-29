@@ -56,7 +56,8 @@ public class CollectionController implements Initializable {
         try{
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
                 listOfItems.remove(tableViewCollection.getSelectionModel().getSelectedItem());
-                tableViewCollection.refresh();
+                tableViewCollection.setItems(listOfItems);
+                txtSearchItem.setText("");
             }
             else{
                 throw new Exception("Please, Select an item");
