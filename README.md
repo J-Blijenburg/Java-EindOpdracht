@@ -15,3 +15,4 @@ Karel - Zeeman123
 Linda - Boer123
 
 To be sure here is the Github:
+https://github.com/J-Blijenburg/Java-EindOpdracht
