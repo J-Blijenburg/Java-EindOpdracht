@@ -36,7 +36,7 @@ public class AddMemberController  {
         txtAddMemberFirstName.setText("");
         txtAddMemberLastName.setText("");
         dataPickerAddNewMember.setValue(null);
-        setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
+        setSceneOfMembers(new MembersController(anchorPane, listOfMembers));
     }
     //When entering all the needed information you can add the new member
     @FXML public void btnAddMemberConfirm(ActionEvent event) {
@@ -46,9 +46,11 @@ public class AddMemberController  {
             }
             LocalDate dateOfBirth = checkDate(dataPickerAddNewMember);
 
-            listOfMembers.add(new Members(listOfMembers.size() + 1,txtAddMemberFirstName.getText(), txtAddMemberLastName.getText(), dateOfBirth , txtAddMemberFirstName.getText(), txtAddMemberLastName.getText() +  "123"));
+            int newMemberId = listOfMembers.get(listOfMembers.size() - 1).getId() + 1;
 
-            setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
+            listOfMembers.add(new Members(newMemberId,txtAddMemberFirstName.getText(), txtAddMemberLastName.getText(), dateOfBirth , txtAddMemberFirstName.getText(), txtAddMemberLastName.getText() +  "123"));
+
+            setSceneOfMembers(new MembersController(anchorPane, listOfMembers));
         }
         catch(Exception ex){
             lblAddNewMemberErrorMessage.setText(ex.getMessage());
@@ -56,8 +58,8 @@ public class AddMemberController  {
     }
 
     //set the scene with the given controller and fxml-file
-    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
+    private void setSceneOfMembers(Object controller) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Members-View.fxml"));
         loader.setController(controller);
         AnchorPane an =  loader.load();
         anchorPane.getChildren().setAll(an);
@@ -66,8 +68,7 @@ public class AddMemberController  {
     private LocalDate checkDate(DatePicker dateTimePicker) throws Exception {
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate ld = LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
-            return ld;
+            return LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
 
         }catch (Exception ex){
             throw new Exception("Please, enter a valid date. For Example: 11-02-2000");

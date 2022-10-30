@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -63,16 +62,10 @@ public class EditMemberController implements Initializable {
             lblEditMemberErrorMessage.setText(ex.getMessage());
         }
     }
-    private LocalDate checkDate(DatePicker dateTimePicker) throws ParseException {
-
+    private LocalDate checkDate(DatePicker dateTimePicker) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate ld = LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
-
-        return ld;
+        return LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
     }
-
-
-
 
     public void setScene(Object controller, String nameOfFxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));

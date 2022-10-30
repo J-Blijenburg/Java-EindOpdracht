@@ -1,8 +1,6 @@
 package Model;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Members implements Serializable {
     private int id;
