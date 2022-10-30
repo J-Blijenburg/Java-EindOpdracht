@@ -2,6 +2,9 @@ package com.example.javaeindopdracht;
 
 import Model.Items;
 import Model.Members;
+import com.example.javaeindopdracht.Exception.ItemNotFoundException;
+import com.example.javaeindopdracht.Exception.MemberNotFoundException;
+import com.example.javaeindopdracht.Exception.ValidNumberException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,10 +62,8 @@ public class LendingReceivingController implements Initializable {
         try{
             clearCurrentTextOfLabel();
             Items selectedItem = SelectItem(checkForInt(txtItemCode.getText()));
-            CheckNull(selectedItem, "Member does not exist");
 
             Members selectedMember = SelectMember(checkForInt(txtMemberIdentifier.getText()));
-            CheckNull(selectedMember, "Item not found in this library");
 
             if(selectedItem.getAvailable().equals(true)){
                 selectedItem.setLendOutDate(LocalDate.now());
@@ -88,46 +89,36 @@ public class LendingReceivingController implements Initializable {
         lblReceiveItemError.setText(null);
     }
 
-    private Integer checkForInt(String text) throws Exception {
+    private Integer checkForInt(String text) throws ValidNumberException {
         try{
             return Integer.parseInt(text);
         }catch (NumberFormatException ex){
-            throw new Exception("Please, Enter a valid number");
+            throw new ValidNumberException();
         }
     }
     //Goes through every item to search the item with the correct item code
-    private Items SelectItem(int selectedItem) throws Exception {
+    private Items SelectItem(int selectedItem) throws ItemNotFoundException {
         for(Items item : listOfItems){
             if(item.getItemCode() == selectedItem){
                 return item;
             }
         }
-        throw new Exception("Item not recognized");
-    }
-    //If the object is null throw an exception
-    private void CheckNull(Object object, String errorMessage) throws Exception {
-        if (object == null) {
-            throw new Exception(errorMessage);
-        }
+        throw new ItemNotFoundException();
     }
 
     //Goes through every member to search the member with the correct member id
-    private Members SelectMember(int selectedMember){
+    private Members SelectMember(int selectedMember) throws MemberNotFoundException{
         for(Members member : listOfMembers){
             if(member.getId() == selectedMember){
                 return member;
             }
         }
-        return null;
+        throw new MemberNotFoundException();
     }
 
 
     //check if the member actually lend the item
     private void checkLendOutBy(Items item) throws Exception {
-        if(item.getLendOutBy() == null){
-            throw new Exception("Member didn't lend this item");
-        }
-
         if(item.getLendOutBy().getId() == currentMember.getId()){
             checkDeadLine();
             normalItemSettings(item);
