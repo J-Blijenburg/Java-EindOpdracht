@@ -22,10 +22,10 @@ public class LendingReceivingController implements Initializable {
     @FXML private Label lblReceiveItemError;
     @FXML private TextField txtItemCode;
     @FXML private TextField txtMemberIdentifier;
-    private ObservableList<Items> listOfItems;
-    private ObservableList<Members> listOfMembers;
+    private final ObservableList<Items> listOfItems;
+    private final ObservableList<Members> listOfMembers;
 
-    private Members currentMember;
+    private final Members currentMember;
     private int dateCheck;
     private final int deadLine = 21;
     private final int totalDaysToLate = Math.abs(dateCheck - deadLine);

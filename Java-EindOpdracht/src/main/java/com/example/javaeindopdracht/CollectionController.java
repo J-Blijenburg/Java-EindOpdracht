@@ -28,7 +28,7 @@ public class CollectionController implements Initializable {
     @FXML private Label lblItemsErrorMessage;
     @FXML private AnchorPane anchorPane;
     @FXML private TextField txtSearchItem;
-    private Scene scene = new Scene();
+    private final Scene scene = new Scene();
 
     public CollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems) {
         this.anchorPane = anchorPane;

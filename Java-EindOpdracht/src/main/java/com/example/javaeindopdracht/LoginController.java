@@ -25,10 +25,10 @@ public class LoginController {
     @FXML public TextField userNametxt;
     @FXML public PasswordField passWordtxt;
     @FXML public Label lblErrorMessage;
-    private Database database = new Database();
-    private ObservableList<Members> listOfMembers;
-    private File memberFile = new File("JavaEindopdrachtMembers.txt");
-    private File itemFile = new File("JavaEindopdrachtItems.txt");
+    private final Database database = new Database();
+    private final ObservableList<Members> listOfMembers;
+    private final File memberFile = new File("JavaEindopdrachtMembers.txt");
+    private final File itemFile = new File("JavaEindopdrachtItems.txt");
 
     public LoginController() throws IOException, ClassNotFoundException {
         this.listOfMembers = FXCollections.observableList(this.database.getAllMembers());
