@@ -2,18 +2,19 @@ package com.example.javaeindopdracht;
 
 import Database.Database;
 import Model.Members;
+import com.example.javaeindopdracht.Exception.PassWordException;
+import com.example.javaeindopdracht.Exception.UserNameException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import java.io.IOException;
 public class LoginController {
     @FXML public TextField userNametxt;
     @FXML public PasswordField passWordtxt;
-    @FXML public Label LblErrorMessage;
+    @FXML public Label lblErrorMessage;
     private Database database = new Database();
     private ObservableList<Members> listOfMembers;
     private File memberFile = new File("JavaEindopdrachtMembers.txt");
@@ -38,7 +39,7 @@ public class LoginController {
     }
 
     //loop through every single member to identify the correct username and password
-    public void loginBtnClick(ActionEvent actionEvent) {
+    public void loginBtnClick(ActionEvent event) {
        try{
            CheckDataBase(memberFile);
            CheckDataBase(itemFile);
@@ -46,46 +47,46 @@ public class LoginController {
            for(Members member : listOfMembers){
                if (this.userNametxt.getText().equals(member.getFirstName())) {
                    if (!this.passWordtxt.getText().equals(member.getPassWord())) {
-                       throw new Exception("Invalid Password combination");
+                       throw new PassWordException();
                    }
-                   OpenNewStage(member);
+                   OpenNewStage(member, event);
                    break;
                }
            }
-           throw new Exception("Username does not exist!");
+           throw new UserNameException();
        }
        catch(Exception ex){
-           this.LblErrorMessage.setText("");
-           this.LblErrorMessage.setText(ex.getMessage());
+           this.lblErrorMessage.setText("");
+           this.lblErrorMessage.setText(ex.getMessage());
        }
     }
     //If there is no input remind the user to fill in a valid input
     private void CheckUsernameAndPassword() throws Exception {
-        if(this.userNametxt.getText().equals("") | this.passWordtxt.getText().equals("")){
+        if(this.userNametxt.getText().equals("") || this.passWordtxt.getText().equals("")){
             throw new Exception("Please, Enter a Username and Password.");
         }
     }
 
     //Create a new stage with settings
-    private void OpenNewStage(Members member) throws IOException {
+    private void OpenNewStage(Members member, ActionEvent event) throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Dashboard-View.fxml"));
         DashboardController dashboardController = new DashboardController(member, database);
         fxmlLoader.setController(dashboardController);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(fxmlLoader.load()));
-        stage.setResizable(false);
-        stage.setTitle("DashBoard");
-        stage.show();
-        Start.loginStage.close();
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            public void handle(WindowEvent windowEvent) {
-                try {
-                    database.Write();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+        Stage secondaryStage = new Stage();
+        secondaryStage.setScene(new Scene(fxmlLoader.load()));
+        secondaryStage.setResizable(false);
+        secondaryStage.setTitle("DashBoard");
+        secondaryStage.show();
+        secondaryStage.setOnCloseRequest(windowEvent -> {
+            try {
+                database.Write();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         });
+        Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        primaryStage.close();
     }
 
 

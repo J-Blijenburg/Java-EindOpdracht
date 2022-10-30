@@ -1,6 +1,7 @@
 package com.example.javaeindopdracht;
 
 import Model.Members;
+import com.example.javaeindopdracht.Exception.SelectMemberException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,7 +43,7 @@ public class MembersController implements Initializable {
                 txtSearchMember.setText("");
             }
             else{
-                throw new Exception("Please, Select an member");
+                throw new SelectMemberException();
             }
         }catch(Exception ex){
             lblMembersErrorMessage.setText(ex.getMessage());
@@ -55,7 +56,7 @@ public class MembersController implements Initializable {
                 scene.setScene(new EditMemberController(anchorPane, listOfMembers, tableViewMembers), "EditMember-View.fxml", anchorPane);
             }
             else{
-                throw new Exception("Please, Select an member");
+                throw new SelectMemberException();
             }
         }catch(Exception ex){
             lblMembersErrorMessage.setText(ex.getMessage());
@@ -94,7 +95,7 @@ public class MembersController implements Initializable {
         else{
             ObservableList<Members> filter = FXCollections.observableArrayList();
             for(Members members : listOfMembers){
-                if(members.getFirstName().toLowerCase().contains(searchMember) | members.getLastName().toLowerCase().contains(searchMember)){
+                if(members.getFirstName().toLowerCase().contains(searchMember) || members.getLastName().toLowerCase().contains(searchMember)){
                     filter.add(members);
                 }
             }
