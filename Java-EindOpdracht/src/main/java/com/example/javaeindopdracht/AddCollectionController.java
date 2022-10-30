@@ -35,7 +35,7 @@ public class AddCollectionController {
     //When entering all the needed information you can add the new item
     @FXML public void btnAddItemConfirm(ActionEvent event) {
         try{
-            if(txtAddItemsTitle.getText() != null | txtAddItemsAuthor.getText() != null){
+            if(txtAddItemsTitle.getText() != null || txtAddItemsAuthor.getText() != null){
                 listOfItems.add(new Items(listOfItems.size() + 1, true, txtAddItemsTitle.getText(), txtAddItemsAuthor.getText()));
                 setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
             }

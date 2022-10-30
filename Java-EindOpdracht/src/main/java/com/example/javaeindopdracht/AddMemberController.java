@@ -1,6 +1,8 @@
 package com.example.javaeindopdracht;
 
 import Model.Members;
+import com.example.javaeindopdracht.Exception.DatePickerException;
+import com.example.javaeindopdracht.Exception.EmptyFieldsException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,12 +41,13 @@ public class AddMemberController  {
         setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
     }
     //When entering all the needed information you can add the new member
-    @FXML public void btnAddMemberConfirm(ActionEvent event) {
+    @FXML public void btnAddMemberConfirm(ActionEvent event)  {
         try{
-            if(txtAddMemberFirstName.getText().equals("")| txtAddMemberLastName.getText().equals("") | dataPickerAddNewMember.getEditor().getText().equals("") ){
-                throw new Exception("Please, fill in all the fields");
+            if(txtAddMemberFirstName.getText().equals("") || txtAddMemberLastName.getText().equals("") || dataPickerAddNewMember.getEditor().getText().equals("") ){
+                throw new EmptyFieldsException();
             }
             LocalDate dateOfBirth = checkDate(dataPickerAddNewMember);
+            checkDate(dataPickerAddNewMember);
 
             listOfMembers.add(new Members(listOfMembers.size() + 1,txtAddMemberFirstName.getText(), txtAddMemberLastName.getText(), dateOfBirth , txtAddMemberFirstName.getText(), txtAddMemberLastName.getText() +  "123"));
 
@@ -63,14 +66,12 @@ public class AddMemberController  {
         anchorPane.getChildren().setAll(an);
     }
 
-    private LocalDate checkDate(DatePicker dateTimePicker) throws Exception {
+    private LocalDate checkDate(DatePicker dateTimePicker) throws DatePickerException {
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate ld = LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
-            return ld;
-
-        }catch (Exception ex){
-            throw new Exception("Please, enter a valid date. For Example: 11-02-2000");
+            return LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
+        }catch(Exception ex){
+            throw new DatePickerException();
         }
     }
 
