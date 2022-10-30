@@ -12,13 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 public class AddMemberController  {
 
@@ -69,15 +64,9 @@ public class AddMemberController  {
     }
 
     private LocalDate checkDate(DatePicker dateTimePicker) throws Exception {
-
-
         try{
-            //https://stackoverflow.com/questions/21242110/convert-java-util-date-to-java-time-localdate
-            DateFormat sd = new SimpleDateFormat("dd-MM-yyyy");
-            Date date = (Date) sd.parse(dateTimePicker.getEditor().getText());
-            Instant instant = date.toInstant();
-            ZonedDateTime zonedDateTime = instant.atZone(ZoneId.systemDefault());
-            LocalDate ld = zonedDateTime.toLocalDate();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate ld = LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
             return ld;
 
         }catch (Exception ex){
