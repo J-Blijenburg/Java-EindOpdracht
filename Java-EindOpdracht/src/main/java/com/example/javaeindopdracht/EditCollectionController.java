@@ -4,7 +4,6 @@ import Model.Items;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -23,6 +22,7 @@ public class EditCollectionController implements Initializable {
     @FXML private Label lblEditItems;
     @FXML private TextField txtEditItemTitle;
     @FXML private TextField txtEditItemsAuthor;
+    private Scene scene = new Scene();
 
     public EditCollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems, TableView<Items> tableViewCollection) {
         this.anchorPane = anchorPane;
@@ -31,7 +31,7 @@ public class EditCollectionController implements Initializable {
     }
     //While editing an item cancel the process and reset all the values
     @FXML public void btnCancelEditItems(ActionEvent event) throws IOException {
-        setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
+        scene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
     }
 
     //If information of the selected item is changed this button is going to confirm the changes
@@ -47,7 +47,7 @@ public class EditCollectionController implements Initializable {
                     item.setAuthor(txtEditItemsAuthor.getText());
                 }
                 tableViewCollection.refresh();
-                setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
+                scene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
             }
             else{
                 throw new Exception("Please, Select an item");
@@ -56,13 +56,6 @@ public class EditCollectionController implements Initializable {
         }catch(Exception ex){
             lblItemsErrorMessage.setText(ex.getMessage());
         }
-    }
-    //set the scene with the given controller and fxml-file
-    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
-        loader.setController(controller);
-        AnchorPane an =  loader.load();
-        anchorPane.getChildren().setAll(an);
     }
 
     @Override

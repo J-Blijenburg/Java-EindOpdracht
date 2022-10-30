@@ -6,7 +6,6 @@ import Model.Members;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -33,6 +32,8 @@ public class DashboardController implements Initializable {
     private final Members currentMember;
     private ObservableList<Members> listOfMembers;
     private ObservableList<Items> listOfItems;
+    private Scene scene = new Scene();
+
     //Receive the current member and database from the Login-controller
     public DashboardController(Members member, Database database){
         this.currentMember = member;
@@ -44,28 +45,21 @@ public class DashboardController implements Initializable {
         try {
             this.listOfMembers = FXCollections.observableList(database.getAllMembers());
             this.listOfItems = FXCollections.observableList(database.getAllItems());
-            setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml");
+            scene.setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml", dashBoardAnchorPane);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
     @FXML private void membersOnAction() throws IOException{
-        setScene(new MembersController(dashBoardAnchorPane, listOfMembers),"Members-View.fxml");
+        scene.setScene(new MembersController(dashBoardAnchorPane, listOfMembers),"Members-View.fxml", dashBoardAnchorPane);
     }
     @FXML private void collectionOnAction() throws IOException{
-        setScene(new CollectionController(dashBoardAnchorPane, listOfItems), "Collection-View.fxml");
+        scene.setScene(new CollectionController(dashBoardAnchorPane, listOfItems), "Collection-View.fxml", dashBoardAnchorPane);
     }
     @FXML private void lendingReceivingOnAction() throws IOException {
-        setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml");
+        scene.setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml", dashBoardAnchorPane);
     }
 
-    //set the scene with the given controller and fxml-file
-    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
-        //https://stackoverflow.com/questions/53127331/javafx-swap-anchorpane-element-with-fxml-from-another-file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
-        loader.setController(controller);
-        AnchorPane an =  loader.load();
-        dashBoardAnchorPane.getChildren().setAll(an);
-    }
+
 }

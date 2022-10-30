@@ -19,7 +19,7 @@ public class AddCollectionController {
     @FXML private TableView<Items> tableViewCollection;
     @FXML private TextField txtAddItemsTitle;
     @FXML private Label lblEditItemsErrorMessage;
-    private CreateScene createScene = new CreateScene();
+    private Scene scene = new Scene();
 
     public AddCollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems, TableView<Items> tableViewCollection) {
         this.anchorPane = anchorPane;
@@ -30,7 +30,7 @@ public class AddCollectionController {
     @FXML public void btnCancelNewItem(ActionEvent event) throws IOException {
         txtAddItemsAuthor.setText("");
         txtAddItemsTitle.setText("");
-        createScene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
+        scene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
     }
 
     //When entering all the needed information you can add the new item
@@ -38,7 +38,7 @@ public class AddCollectionController {
         try{
             if(txtAddItemsTitle.getText() != null || txtAddItemsAuthor.getText() != null){
                 listOfItems.add(new Items(listOfItems.size() + 1, true, txtAddItemsTitle.getText(), txtAddItemsAuthor.getText()));
-                createScene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
+                scene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
             }
             else{
                 throw new EmptyFieldsException();

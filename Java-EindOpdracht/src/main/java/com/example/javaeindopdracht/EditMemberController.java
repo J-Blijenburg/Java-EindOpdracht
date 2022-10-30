@@ -4,7 +4,6 @@ import Model.Members;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -28,6 +27,7 @@ public class EditMemberController implements Initializable {
     @FXML private DatePicker dataPickerEditMember;
     @FXML private Label lblEditMember;
     @FXML private Label lblEditMemberErrorMessage;
+    private Scene scene = new Scene();
 
     public EditMemberController(AnchorPane anchorPane, ObservableList<Members> listOfMembers, TableView<Members> tableViewMembers) {
         this.anchorPane = anchorPane;
@@ -39,7 +39,7 @@ public class EditMemberController implements Initializable {
         txtEditMemberFirstName.setText("");
         txtEditMemberLastName.setText("");
         dataPickerEditMember.setValue(null);
-        setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
+        scene.setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml", anchorPane);
     }
 
     //If information of the member is changed this button is going to confirm the changes
@@ -58,7 +58,7 @@ public class EditMemberController implements Initializable {
 
             }
             tableViewMembers.refresh();
-            setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml");
+            scene.setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml", anchorPane);
         } catch (Exception ex) {
             lblEditMemberErrorMessage.setText(ex.getMessage());
         }
@@ -69,16 +69,6 @@ public class EditMemberController implements Initializable {
         LocalDate ld = LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
 
         return ld;
-    }
-
-
-
-
-    public void setScene(Object controller, String nameOfFxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
-        loader.setController(controller);
-        AnchorPane an =  loader.load();
-        anchorPane.getChildren().setAll(an);
     }
 
     @Override

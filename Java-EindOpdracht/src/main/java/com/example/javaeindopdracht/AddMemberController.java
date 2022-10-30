@@ -25,7 +25,7 @@ public class AddMemberController  {
     @FXML private DatePicker dataPickerAddNewMember;
     @FXML private Label lblAddNewMemberErrorMessage;
     @FXML private TableView<Members> tableViewMembers;
-    private CreateScene createScene = new CreateScene();
+    private Scene scene = new Scene();
 
     public AddMemberController(AnchorPane anchorPane, ObservableList<Members> listOfMembers, TableView<Members> tableViewMembers) {
         this.anchorPane = anchorPane;
@@ -38,7 +38,7 @@ public class AddMemberController  {
         txtAddMemberFirstName.setText("");
         txtAddMemberLastName.setText("");
         dataPickerAddNewMember.setValue(null);
-        createScene.setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml", anchorPane);
+        scene.setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml", anchorPane);
     }
     //When entering all the needed information you can add the new member
     @FXML public void btnAddMemberConfirm(ActionEvent event)  {
@@ -51,7 +51,7 @@ public class AddMemberController  {
 
             listOfMembers.add(new Members(listOfMembers.size() + 1,txtAddMemberFirstName.getText(), txtAddMemberLastName.getText(), dateOfBirth , txtAddMemberFirstName.getText(), txtAddMemberLastName.getText() +  "123"));
 
-            createScene.setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml", anchorPane);
+            scene.setScene(new MembersController(anchorPane, listOfMembers), "Members-View.fxml", anchorPane);
         }
         catch(Exception ex){
             lblAddNewMemberErrorMessage.setText(ex.getMessage());

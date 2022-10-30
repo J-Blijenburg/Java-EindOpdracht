@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -28,6 +27,8 @@ public class CollectionController implements Initializable {
     @FXML private Label lblItemsErrorMessage;
     @FXML private AnchorPane anchorPane;
     @FXML private TextField txtSearchItem;
+    private Scene scene = new Scene();
+
     public CollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems) {
         this.anchorPane = anchorPane;
         this.listOfItems = listOfItems;
@@ -35,14 +36,14 @@ public class CollectionController implements Initializable {
 
     //display the view to create/add a new item
     @FXML public void btnAddItemOnAction(ActionEvent event) throws IOException {
-        setScene(new AddCollectionController(anchorPane, listOfItems, tableViewCollection), "AddCollection-View.fxml");
+        scene.setScene(new AddCollectionController(anchorPane, listOfItems, tableViewCollection), "AddCollection-View.fxml", anchorPane);
     }
 
     @FXML public void btnEditItemsOnAction(ActionEvent event) throws IOException {
         try{
             //Check if an item is selected and bring that item to the edit-page.
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                setScene(new EditCollectionController(anchorPane, listOfItems, tableViewCollection), "EditCollection-View.fxml");
+               scene.setScene(new EditCollectionController(anchorPane, listOfItems, tableViewCollection), "EditCollection-View.fxml", anchorPane);
             }
             else{
                 throw new Exception("Please, Select an item");
@@ -65,14 +66,6 @@ public class CollectionController implements Initializable {
         }catch (Exception ex){
             lblItemsErrorMessage.setText(ex.getMessage());
         }
-    }
-
-    //set the scene with the given controller and fxml-file
-    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
-        loader.setController(controller);
-        AnchorPane an =  loader.load();
-        anchorPane.getChildren().setAll(an);
     }
 
     @Override
