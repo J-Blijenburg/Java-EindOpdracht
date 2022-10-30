@@ -1,10 +1,10 @@
 package com.example.javaeindopdracht;
 
 import Model.Items;
+import com.example.javaeindopdracht.Exception.EmptyFieldsException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -19,6 +19,7 @@ public class AddCollectionController {
     @FXML private TableView<Items> tableViewCollection;
     @FXML private TextField txtAddItemsTitle;
     @FXML private Label lblEditItemsErrorMessage;
+    private CreateScene createScene = new CreateScene();
 
     public AddCollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems, TableView<Items> tableViewCollection) {
         this.anchorPane = anchorPane;
@@ -29,7 +30,7 @@ public class AddCollectionController {
     @FXML public void btnCancelNewItem(ActionEvent event) throws IOException {
         txtAddItemsAuthor.setText("");
         txtAddItemsTitle.setText("");
-        setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
+        createScene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
     }
 
     //When entering all the needed information you can add the new item
@@ -37,23 +38,17 @@ public class AddCollectionController {
         try{
             if(txtAddItemsTitle.getText() != null || txtAddItemsAuthor.getText() != null){
                 listOfItems.add(new Items(listOfItems.size() + 1, true, txtAddItemsTitle.getText(), txtAddItemsAuthor.getText()));
-                setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
+                createScene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
             }
             else{
-                throw new Exception("Please, fill in all the fields");
+                throw new EmptyFieldsException();
             }
         }catch(Exception ex){
             lblEditItemsErrorMessage.setText(ex.getMessage());
         }
     }
 
-    //set the scene with the given controller and fxml-file
-    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
-        loader.setController(controller);
-        AnchorPane an =  loader.load();
-        anchorPane.getChildren().setAll(an);
-    }
+
 
 
 }
