@@ -26,7 +26,7 @@
     -fx-text-fill: #E7F2FB;
 }
 
-#lblItemsErrorMessage, #lblLendingReceivingError, #lblMembersErrorMessage{
+#lblItemsErrorMessage, #lblLendingReceivingError, #lblMembersErrorMessage, #lblErrorMessageDashBoard{
     -fx-text-fill: #C60108;
 }
 #lblLendingReceivingSucces{

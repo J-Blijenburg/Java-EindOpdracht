@@ -19,7 +19,7 @@ public class AddCollectionController {
     @FXML private TableView<Items> tableViewCollection;
     @FXML private TextField txtAddItemsTitle;
     @FXML private Label lblEditItemsErrorMessage;
-    private Scene scene = new Scene();
+    final private Scene scene = new Scene();
 
     public AddCollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems, TableView<Items> tableViewCollection) {
         this.anchorPane = anchorPane;

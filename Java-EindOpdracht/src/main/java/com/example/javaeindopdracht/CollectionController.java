@@ -1,6 +1,7 @@
 package com.example.javaeindopdracht;
 
 import Model.Items;
+import com.example.javaeindopdracht.Exception.SelectItemException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,14 +40,14 @@ public class CollectionController implements Initializable {
         scene.setScene(new AddCollectionController(anchorPane, listOfItems, tableViewCollection), "AddCollection-View.fxml", anchorPane);
     }
 
-    @FXML public void btnEditItemsOnAction(ActionEvent event) throws IOException {
+    @FXML public void btnEditItemsOnAction(ActionEvent event) {
         try{
             //Check if an item is selected and bring that item to the edit-page.
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
                scene.setScene(new EditCollectionController(anchorPane, listOfItems, tableViewCollection), "EditCollection-View.fxml", anchorPane);
             }
             else{
-                throw new Exception("Please, Select an item");
+                throw new SelectItemException();
             }
         }catch(Exception ex){
             lblItemsErrorMessage.setText(ex.getMessage());
@@ -61,7 +62,7 @@ public class CollectionController implements Initializable {
                 txtSearchItem.setText("");
             }
             else{
-                throw new Exception("Please, Select an item");
+                throw new SelectItemException();
             }
         }catch (Exception ex){
             lblItemsErrorMessage.setText(ex.getMessage());
@@ -106,7 +107,7 @@ public class CollectionController implements Initializable {
         else{
             ObservableList<Items> filter = FXCollections.observableArrayList();
             for(Items item : listOfItems){
-                if(item.getTitle().toLowerCase().contains(searchItem) | item.getAuthor().toLowerCase().contains(searchItem)){
+                if(item.getTitle().toLowerCase().contains(searchItem) || item.getAuthor().toLowerCase().contains(searchItem)){
                     filter.add(item);
                 }
             }

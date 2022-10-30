@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
-    @FXML private Label lblMembersErrorMessage;
     @FXML private VBox vboxMembers;
     @FXML private VBox vboxAddNewMembers;
     @FXML private VBox vboxEditMembers;
@@ -28,11 +27,12 @@ public class DashboardController implements Initializable {
     @FXML private TabPane tabPane;
     @FXML private Tab tabLendingReceiving;
     @FXML private AnchorPane dashBoardAnchorPane;
+    @FXML private Label lblErrorMessageDashBoard;
     private final Database database;
     private final Members currentMember;
     private ObservableList<Members> listOfMembers;
     private ObservableList<Items> listOfItems;
-    private Scene scene = new Scene();
+    private final Scene scene = new Scene();
 
     //Receive the current member and database from the Login-controller
     public DashboardController(Members member, Database database){
@@ -42,13 +42,13 @@ public class DashboardController implements Initializable {
     //Greet the current member and load all the list in the correct tableView. It also makes sure that the right Tap is opened
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         try {
             this.listOfMembers = FXCollections.observableList(database.getAllMembers());
             this.listOfItems = FXCollections.observableList(database.getAllItems());
             scene.setScene(new LendingReceivingController(listOfItems, listOfMembers, currentMember), "LendingReceiving-View.fxml", dashBoardAnchorPane);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (Exception ex) {
+            lblErrorMessageDashBoard.setText(ex.getMessage());
         }
     }
     @FXML private void membersOnAction() throws IOException{

@@ -22,7 +22,7 @@ public class EditCollectionController implements Initializable {
     @FXML private Label lblEditItems;
     @FXML private TextField txtEditItemTitle;
     @FXML private TextField txtEditItemsAuthor;
-    private Scene scene = new Scene();
+    private  final Scene scene = new Scene();
 
     public EditCollectionController(AnchorPane anchorPane, ObservableList<Items> listOfItems, TableView<Items> tableViewCollection) {
         this.anchorPane = anchorPane;
@@ -37,21 +37,16 @@ public class EditCollectionController implements Initializable {
     //If information of the selected item is changed this button is going to confirm the changes
     @FXML public void btnEditItemConfirm(ActionEvent event) {
         try{
-            if(tableViewCollection.getSelectionModel().getSelectedItem() != null){
-                Items item = tableViewCollection.getSelectionModel().getSelectedItem();
+            Items item = tableViewCollection.getSelectionModel().getSelectedItem();
 
-                if(!txtEditItemTitle.getText().equals("")){
-                    item.setTitle(txtEditItemTitle.getText());
-                }
-                if(!txtEditItemsAuthor.getText().equals("")){
-                    item.setAuthor(txtEditItemsAuthor.getText());
-                }
-                tableViewCollection.refresh();
-                scene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
+            if(!txtEditItemTitle.getText().equals("")){
+                item.setTitle(txtEditItemTitle.getText());
             }
-            else{
-                throw new Exception("Please, Select an item");
+            if(!txtEditItemsAuthor.getText().equals("")){
+                item.setAuthor(txtEditItemsAuthor.getText());
             }
+            tableViewCollection.refresh();
+            scene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
 
         }catch(Exception ex){
             lblItemsErrorMessage.setText(ex.getMessage());

@@ -1,7 +1,6 @@
 package com.example.javaeindopdracht;
 
 import Model.Members;
-import com.example.javaeindopdracht.Exception.DatePickerException;
 import com.example.javaeindopdracht.Exception.EmptyFieldsException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class AddMemberController  {
 
@@ -25,7 +23,8 @@ public class AddMemberController  {
     @FXML private DatePicker dataPickerAddNewMember;
     @FXML private Label lblAddNewMemberErrorMessage;
     @FXML private TableView<Members> tableViewMembers;
-    private Scene scene = new Scene();
+    private final Scene scene = new Scene();
+    private final Date date = new Date();
 
     public AddMemberController(AnchorPane anchorPane, ObservableList<Members> listOfMembers, TableView<Members> tableViewMembers) {
         this.anchorPane = anchorPane;
@@ -46,8 +45,7 @@ public class AddMemberController  {
             if(txtAddMemberFirstName.getText().equals("") || txtAddMemberLastName.getText().equals("") || dataPickerAddNewMember.getEditor().getText().equals("") ){
                 throw new EmptyFieldsException();
             }
-            LocalDate dateOfBirth = checkDate(dataPickerAddNewMember);
-            checkDate(dataPickerAddNewMember);
+            LocalDate dateOfBirth = date.checkDate(dataPickerAddNewMember);
 
             listOfMembers.add(new Members(listOfMembers.size() + 1,txtAddMemberFirstName.getText(), txtAddMemberLastName.getText(), dateOfBirth , txtAddMemberFirstName.getText(), txtAddMemberLastName.getText() +  "123"));
 
@@ -57,13 +55,6 @@ public class AddMemberController  {
             lblAddNewMemberErrorMessage.setText(ex.getMessage());
         }
     }
-    private LocalDate checkDate(DatePicker dateTimePicker) throws DatePickerException {
-        try{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            return LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
-        }catch(Exception ex){
-            throw new DatePickerException();
-        }
-    }
+
 
 }

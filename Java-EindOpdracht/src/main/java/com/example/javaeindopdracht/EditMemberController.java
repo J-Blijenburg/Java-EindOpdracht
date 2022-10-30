@@ -13,7 +13,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -27,7 +26,8 @@ public class EditMemberController implements Initializable {
     @FXML private DatePicker dataPickerEditMember;
     @FXML private Label lblEditMember;
     @FXML private Label lblEditMemberErrorMessage;
-    private Scene scene = new Scene();
+    private final Scene scene = new Scene();
+    private final Date date = new Date();
 
     public EditMemberController(AnchorPane anchorPane, ObservableList<Members> listOfMembers, TableView<Members> tableViewMembers) {
         this.anchorPane = anchorPane;
@@ -53,7 +53,7 @@ public class EditMemberController implements Initializable {
                 member.setLastName(txtEditMemberLastName.getText());
             }
             if(!dataPickerEditMember.getEditor().getText().equals("")){
-                LocalDate dateOfBirth =  checkDate(dataPickerEditMember);
+                LocalDate dateOfBirth = date.checkDate(dataPickerEditMember);
                 member.setBirthDate(dateOfBirth);
 
             }
@@ -63,14 +63,6 @@ public class EditMemberController implements Initializable {
             lblEditMemberErrorMessage.setText(ex.getMessage());
         }
     }
-    private LocalDate checkDate(DatePicker dateTimePicker) throws ParseException {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate ld = LocalDate.parse(dateTimePicker.getEditor().getText(), formatter);
-
-        return ld;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Members member = tableViewMembers.getSelectionModel().getSelectedItem();
