@@ -25,14 +25,26 @@ private List<Items> allItems = new ArrayList<>();
     }
 
 
-    public void Write(){
-        try{
+    public void Write() throws IOException {
+        FileOutputStream fileMembers = new FileOutputStream("JavaEindopdrachtMembers.txt");
+        ObjectOutputStream objectMembers = new ObjectOutputStream(fileMembers);
+        FileOutputStream fileItems = new FileOutputStream("JavaEindopdrachtItems.txt");
+        ObjectOutputStream objectItems = new ObjectOutputStream(fileItems);
 
+        for(Members member : allMembers){
+            objectMembers.writeObject(member);
         }
-        catch(Exception ex){
 
-
+        for(Items item : allItems){
+            objectItems.writeObject(item);
         }
+
+
+        objectMembers.close();
+        objectItems.close();
+        fileMembers.close();
+        fileItems.close();
+
     }
 
     private void Read() throws IOException, ClassNotFoundException {

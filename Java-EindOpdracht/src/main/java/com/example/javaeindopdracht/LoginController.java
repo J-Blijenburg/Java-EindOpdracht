@@ -79,7 +79,11 @@ public class LoginController {
         Start.loginStage.close();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent windowEvent) {
-                database.Write();
+                try {
+                    database.Write();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
