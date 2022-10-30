@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -28,7 +27,7 @@ public class MembersController implements Initializable {
     @FXML private TableView<Members> tableViewMembers;
 
     @FXML private Label lblEditMember;
-
+    private Scene scene = new Scene();
 
     public MembersController(AnchorPane anchorPane, ObservableList<Members> listOfMembers) {
         this.anchorPane = anchorPane;
@@ -53,7 +52,7 @@ public class MembersController implements Initializable {
     @FXML public void btnEditMemberOnAction(ActionEvent event) throws IOException {
         try{
             if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
-                setScene(new EditMemberController(anchorPane, listOfMembers, tableViewMembers), "EditMember-View.fxml");
+                scene.setScene(new EditMemberController(anchorPane, listOfMembers, tableViewMembers), "EditMember-View.fxml", anchorPane);
             }
             else{
                 throw new Exception("Please, Select an member");
@@ -65,15 +64,7 @@ public class MembersController implements Initializable {
     }
     //it will show the view on how to add a new member
     @FXML public void btnAddMemberOnAction(ActionEvent event) throws IOException {
-        setScene(new AddMemberController(anchorPane, listOfMembers, tableViewMembers), "AddMember-View.fxml");
-    }
-
-    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
-        //https://stackoverflow.com/questions/53127331/javafx-swap-anchorpane-element-with-fxml-from-another-file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
-        loader.setController(controller);
-        AnchorPane an =  loader.load();
-        anchorPane.getChildren().setAll(an);
+        scene.setScene(new AddMemberController(anchorPane, listOfMembers, tableViewMembers), "AddMember-View.fxml", anchorPane);
     }
 
     @Override
