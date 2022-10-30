@@ -2,6 +2,8 @@ package com.example.javaeindopdracht;
 
 import Database.Database;
 import Model.Members;
+import com.example.javaeindopdracht.Exception.DatabaseNotExistException;
+import com.example.javaeindopdracht.Exception.EmptyLoginFieldsException;
 import com.example.javaeindopdracht.Exception.PassWordException;
 import com.example.javaeindopdracht.Exception.UserNameException;
 import javafx.collections.FXCollections;
@@ -32,9 +34,9 @@ public class LoginController {
         this.listOfMembers = FXCollections.observableList(this.database.getAllMembers());
     }
 
-    public void CheckDataBase(File file) throws Exception {
+    public void CheckDataBase(File file) throws DatabaseNotExistException {
         if(!file.exists()){
-            throw new Exception("Database file " + file.getName() + " does not exist!");
+            throw new DatabaseNotExistException(file);
         }
     }
 
@@ -61,9 +63,9 @@ public class LoginController {
        }
     }
     //If there is no input remind the user to fill in a valid input
-    private void CheckUsernameAndPassword() throws Exception {
+    private void CheckUsernameAndPassword() throws EmptyLoginFieldsException {
         if(this.userNametxt.getText().equals("") || this.passWordtxt.getText().equals("")){
-            throw new Exception("Please, Enter a Username and Password.");
+            throw new EmptyLoginFieldsException();
         }
     }
 
@@ -79,11 +81,13 @@ public class LoginController {
         secondaryStage.setTitle("DashBoard");
         secondaryStage.show();
         secondaryStage.setOnCloseRequest(windowEvent -> {
+
             try {
                 database.Write();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                lblErrorMessage.setText("Could not write to database");
             }
+
         });
         Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         primaryStage.close();

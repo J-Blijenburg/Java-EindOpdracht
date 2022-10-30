@@ -39,7 +39,7 @@
             </AnchorPane>
          </children>
       </HBox>
-      <Label id="LblWelcomeUser" fx:id="LblWelcome" layoutX="28.0" layoutY="6.0" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="10.0">
+      <Label id="lblWelcomeUser" fx:id="lblWelcome" layoutX="28.0" layoutY="6.0" prefHeight="44.0" prefWidth="656.0" text="Welcome [name of user]" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="Calibri" size="29.0" />
          </font>

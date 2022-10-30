@@ -2,9 +2,7 @@ package com.example.javaeindopdracht;
 
 import Model.Items;
 import Model.Members;
-import com.example.javaeindopdracht.Exception.ItemNotFoundException;
-import com.example.javaeindopdracht.Exception.MemberNotFoundException;
-import com.example.javaeindopdracht.Exception.ValidNumberException;
+import com.example.javaeindopdracht.Exception.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class LendingReceivingController implements Initializable {
     @FXML private TextField txtReceiveItemCode;
-    @FXML private Label LblWelcome;
+    @FXML private Label lblWelcome;
     @FXML private Label lblReceiveItemSuccses;
     @FXML private Label lblReceiveItemError;
     @FXML private TextField txtItemCode;
@@ -45,7 +43,7 @@ public class LendingReceivingController implements Initializable {
             Items item = SelectItem(checkForInt(txtReceiveItemCode.getText()));
 
             if(item.getAvailable()){
-                throw new Exception("Item is not lend out");
+                throw new ItemNotLendOutException();
             }
 
             dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
@@ -58,7 +56,7 @@ public class LendingReceivingController implements Initializable {
     }
 
     //Check if both Textboxes are filled. Assign the selected item to the selected member
-    @FXML public void btnLendItemOnAction(ActionEvent event) {
+    @FXML public void btnLendItemOnAction(ActionEvent event){
         try{
             clearCurrentTextOfLabel();
             Items selectedItem = SelectItem(checkForInt(txtItemCode.getText()));
@@ -71,7 +69,7 @@ public class LendingReceivingController implements Initializable {
                 selectedItem.setAvailable(false);
             }
             else{
-                throw new Exception("Item is not available now");
+                throw new ItemNotAvailableException();
             }
             lblReceiveItemSuccses.setText("Item " + selectedItem.getTitle() + " is lent out by " +selectedMember.getFirstName() +  " successfully on " + selectedItem.getLendOutDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         }catch(Exception ex){
@@ -81,7 +79,7 @@ public class LendingReceivingController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        LblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
+        lblWelcome.setText("Welcome " + currentMember.getFirstName() + " " + currentMember.getLastName());
     }
     //set the current text of the label to not
     private void clearCurrentTextOfLabel(){
@@ -118,13 +116,13 @@ public class LendingReceivingController implements Initializable {
 
 
     //check if the member actually lend the item
-    private void checkLendOutBy(Items item) throws Exception {
+    private void checkLendOutBy(Items item) throws DidNotLendException {
         if(item.getLendOutBy().getId() == currentMember.getId()){
             checkDeadLine();
             normalItemSettings(item);
         }
         else{
-            throw new Exception("Member didn't lend this item");
+            throw new DidNotLendException();
         }
     }
     private void checkDeadLine(){
