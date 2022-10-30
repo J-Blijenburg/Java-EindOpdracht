@@ -29,16 +29,15 @@ public class AddCollectionController {
     @FXML public void btnCancelNewItem(ActionEvent event) throws IOException {
         txtAddItemsAuthor.setText("");
         txtAddItemsTitle.setText("");
-        setScene(new CollectionController(anchorPane, listOfItems));
+        setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
     }
 
     //When entering all the needed information you can add the new item
     @FXML public void btnAddItemConfirm(ActionEvent event) {
         try{
             if(txtAddItemsTitle.getText() != null | txtAddItemsAuthor.getText() != null){
-                int newCollectionId = listOfItems.get(listOfItems.size() - 1).getItemCode() + 1;
-                listOfItems.add(new Items(newCollectionId, true, txtAddItemsTitle.getText(), txtAddItemsAuthor.getText()));
-                setScene(new CollectionController(anchorPane, listOfItems));
+                listOfItems.add(new Items(listOfItems.size() + 1, true, txtAddItemsTitle.getText(), txtAddItemsAuthor.getText()));
+                setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
             }
             else{
                 throw new Exception("Please, fill in all the fields");
@@ -49,8 +48,8 @@ public class AddCollectionController {
     }
 
     //set the scene with the given controller and fxml-file
-    private void setScene(Object controller) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Collection-View.fxml"));
+    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
         loader.setController(controller);
         AnchorPane an =  loader.load();
         anchorPane.getChildren().setAll(an);

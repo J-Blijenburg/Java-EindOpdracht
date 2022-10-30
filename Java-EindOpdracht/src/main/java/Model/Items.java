@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Items implements Serializable {
-    private final int itemCode;
+    private int itemCode;
     private Boolean available;
     private String title;
     private String author;
@@ -36,6 +36,10 @@ public class Items implements Serializable {
     }
     public int getItemCode() {
         return itemCode;
+    }
+
+    public void setItemCode(int itemCode) {
+        this.itemCode = itemCode;
     }
 
     public Boolean getAvailable() {

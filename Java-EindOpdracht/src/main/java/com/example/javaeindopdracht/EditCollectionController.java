@@ -31,7 +31,7 @@ public class EditCollectionController implements Initializable {
     }
     //While editing an item cancel the process and reset all the values
     @FXML public void btnCancelEditItems(ActionEvent event) throws IOException {
-        setSceneOfCollection(new CollectionController(anchorPane, listOfItems));
+        setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
     }
 
     //If information of the selected item is changed this button is going to confirm the changes
@@ -47,7 +47,7 @@ public class EditCollectionController implements Initializable {
                     item.setAuthor(txtEditItemsAuthor.getText());
                 }
                 tableViewCollection.refresh();
-                setSceneOfCollection(new CollectionController(anchorPane, listOfItems));
+                setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml");
             }
             else{
                 throw new Exception("Please, Select an item");
@@ -58,8 +58,8 @@ public class EditCollectionController implements Initializable {
         }
     }
     //set the scene with the given controller and fxml-file
-    private void setSceneOfCollection(Object controller) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Collection-View.fxml"));
+    private void setScene(Object controller, String nameOfFxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(nameOfFxmlFile));
         loader.setController(controller);
         AnchorPane an =  loader.load();
         anchorPane.getChildren().setAll(an);

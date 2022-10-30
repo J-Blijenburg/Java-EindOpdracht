@@ -38,7 +38,7 @@ public class CollectionController implements Initializable {
         setScene(new AddCollectionController(anchorPane, listOfItems, tableViewCollection), "AddCollection-View.fxml");
     }
 
-    @FXML public void btnEditItemsOnAction(ActionEvent event) {
+    @FXML public void btnEditItemsOnAction(ActionEvent event) throws IOException {
         try{
             //Check if an item is selected and bring that item to the edit-page.
             if(tableViewCollection.getSelectionModel().getSelectedItem() != null){

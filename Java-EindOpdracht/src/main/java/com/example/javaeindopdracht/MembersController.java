@@ -50,7 +50,7 @@ public class MembersController implements Initializable {
         }
     }
     //Check if a member is selected and bring that member to the edit-page.
-    @FXML public void btnEditMemberOnAction(ActionEvent event) {
+    @FXML public void btnEditMemberOnAction(ActionEvent event) throws IOException {
         try{
             if(tableViewMembers.getSelectionModel().getSelectedItem() != null){
                 setScene(new EditMemberController(anchorPane, listOfMembers, tableViewMembers), "EditMember-View.fxml");

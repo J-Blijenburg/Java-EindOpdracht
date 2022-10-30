@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Database implements Serializable{
-private final List<Members> allMembers = new ArrayList<>();
-private final List<Items> allItems = new ArrayList<>();
+private List<Members> allMembers = new ArrayList<>();
+private List<Items> allItems = new ArrayList<>();
 
 
     public Database() throws IOException, ClassNotFoundException {
@@ -25,22 +25,14 @@ private final List<Items> allItems = new ArrayList<>();
     }
 
 
-    public void Write() throws IOException {
-        FileOutputStream fileMembers = new FileOutputStream("JavaEindopdrachtMembers.txt");
-        ObjectOutputStream objectMembers = new ObjectOutputStream(fileMembers);
-        FileOutputStream fileItems = new FileOutputStream("JavaEindopdrachtItems.txt");
-        ObjectOutputStream objectItems = new ObjectOutputStream(fileItems);
+    public void Write(){
+        try{
 
-        for(Members member : allMembers){
-            objectMembers.writeObject(member);
         }
-        for(Items item : allItems){
-            objectItems.writeObject(item);
+        catch(Exception ex){
+
+
         }
-        objectMembers.close();
-        objectItems.close();
-        fileMembers.close();
-        fileItems.close();
     }
 
     private void Read() throws IOException, ClassNotFoundException {
