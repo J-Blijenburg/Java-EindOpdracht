@@ -26,9 +26,7 @@ public class LendingReceivingController implements Initializable {
     private final ObservableList<Members> listOfMembers;
 
     private final Members currentMember;
-    private int dateCheck;
-    private final int deadLine = 21;
-    private final int totalDaysToLate = Math.abs(dateCheck - deadLine);
+
 
     public LendingReceivingController(ObservableList<Items> listOfItems, ObservableList<Members> listOfMembers, Members currentMember) {
         this.listOfItems = listOfItems;
@@ -46,7 +44,7 @@ public class LendingReceivingController implements Initializable {
                 throw new ItemNotLendOutException();
             }
 
-            dateCheck = LocalDate.now().getDayOfYear() - item.getLendOutDate().getDayOfYear();
+
             checkLendOutBy(item);
 
         }
@@ -118,14 +116,14 @@ public class LendingReceivingController implements Initializable {
     //check if the member actually lend the item
     private void checkLendOutBy(Items item) throws DidNotLendException {
         if(item.getLendOutBy().getId() == currentMember.getId()){
-            checkDeadLine();
+            checkDeadLine(item);
             normalItemSettings(item);
         }
         else{
             throw new DidNotLendException();
         }
     }
-    private void checkDeadLine(){
+    private void checkDeadLine(Items item){
         if(dateCheck < deadLine){
             lblReceiveItemSuccses.setText("Received item successfully");
         }

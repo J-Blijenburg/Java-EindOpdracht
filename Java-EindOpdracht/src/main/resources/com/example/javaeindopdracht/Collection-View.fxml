@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="collectionAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="707.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="collectionAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="707.0" stylesheets="@../../../Style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="vboxCollection" layoutY="10.0" prefHeight="342.0" prefWidth="707.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -38,17 +38,22 @@
                               <PropertyValueFactory property="available" />
                            </cellValueFactory>
                         </TableColumn>
-                        <TableColumn prefWidth="200.0" text="title">
+                        <TableColumn prefWidth="134.0" text="title">
                            <cellValueFactory>
                               <PropertyValueFactory property="title" />
                            </cellValueFactory>
                         </TableColumn>
-                        <TableColumn minWidth="0.0" prefWidth="185.0" text="author">
+                        <TableColumn minWidth="0.0" prefWidth="161.0" text="author">
                            <cellValueFactory>
                               <PropertyValueFactory property="author" />
                            </cellValueFactory>
                         </TableColumn>
-                        <TableColumn fx:id="tableViewItemsLendOutBy" minWidth="0.0" prefWidth="140.0" text="Lend Out By">
+                        <TableColumn fx:id="tableViewItemsLendOutBy" minWidth="0.0" prefWidth="106.0" text="Lend Out By">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="lendOutBy" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="tableViewExpectedreturnDate" minWidth="0.0" prefWidth="115.0" text="Expected return date">
                            <cellValueFactory>
                               <PropertyValueFactory property="lendOutBy" />
                            </cellValueFactory>

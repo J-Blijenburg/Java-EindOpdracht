@@ -31,6 +31,11 @@ public class AddCollectionController {
         txtAddItemsAuthor.setText("");
         txtAddItemsTitle.setText("");
         scene.setScene(new CollectionController(anchorPane, listOfItems), "Collection-View.fxml", anchorPane);
+
+
+
+        //listOfItems.get(0).setLendOutDate(LocalDate.of(2022, 10, 5));
+
     }
 
     //When entering all the needed information you can add the new item

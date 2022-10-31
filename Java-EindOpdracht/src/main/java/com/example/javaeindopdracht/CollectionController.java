@@ -16,11 +16,14 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class CollectionController implements Initializable {
     @FXML private TableColumn<Items, String> tableViewItemsLendOutBy;
     @FXML private TableColumn<Items, String > tableViewItemsAvailable;
+    @FXML private TableColumn<Items, String>tableViewExpectedreturnDate;
 
     @FXML private ObservableList<Items> listOfItems;
     @FXML private TableView<Items> tableViewCollection;
@@ -74,7 +77,20 @@ public class CollectionController implements Initializable {
         tableViewCollection.setItems(listOfItems);
         changeTableViewAvailable();
         changeTableViewLendOutBy();
+        expectedReturnDate();
         txtSearchItem.textProperty().addListener((obs, oldText, newText) -> searchItem());
+    }
+
+    private void expectedReturnDate(){
+        tableViewExpectedreturnDate.setCellValueFactory(cellDate ->{
+            Items item = cellDate.getValue();
+
+            if(item.getAvailable().equals(false)){
+                LocalDate localDate = item.getLendOutDate().plusDays(21);
+                return new SimpleStringProperty(localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            }
+            return new SimpleStringProperty(null);
+        });
     }
 
     //Receives the data what in the cell is displayed and change it to the right string
