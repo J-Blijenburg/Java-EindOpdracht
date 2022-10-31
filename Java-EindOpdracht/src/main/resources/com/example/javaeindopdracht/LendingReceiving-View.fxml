@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="lendingReceivingAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="lendingReceivingAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutY="49.0" prefHeight="287.0" prefWidth="707.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
@@ -30,8 +30,11 @@
             </AnchorPane>
             <AnchorPane id="AnchorPaneLendingRight" prefHeight="287.0" prefWidth="377.0">
                <children>
-                  <Button id="btnReceiveItem" layoutX="184.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnReceiveItemOnAction" prefWidth="100.0" stylesheets="@../../../Style.css" text="Receive Item" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="80.0" />
+                  <Button id="btnReceiveItem" fx:id="btnReceiveItem" layoutX="184.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnReceiveItemOnAction" prefWidth="100.0" stylesheets="@../../../Style.css" text="Receive Item" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="80.0" />
                   <TextField fx:id="txtReceiveItemCode" layoutX="102.0" layoutY="37.0" prefWidth="250.0" promptText="Item Code" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="30.0" />
+                  <Button id="btnPayFine" fx:id="btnPayFine" disable="true" layoutX="175.0" layoutY="80.0" mnemonicParsing="false" onAction="#btnReceiveItemOnAction" opacity="0.0" prefWidth="100.0" stylesheets="@../../../Style.css" text="Pay Fine" />
+                  <Label id="lblLendingReceivingSucces" fx:id="lblPayFine" layoutX="25.0" layoutY="116.0" prefHeight="25.0" prefWidth="222.0" />
+                  <Label id="lblLendingReceivingSucces" fx:id="lblTotalPayFine" layoutX="25.0" layoutY="149.0" prefHeight="25.0" prefWidth="222.0" />
                </children>
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />

@@ -16,7 +16,7 @@
     -fx-text-fill: #E7F2FB;
 }
 
-#btnEditCollection, #btnEditMembers, #btnCancelNewMember, #btnCancelEditItems, #btnCancelEditMember, #btnCancelNewItem{
+#btnEditCollection, #btnEditMembers, #btnCancelNewMember, #btnCancelEditItems, #btnCancelEditMember, #btnCancelNewItem, #btnPayFine{
     -fx-background-color: #797979;
     -fx-text-fill: #E7F2FB;
 }

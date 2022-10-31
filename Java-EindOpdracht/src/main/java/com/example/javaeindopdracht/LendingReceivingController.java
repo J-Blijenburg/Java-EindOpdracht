@@ -7,10 +7,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -23,10 +25,17 @@ public class LendingReceivingController implements Initializable {
     @FXML private Label lblReceiveItemError;
     @FXML private TextField txtItemCode;
     @FXML private TextField txtMemberIdentifier;
+    @FXML private Label lblPayFine;
+    @FXML private Label lblTotalPayFine;
+    @FXML private Button btnReceiveItem;
+    @FXML private Button btnPayFine;
+    private Boolean hasToPayFine;
     private final ObservableList<Items> listOfItems;
     private final ObservableList<Members> listOfMembers;
 
     private final Members currentMember;
+    private int totalDaysToLate;
+
 
 
     public LendingReceivingController(ObservableList<Items> listOfItems, ObservableList<Members> listOfMembers, Members currentMember) {
@@ -118,7 +127,12 @@ public class LendingReceivingController implements Initializable {
     private void checkLendOutBy(Items item) throws DidNotLendException {
         if(item.getLendOutBy().getId() == currentMember.getId()){
             checkDeadLine(item);
-            normalItemSettings(item);
+            if(hasToPayFine){
+                itemToLate();
+            }
+            else{
+                normalItemSettings(item);
+            }
         }
         else{
             throw new DidNotLendException();
@@ -127,13 +141,31 @@ public class LendingReceivingController implements Initializable {
     private void checkDeadLine(Items item){
         LocalDate deadLine = item.getLendOutDate().plusDays(21);
         Period periodeBetween = Period.between(LocalDate.now(), deadLine);
-        int totalDaysToLate = Math.abs(periodeBetween.getDays());
+        totalDaysToLate = Math.abs(periodeBetween.getDays());
         if(LocalDate.now().isBefore(deadLine)){
+            hasToPayFine = false;
             lblReceiveItemSuccses.setText("Received item successfully");
         }
         else{
-            lblReceiveItemError.setText("Item is " + totalDaysToLate + " days to late!");
+            hasToPayFine = true;
         }
+    }
+    private void itemToLate(){
+        btnReceiveItem.setDisable(true);
+        btnPayFine.setDisable(false);
+        btnPayFine.setOpacity(1);
+        lblPayFine.setText("Item is " + totalDaysToLate + " days to late!");
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        lblTotalPayFine.setText("Total Fine: € " + decimalFormat.format(calculateFine()));
+    }
+
+    private double calculateFine(){
+        double totalFine = 0;
+        for(int i = 0; i < totalDaysToLate; i++){
+            totalFine += 0.10;
+        }
+
+        return totalFine;
     }
 
     //set item settings back to normal
