@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class AddCollectionController {
     @FXML private TextField txtAddItemsAuthor;
@@ -34,7 +35,7 @@ public class AddCollectionController {
 
 
 
-        //listOfItems.get(0).setLendOutDate(LocalDate.of(2022, 10, 5));
+        listOfItems.get(0).setLendOutDate(LocalDate.of(2022, 10, 5));
 
     }
 

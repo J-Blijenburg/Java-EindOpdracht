@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -124,7 +125,10 @@ public class LendingReceivingController implements Initializable {
         }
     }
     private void checkDeadLine(Items item){
-        if(dateCheck < deadLine){
+        LocalDate deadLine = item.getLendOutDate().plusDays(21);
+        Period periodeBetween = Period.between(LocalDate.now(), deadLine);
+        int totalDaysToLate = Math.abs(periodeBetween.getDays());
+        if(LocalDate.now().isBefore(deadLine)){
             lblReceiveItemSuccses.setText("Received item successfully");
         }
         else{
