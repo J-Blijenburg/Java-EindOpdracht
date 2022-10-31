@@ -8,11 +8,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -129,5 +132,11 @@ public class CollectionController implements Initializable {
             }
             tableViewCollection.setItems(filter);
         }
+    }
+
+    @FXML private void btnImportItemsOnAction(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
+
     }
 }
