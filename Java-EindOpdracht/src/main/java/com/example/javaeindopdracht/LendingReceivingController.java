@@ -35,7 +35,7 @@ public class LendingReceivingController implements Initializable {
 
     private final Members currentMember;
     private int totalDaysToLate;
-
+    private Items itemToPayOff;
 
 
     public LendingReceivingController(ObservableList<Items> listOfItems, ObservableList<Members> listOfMembers, Members currentMember) {
@@ -91,6 +91,8 @@ public class LendingReceivingController implements Initializable {
     }
     //set the current text of the label to not
     private void clearCurrentTextOfLabel(){
+        lblPayFine.setText(null);
+        lblTotalPayFine.setText(null);
         lblReceiveItemSuccses.setText(null);
         lblReceiveItemError.setText(null);
     }
@@ -128,6 +130,7 @@ public class LendingReceivingController implements Initializable {
         if(item.getLendOutBy().getId() == currentMember.getId()){
             checkDeadLine(item);
             if(hasToPayFine){
+                itemToPayOff = item;
                 itemToLate();
             }
             else{
@@ -173,5 +176,18 @@ public class LendingReceivingController implements Initializable {
         item.setAvailable(true);
         item.setLendOutBy(null);
         item.setLendOutDate(null);
+    }
+
+    @FXML private void btnPayFineOnAction(){
+        removePayFineButton();
+        normalItemSettings(itemToPayOff);
+        lblPayFine.setText("Payment complete and received item successfully");
+        lblTotalPayFine.setText("");
+        btnReceiveItem.setDisable(false);
+    }
+
+    private void removePayFineButton(){
+        btnPayFine.setOpacity(0);
+        btnPayFine.setDisable(true);
     }
 }
